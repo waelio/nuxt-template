@@ -1,0 +1,123 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+ relationMode = "prisma"
+}
+
+model User {
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  email        String   @unique
+  username     String   @unique
+  name         String?
+  password     String
+  first_name   String?
+  last_name    String?
+  profileImage String?
+  role         String   @default("USER")
+  posts        Post[]
+  profile      Profile?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Refresh token
+  refreshToken RefreshToken[]
+
+  //Auth0
+  auth0Id String?
+
+  // Tweet
+  tweet Tweet[]
+
+  // MediaFiles
+  mediaFiles   MediaFile[]
+}
+model Profile {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  bio       String
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String   @unique @db.ObjectId
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+// Permissions
+model Permission {
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  action       String[]
+  subject      String[] @default(["post"])
+  fields       String[] @default([])
+  conditions   String[] @default([])
+  inverted     Boolean  @default(false)
+  reason       String?
+  permissionId String?  @db.ObjectId
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+model RefreshToken {
+  id    String @id @default(auto()) @map("_id") @db.ObjectId
+  token String @unique
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  userId String @db.ObjectId
+  user   User   @relation(fields: [userId], references: [id])
+}
+model Tweet {
+  id   String @id @default(auto()) @map("_id") @db.ObjectId
+  text String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Author
+  author   User   @relation(fields: [authorId], references: [id])
+  authorId String @db.ObjectId
+
+  replyToId String? @db.ObjectId
+  replyTo   Tweet?  @relation("replies", fields: [replyToId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  replies   Tweet[] @relation("replies")
+
+  // MediaFiles
+  mediaFiles MediaFile[]
+}
+model MediaFile {
+  id               String @id @default(auto()) @map("_id") @db.ObjectId
+  url              String
+  providerPublicId String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // User
+  user   User   @relation(fields: [userId], references: [id])
+  userId String @db.ObjectId
+
+  // Tweets
+  tweet   Tweet?  @relation(fields: [tweetId], references: [id])
+  tweetId String? @db.ObjectId
+}
+model Post {
+  id        String @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  published Boolean  @default(false)
+  title     String   
+  body      String?
+  author    User?    @relation(fields: [authorId], references: [id])
+  authorId  String?  @db.ObjectId
+}
+
+enum Role {
+  USER
+  ADMIN
+  GUEST
+  SUPER
+}
