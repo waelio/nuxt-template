@@ -1,4 +1,4 @@
-import { Notify, Dialog } from '#imports'
+import { Notify, Dialog } from 'quasar'
 
 
 import {

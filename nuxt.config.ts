@@ -41,7 +41,7 @@ export default defineNuxtConfig({
       ['defineStore', 'definePiniaStore'], // import { defineStore as definePiniaStore } from 'pinia'
     ],
   },
-  //@ts-ignore
+  // @ts-ignore
   quasar: QuasarOptions
 
 })

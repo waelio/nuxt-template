@@ -8,7 +8,8 @@ export const userStore = defineStore({
     id: 'com.waelio.app',
     projects: importedProjects,
     userInfo: {},
-    currencies: {}
+    currencies: {},
+    name: 'Waelio.com'
   }),
   actions: {
     setUserInfo(info: IUSER & { currency: string, ip: string }) {
@@ -19,6 +20,7 @@ export const userStore = defineStore({
     }
   },
   getters: {
+    name: (state) => state.name,
     Projects: state => state.projects,
     user: state => state.userInfo,
     // @ts-ignore

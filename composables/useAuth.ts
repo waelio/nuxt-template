@@ -1,17 +1,34 @@
+// @ts-ignore
 import { useState } from '#app'
+// @ts-ignore
 import jwt_decode from "jwt-decode"
+// @ts-ignore
 import type { JwtPayload } from 'jwt-decode'
-
-import { TUSER, IUSER, IToken } from '~~/types'
+import { TUSER, IUSER, IToken } from '~/types'
 import useFetchApi from './useFetchApi'
-// import { ref } from '#imports'
+import { Ref } from 'vue'
 import { note } from './useNote'
+
 
 export default () => {
   const useAuthToken = () => useState('auth_token') as Ref<JwtPayload>
   const useAuthUser = () => useState('auth_user') as Ref<IUSER>
   const useAuthUsers = () => useState('auth_users') as Ref<IUSER[]>
   const useAuthLoading = () => useState('auth_loading', () => true) as Ref<boolean>
+
+  const setToken = (newToken: unknown) => {
+    const authToken: Ref<JwtPayload> = useAuthToken() as Ref<JwtPayload>
+    authToken.value = newToken as JwtPayload
+  }
+  const setUser = (newUser: TUSER) => {
+    const authUser = useAuthUser() as Ref<TUSER>
+    authUser.value = newUser as TUSER
+    
+  }
+  const setUsers = (newUser: IUSER[]) => {
+    const authUsers = useAuthUsers()
+    authUsers.value = [...newUser] as TUSER[]
+  }
   const setIsAuthLoading = (value: boolean) => {
     const authLoading = useAuthLoading()
     authLoading.value = value
@@ -49,7 +66,8 @@ export default () => {
           setToken(access_token)
           setUser(user as TUSER)
           note.success('Successful login')
-          resolve(true)
+          resolve(user)
+          return user
         } else {
           note.warning('Session expired, please login again.')
         }
@@ -169,7 +187,8 @@ export default () => {
     useAuthLoading,
     getUser,
     getUsers,
-    refreshToken
+    refreshToken,
+    setToken
 
   }
 

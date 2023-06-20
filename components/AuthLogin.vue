@@ -25,9 +25,11 @@
 <script lang="ts" setup>
 import { reactive } from "vue";
 import useAuth from "~/composables/useAuth";
+import { useAuthStore } from "~/store/auth.pinia";
 const router = useRouter();
+const auth = useAuthStore();
 const emit = defineEmits(["loginSuccess"]);
-
+const user = ref({})
 const authUser = reactive({
   username: "",
   password: "",
@@ -45,8 +47,10 @@ async function handleLogin() {
       username: authUser.username,
       password: authUser.password,
     });
-
+    auth.setUserInfo(authUser);
     emit("loginSuccess", { username: authUser.username });
+    authUser.username = ''
+    authUser.password = ''
   } catch (error) {
     console.log(error);
   } finally {

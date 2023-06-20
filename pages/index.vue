@@ -1,14 +1,11 @@
 <template>
-  <div>
+  <div class="q-ma-md"> 
     <h1 class="text-h3 text-center underlined">Auth</h1>
-    <AuthLogin></AuthLogin>
-    <AuthRegister></AuthRegister>
+    User: {{ user }}
   </div>
 </template>
 <script lang="ts" setup>
-import { userStore } from '~/store/root.pinia'
-
-const root = userStore()
-console.log(root.Projects)
-
+import { useAuthStore } from "~/store/auth.pinia";
+const auth = useAuthStore();
+const user = auth.user
 </script>
