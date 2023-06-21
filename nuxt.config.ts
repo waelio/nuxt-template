@@ -32,7 +32,8 @@ export default defineNuxtConfig({
   modules: [
     'nuxt-quasar-ui',
     '@pinia/nuxt',
-
+    '@nuxtjs/i18n',
+    '@vite-pwa/nuxt'
   ],
   pinia: {
     autoImports: [

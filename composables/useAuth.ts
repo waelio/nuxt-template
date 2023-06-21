@@ -166,7 +166,7 @@ export default () => {
         await refreshToken()
         await getUser()
 
-        reRefreshAccessToken()
+        // reRefreshAccessToken()
 
         resolve(true)
       } catch (error) {

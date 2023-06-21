@@ -1,60 +1,63 @@
-import { defineEventHandler, sendError, H3Event } from "h3"
-import { IUSER } from "../../../types"
-import { generateTokens, sendRefreshToken } from "~/server/utils/jwt"
-// @ts-ignore
-import { getUserByUsername } from '@server/db/users'
-// @ts-ignore
-import { userTransformer } from '@server/transformers/user'
-// @ts-ignore
-import { createRefreshToken } from '@server/db/refreshTokens'
-// @ts-ignore
+import { getUserByUsername } from "~~/server/db/users"
 import bcrypt from "bcrypt"
+import { generateTokens, sendRefreshToken } from "~~/server/utils/jwt"
+import { userTransformer } from "~~/server/transformers/user"
+import { createRefreshToken } from "~~/server/db/refreshTokens"
+import { sendError } from "h3"
+import { IUSER } from "~~/types"
 
-export default defineEventHandler(async (event: H3Event) => {
-  const body = await readBody(event)
+export default defineEventHandler(async (event) => {
+    const body = await readBody(event)
 
-  //@ts-ignore
-  const { username, password } = body
+    //@ts-ignore
+    const { username, password } = body
 
-  if (!username || !password) {
-    return sendError(event, createError({
-      statusCode: 400,
-      statusMessage: 'Ivalid params'
-    }))
-  }
+    if (!username || !password) {
+        return sendError(event, createError({
+            statusCode: 400,
+            statusMessage: 'Ivalid params'
+        }))
+    }
 
-  const user = await getUserByUsername(username)
-  if (!user) {
-    return sendError(event, createError({
-      statusCode: 400,
-      statusMessage: 'Username or password is invalid'
-    }))
-  }
-  event.context.nuxtState = { user }
-  // const role = user.role as string
+    const user = await getUserByUsername(username)
+    if (!user) {
+        return sendError(event, createError({
+            statusCode: 400,
+            statusMessage: 'Username or password is invalid'
+        }))
+    }
+    event.context.nuxtState = { user }
+    // const role = user.role as string
 
-  const doesThePasswordMatch = await bcrypt.compare(password, user.password)
+    const doesThePasswordMatch = await bcrypt.compare(password, user.password)
 
-  if (!doesThePasswordMatch) {
-    return sendError(event, createError({
-      statusCode: 400,
-      statusMessage: 'Username or password is invalid'
-    }))
-  }
-  
-  const { accessToken, refreshToken } = generateTokens(user as unknown as IUSER)
+    if (!doesThePasswordMatch) {
+        return sendError(event, createError({
+            statusCode: 400,
+            statusMessage: 'Username or password is invalid'
+        }))
+    }
 
-  await createRefreshToken({
-    token: refreshToken,
-    userId: user.id
-  })
+    const { accessToken, refreshToken } = generateTokens(user as unknown as IUSER)
 
-  sendRefreshToken(event, refreshToken)
+    await createRefreshToken({
+        token: refreshToken,
+        userId: user.id
+    })
 
-  return {
-    access_token: accessToken,
-    user: userTransformer(user as unknown as IUSER),
-    auth: event.context.nuxtState
-  }
+    sendRefreshToken(event, refreshToken)
+        
+    return {
+        access_token: accessToken,
+        user: userTransformer(user as unknown as IUSER),
+        auth: event.context.nuxtState
+    }
 
 })
+
+
+
+
+// import {
+    //     defineAbilitiesFor,
+    // } from './services/authmanagement/authentication.abilities'
