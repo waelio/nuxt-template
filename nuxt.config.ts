@@ -11,6 +11,11 @@ export default defineNuxtConfig({
     '@composables': resolve(__dirname, './composables'),
     '~': resolve(__dirname, '.'),
   },
+  css: [
+    '@quasar/extras/material-icons/material-icons.css',
+    'quasar/dist/quasar.prod.css',
+    '~/assets/styles/quasar.scss',
+  ],
   ssr: false,
   runtimeConfig: {
     // Auth
