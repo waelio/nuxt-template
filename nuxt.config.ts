@@ -32,6 +32,8 @@ export default defineNuxtConfig({
       EMAIL_SERVICE: process.env.EMAIL_PUBLIC_KEY,
       EMAIL_TEMPLATE: process.env.EMAIL_TEMPLATE,
       EMAIL_USER: process.env.EMAIL_USER,
+      // JSON place Holder
+      apiBase: process.env.API_URL,
     }
   },
   modules: [

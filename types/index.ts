@@ -256,3 +256,14 @@ export type TReshreshToken = {
   updatedAt?: Date;
   createdAt?: Date;
 }
+
+export interface IPOST {
+  [x: string]: any
+  userId: number,
+  id: number,
+  title: string
+}
+
+export interface RequestIPOST {
+  data: IPOST
+}
