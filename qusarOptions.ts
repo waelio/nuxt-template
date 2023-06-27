@@ -10,15 +10,12 @@ export const QuasarOptions = {
     'BottomSheet',
     'Notify',
   ],
-    // iconSet: {
-    //   ...materialIcons,
-    //   colorPicker: materialIconsRound.colorPicker,
-    // },
-    extras: {
+  importStrategy: 'auto',
+  extras: {
     font: 'roboto-font',
       fontIcons: ['material-icons'],
         animations: 'all',
-    },
+  },
   config: {
     dark: false,
     },
@@ -31,4 +28,6 @@ export const QuasarOptions = {
     },
   },
 }
+
+
 export default QuasarOptions

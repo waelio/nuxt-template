@@ -2,33 +2,21 @@ import { fasEarthAmericas, fasFlask } from "@quasar/extras/fontawesome-v6";
 import { QSpinnerGears } from 'quasar'
 
 export const links1 = [
-  { icon: "person", text: "For you", dist: "/profile" },
-  { icon: "star_border", text: "Favourites", dist: "/favorites" },
+  { icon: "person", text: "For you", dist: "/auth/profile" },
+  { icon: "star_border", text: "Favourites", dist: "/auth/favorites" },
   { icon: "settings", text: "Settings", dist: "/settings" },
   { icon: "info", text: "About us", dist: "/about" },
-  { icon: "mail", text: "Messages", dist: "/auth/user/inbox" },
+  { icon: "mail", text: "Messages", dist: "/user/inbox" },
   { icon: "contact_page", text: "Contact us", dist: "/contact" },
 
 ];
 export const links2 = [
   { icon: "web", text: "Our blog", dist: "/blog" },
-  // { icon: "domain", text: "Fintech", dist: "/fintech" },
-  // { icon: "flag", text: "Globe", dist: "/" },
-  // { icon: fasEarthAmericas, text: "World", dist: "/" },
-  // { icon: "place", text: "Pojects", dist: "/projects" },
-  // { icon: "domain", text: "Business", dist: "/business" },
-  // { icon: "memory", text: "Technology", dist: "/technology" },
-  // { icon: "local_movies", text: "Entertainment", dist: "/games" },
-  // { icon: "directions_bike", text: "Games", dist: "/games" },
   { icon: fasFlask, text: "Science", dist: "/" },
 ];
 export const links3 = [
-  { icon: "", text: "Language & region", dist: '/settings' },
   { icon: "", text: "Settings", dist: '/settings' },
-  { icon: "open_in_new", text: "Github Repo", dist: 'https://github.com/peace2074/nuxt-template' },
-  { icon: "open_in_new", text: "Discord Chat", dist: '#didscord' },
   { icon: "", text: "Send feedback", dist: '/contact' },
-  { icon: "open_in_new", text: "Help", dist: '/contact' },
   { icon: "help", text: "Help", dist: "/help" },
 ];
 export const projects = [

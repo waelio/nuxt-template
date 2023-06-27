@@ -1,24 +1,31 @@
 <template>
-  <div class="q-px-lg">
-    <q-form @submit="handleLogin" @reset="onReset" class="q-gutter-md">
+  <div class="q-pa-lg border-2">
+    <q-form @submit="handleLogin" @reset="onReset" 
+    class="q-my-md q-gutter-md">
       <h4 class="text-center">Login</h4>
-      <q-btn label="Login" type="submit" color="primary" />
-      <q-btn label="Reset" type="reset" color="primary" flat class="q-ml-sm" />
+      <q-input
+        type="text"
+        placeholder="username"
+        label="Username"
+        name="username"
+        v-model="authUser.username"
+      />
+      <q-input
+        type="password"
+        placeholder="password"
+        label="Password"
+        name="password"
+        v-model="authUser.password"
+      />
+    <q-btn label="Login" type="submit" color="positive" text-color="white" />
+    <q-btn
+      label="Reset"
+      type="reset"
+      color="warning"
+      text-color="white"
+      class="q-ml-sm"
+    />
     </q-form>
-    <q-input
-      type="text"
-      placeholder="username"
-      label="Username"
-      name="username"
-      v-model="authUser.username"
-    />
-    <q-input
-      type="password"
-      placeholder="password"
-      label="Password"
-      name="password"
-      v-model="authUser.password"
-    />
   </div>
 </template>
 
@@ -26,10 +33,13 @@
 import { reactive } from "vue";
 import useAuth from "~/composables/useAuth";
 import { useAuthStore } from "~/store/auth.pinia";
+import { useTitle } from "@vueuse/core";
+const title = useTitle("Login Page");
+
 const router = useRouter();
 const auth = useAuthStore();
 const emit = defineEmits(["loginSuccess"]);
-const user = ref({})
+const user = ref({});
 const authUser = reactive({
   username: "",
   password: "",
@@ -49,8 +59,8 @@ async function handleLogin() {
     });
     auth.setUserInfo(authUser);
     emit("loginSuccess", { username: authUser.username });
-    authUser.username = ''
-    authUser.password = ''
+    authUser.username = "";
+    authUser.password = "";
   } catch (error) {
     console.log(error);
   } finally {

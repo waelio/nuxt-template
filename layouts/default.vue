@@ -3,11 +3,9 @@ import { ref, Ref, watch, computed } from "vue";
 import { links1, links2, links3 } from "../statics/index";
 import { TUSER } from "../types/index";
 // import { LightModes } from '~~/types';
-import { isDark, useToggle, autoStyle, autoClass } from '../mixins'
+import { isDark, useToggle, autoStyle, autoClass } from "../mixins";
 
-
-
-const toggleDark = useToggle(isDark)
+const toggleDark = useToggle(isDark);
 const { useAuthUser, logout } = useAuth();
 const user: Ref<TUSER> = useAuthUser() as Ref<TUSER>;
 const isAuthenticated = computed(() => !!(user.value && user.value.username));
@@ -81,7 +79,8 @@ const toggleLeftDrawer = () => {
 
         <q-space />
 
-        <q-input :class="autoClass"
+        <q-input
+          :class="autoClass"
           class="GNL__toolbar-input"
           outlined
           dense
@@ -94,12 +93,17 @@ const toggleLeftDrawer = () => {
             <q-icon v-else name="clear" class="cursor-pointer" @click="search = ''" />
           </template>
           <template v-slot:append>
-            <q-btn flat dense round aria-label="Menu" icon="arrow_drop_down" :class="autoClass">
+            <q-btn
+              flat
+              dense
+              round
+              aria-label="Menu"
+              icon="arrow_drop_down"
+              :class="autoClass"
+            >
               <q-menu anchor="bottom end" self="top end" :class="autoClass">
                 <div class="q-pa-md" cl:class="widtCautoClass0px" :class="autoClass">
-                  <div class="text-body2 q-mb-md">
-                    Narrow your search results
-                  </div>
+                  <div class="text-body2 q-mb-md">Narrow your search results</div>
 
                   <div class="row items-center">
                     <div class="col-3 text-subtitle2 text-grey">Exact phrase</div>
@@ -195,7 +199,8 @@ const toggleLeftDrawer = () => {
                   </q-avatar>
 
                   <div class="text-subtitle1 q-mt-md q-mb-xs">0</div>
-                  <q-btn dense
+                  <q-btn
+                    dense
                     :color="isAuthenticated ? 'green' : 'red'"
                     :label="isAuthenticated ? 'Sign Out' : 'Sign In'"
                     @click.prevent="
@@ -209,7 +214,8 @@ const toggleLeftDrawer = () => {
             </q-menu>
           </q-btn>
         </div>
-        <q-btn v-if="!isAuthenticated"
+        <q-btn
+          v-if="!isAuthenticated"
           :color="isAuthenticated ? 'green' : 'red'"
           :label="isAuthenticated ? 'Sign Out' : 'Sign In'"
           @click.prevent="isAuthenticated ? logout() : $router.push('/auth/login')"
@@ -243,26 +249,6 @@ const toggleLeftDrawer = () => {
             </q-item-section>
             <q-item-section>
               <q-item-label>{{ link.text }}</q-item-label>
-            </q-item-section>
-          </q-item>
-
-          <q-separator inset class="q-my-sm" />
-
-          <q-item
-            class="GNL__drawer-item"
-            v-ripple
-            v-for="link in links2"
-            :key="link.text"
-            clickable
-            @click="$router.push(link.dist)"
-          >
-            <q-item-section avatar>
-              <q-icon :name="link.icon" />
-            </q-item-section>
-            <q-item-section>
-              <q-item-label>
-                <nuxt-link :to="link.dist">{{ link.text }}</nuxt-link>
-              </q-item-label>
             </q-item-section>
           </q-item>
 
