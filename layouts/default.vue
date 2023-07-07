@@ -156,8 +156,8 @@ const toggleLeftDrawer = () => {
           </template>
         </q-input>
 
+        <LangSwitcher />
         <q-space />
-
         <div v-if="isAuthenticated" class="q-gutter-sm row items-center no-wrap">
           <q-btn v-if="$q.screen.gt.sm" round dense flat color="text-grey-7" icon="apps">
             <q-tooltip>Our Projects</q-tooltip>
