@@ -1,6 +1,3 @@
-import { Notify, Dialog } from 'quasar'
-
-
 import {
   defaultStyles,
   notifyDefaults,
@@ -27,7 +24,7 @@ note.warning = (message: string, config?: typeof notifyDefaults) => note.show(me
 
 note.error = (error: any, config = {}) => {
   const { status, statusCode, errorMessage, message, statusMessage } = error
-  const errorMsg = message || errorMessage || statusMessage || 'Undandled Error!'
+  // const errorMsg = message || errorMessage || statusMessage || 'Undandled Error!'
   if (statusCode || errorMessage || message || statusMessage) {
     note.show(statusCode || errorMessage || message || statusMessage, ENoteAcions.Errror, {
       // @ts-ignore
