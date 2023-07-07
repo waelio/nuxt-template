@@ -79,7 +79,7 @@
   </div>
 </template>
 <script lang="ts" setup>
-import useTweets from '~~/composables/useTweets';
+import useTweets from '~/composables/useTweets';
 
 const loading = ref(false);
 const search = ref();
