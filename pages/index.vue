@@ -48,9 +48,10 @@ onBeforeMount(async () => {
           <div v-if="can('create', 'Post')">
             <a @click="createPost">Add Post</a>
           </div>
-          <div v-if="can('read', 'Post')">
+          <div v-if="can('read', 'Post')">          
             <p>POST</p>
           </div>
+          <div class="text-red">CANNOT READ POST</div>
           <div v-if="can('update', 'Post')">
             <a @click="createPost">Update Post</a>
           </div>
