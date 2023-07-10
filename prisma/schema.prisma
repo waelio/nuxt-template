@@ -48,6 +48,17 @@ model Profile {
   userId String @unique @db.ObjectId
 }
 
+model RefreshToken {
+  id    String @id @default(auto()) @map("_id") @db.ObjectId
+  token String @unique
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  userId String @db.ObjectId
+  user   User   @relation(fields: [userId], references: [id])
+}
+
 model Roles {
   id          String @id @default(auto()) @map("_id") @db.ObjectId
   name        String @unique
@@ -70,8 +81,8 @@ model Tweet {
 }
 
 model User {
-  id           String   @id @default(auto()) @map("_id") @db.ObjectId
-  email        String   @unique
+  id           String         @id @default(auto()) @map("_id") @db.ObjectId
+  email        String         @unique
   first_name   String
   last_name    String
   name         String
@@ -79,5 +90,6 @@ model User {
   profileImage String
   role         String
   updatedAt    DateTime
-  username     String   @unique
+  username     String         @unique
+  RefreshToken RefreshToken[]
 }
