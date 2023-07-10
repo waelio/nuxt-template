@@ -1,18 +1,21 @@
 import { prisma } from './index'
+import { getPermissionById } from './permissions'
 
 
 
 
-
-export const getRoleByName = async (roleName: string) => {
-  // @ts-ignore
-  const role =  await prisma.roles.findUnique({
+export const getPermissionsByRoleByName = async (roleName: string) => {
+  const role = await prisma.roles.findUnique({
     where: {
       name: roleName
     }
-  })  
+  })
+  // @ts-ignore
+  const { permissions } = role
+  // console.log(permissions);
+  const permission = await getPermissionById(permissions)
 
-  return role
+  return permission
 }
 
 

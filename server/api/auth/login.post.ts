@@ -1,11 +1,14 @@
 import { getUserByUsername } from "~~/server/db/users"
+// @ts-ignore
 import bcrypt from "bcrypt"
 import { generateTokens, sendRefreshToken } from "~~/server/utils/jwt"
 import { userTransformer } from "~~/server/transformers/user"
 import { createRefreshToken } from "~~/server/db/refreshTokens"
 import { sendError } from "h3"
 import { IUSER } from "~~/types"
-import { getRoleByName } from "../../db/roles"
+import { getPermissionsByRoleByName } from "../../db/roles"
+import { _to } from 'waelio-utils'
+import { defineAbility } from '@casl/ability';
 
 export default defineEventHandler(async (event) => {
     const body = await readBody(event)
@@ -28,17 +31,30 @@ export default defineEventHandler(async (event) => {
         }))
     }
     event.context.nuxtState = { user }
-    
 
 
-    
+
+
     const role = user.role as string
-    console.log(role);
-        
-    getRoleByName(role)
 
 
-        
+    const getDbRole = async (role: string) =>
+        new Promise((resolve, reject) => {
+
+            const dbr = getPermissionsByRoleByName(role)
+            try {
+                resolve(dbr)
+
+            } catch (error) {
+                reject(error)
+            }
+        })
+
+    const permissions = getDbRole(role)
+    console.log(permissions);
+
+
+
 
 
     const doesThePasswordMatch = await bcrypt.compare(password, user.password)
@@ -58,7 +74,7 @@ export default defineEventHandler(async (event) => {
     })
 
     sendRefreshToken(event, refreshToken)
-        
+
     return {
         access_token: accessToken,
         user: userTransformer(user as unknown as IUSER),
@@ -70,6 +86,3 @@ export default defineEventHandler(async (event) => {
 
 
 
-// import {
-    //     defineAbilitiesFor,
-    // } from './services/authmanagement/authentication.abilities'
