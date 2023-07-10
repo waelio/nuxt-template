@@ -1,6 +1,6 @@
 import { H3Event } from "h3"
 import jwt from "jsonwebtoken"
-import { IToken, IUSER, TToken } from "../../t"
+import { IToken, IUSER, TToken } from "../../types"
 
 
 const generateAccessToken = (user: IUSER) => {
