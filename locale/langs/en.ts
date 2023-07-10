@@ -39,28 +39,7 @@ export default {
     open: "open",
     close: "close",
     holdState: "Always Open"
-  },
-  button: {
-    about: "About",
-    back: "Back",
-    go: "GO",
-    home: "Home",
-    toggle_dark: "Toggle dark mode",
-    toggle_langs: "Change languages",
-    Privacy: "Our Privacy",
-    Privacy_Short: "Privacy",
-    Terms: "Our Terms & Conditions",
-    Terms_Short: "Terms",
-    Contact: "Contact us",
-    TimeLine: "Timeline",
-    Utils: "Utils",
-    submit: "Submit",
-    reset: "Reset",
-    reload: "Reload",
-    close: "Close",
-    new_content: "New content available, reload to update.",
-    offline_ready: "App ready to work offline"
-  },
+  },  
   intro: {
     desc: "JavaScript enthusiast, Wolf Pack brother, Ducks lover, all about reusability and improvements.",
     hi: "Requested plugin is  {name}"

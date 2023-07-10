@@ -1,4 +1,4 @@
-import { fasEarthAmericas, fasFlask } from "@quasar/extras/fontawesome-v6";
+import { /*fasEarthAmericas,*/ fasFlask } from "@quasar/extras/fontawesome-v6";
 import { QSpinnerGears } from 'quasar'
 
 export const links1 = [

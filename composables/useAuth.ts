@@ -1,20 +1,21 @@
 // @ts-ignore
 import { useState } from '#app'
-// @ts-ignore
-import jwt_decode from "jwt-decode"
+// import jwt_decode from "jwt-decode"
 // @ts-ignore
 import type { JwtPayload } from 'jwt-decode'
-import { TUSER, IUSER, IToken } from '~/types'
+import { TUSER, IUSER, IToken, TToken } from '~/types'
 import useFetchApi from './useFetchApi'
 import { Ref } from 'vue'
 import { note } from './useNote'
 
-
-export default () => {
+export const useAuth = () => {
   const useAuthToken = () => useState('auth_token') as Ref<JwtPayload>
   const useAuthUser = () => useState('auth_user') as Ref<IUSER>
   const useAuthUsers = () => useState('auth_users') as Ref<IUSER[]>
   const useAuthLoading = () => useState('auth_loading', () => true) as Ref<boolean>
+  const isAuthenticated = () => useState('isAuthenticated', () => false) as Ref<boolean>
+
+
 
   const setToken = (newToken: unknown) => {
     const authToken: Ref<JwtPayload> = useAuthToken() as Ref<JwtPayload>
@@ -23,7 +24,7 @@ export default () => {
   const setUser = (newUser: TUSER) => {
     const authUser = useAuthUser() as Ref<TUSER>
     authUser.value = newUser as TUSER
-    
+
   }
   const setUsers = (newUser: IUSER[]) => {
     const authUsers = useAuthUsers()
@@ -37,12 +38,14 @@ export default () => {
     return new Promise(async (resolve, reject) => {
       try {
         await useFetchApi('/api/auth/logout', {
+          // @ts-ignore
           method: 'POST'
         })
 
         setToken({})
         setUser({} as TUSER)
         note.warning('Logout success.')
+        isAuthenticated().value = false
         resolve(true)
       } catch (error) {
         note.error('Failed to logout!')
@@ -51,7 +54,7 @@ export default () => {
     })
   }
 
-  const login = ({ username, password }: { username: string; password: string; }) => {
+  const login = ({ username, password }: { username: string, password: string }) => {
     return new Promise(async (resolve, reject) => {
       try {
         const data = await $fetch('/api/auth/login', {
@@ -61,11 +64,12 @@ export default () => {
             password
           }
         })
-        const { user, access_token } = data
+        const { user, access_token } = data as { user: TUSER, access_token: TToken }
         if (user && access_token) {
           setToken(access_token)
           setUser(user as TUSER)
           note.success('Successful login')
+          isAuthenticated().value = true
           resolve(user)
           return user
         } else {
@@ -93,7 +97,7 @@ export default () => {
             repeatPassword: password,
             password
           }
-        })
+        }) as { body: TUSER }
         const user = data.body
 
         resolve(user)
@@ -113,7 +117,7 @@ export default () => {
       try {
         data = await $fetch('/api/auth/refresh')
       } catch (error) {
-        note.warning('Session expired, please login.');
+        note.warning('Session expired, please login.')
         reject(false)
       }
       const access_token = data as unknown as Promise<IToken>
@@ -136,8 +140,8 @@ export default () => {
   const getUser = () => {
     return new Promise(async (resolve, reject) => {
       try {
-        const data = await useFetchApi('/api/auth/user')
-        setUser(data.user as TUSER)
+        const data = await useFetchApi('/api/auth/user') as { user: TUSER }
+        setUser(data.user)
         resolve(true)
       } catch (error) {
         note.log(error)
@@ -149,7 +153,7 @@ export default () => {
   const getUsers = () => {
     return new Promise(async (resolve, reject) => {
       try {
-        const data: { users: TUSER[] } = await useFetchApi('/api/auth/users')
+        const data = await useFetchApi('/api/auth/users') as { users: TUSER[] }
         setUsers(data.users)
         resolve(true)
 
@@ -160,7 +164,7 @@ export default () => {
   }
 
   const initAuth = () => {
-    return new Promise(async (resolve, reject) => {
+    return new Promise(async (resolve, _reject) => {
       setIsAuthLoading(true)
       try {
         await refreshToken()
@@ -171,7 +175,7 @@ export default () => {
         resolve(true)
       } catch (error) {
         note.error('Failed to init Auth!')
-        reject(error)
+        // reject(error)
       } finally {
         setIsAuthLoading(false)
       }
@@ -188,8 +192,10 @@ export default () => {
     getUser,
     getUsers,
     refreshToken,
-    setToken
+    setToken,
+    isAuthenticated: isAuthenticated()?.value
 
   }
 
 }
+export default useAuth 

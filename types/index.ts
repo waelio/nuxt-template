@@ -1,4 +1,5 @@
 import { MediaFile, RefreshToken, Tweet } from "@prisma/client"
+import { NavigationGuard, RouteLocationNormalized } from "~/.nuxt/vue-router"
 
 export type TKey = number
 export type TColor = string
@@ -183,6 +184,7 @@ export type Transaction = TransactionInterface & {
 export type Transactions = Transaction[];
 
 export interface IUSER {
+  [x: string]: any
   id?: string;
   email: string;
   username: string;
@@ -193,8 +195,8 @@ export interface IUSER {
   last_name?: string;
   profileImage?: string;
   role: string;
-  createdAt?: string;
-  updatedAt?: string;
+  createdAt?: string | null;
+  updatedAt?: string | null;
   // Refresh token
   refreshToken?: RefreshToken[];
 
@@ -266,4 +268,8 @@ export interface IPOST {
 
 export interface RequestIPOST {
   data: IPOST
+}
+
+export interface RouteMiddleware {
+  (to: RouteLocationNormalized, from: RouteLocationNormalized): ReturnType<NavigationGuard>
 }

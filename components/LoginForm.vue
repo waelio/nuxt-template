@@ -34,10 +34,10 @@ import { reactive } from "vue";
 import useAuth from "~/composables/useAuth";
 import { useAuthStore } from "~/store/auth.pinia";
 import { useTitle } from "@vueuse/core";
-const title = useTitle("Login Page");
+useTitle("Login Page");
 
 const router = useRouter();
-const auth = useAuthStore();
+
 const emit = defineEmits(["loginSuccess"]);
 const user = ref({});
 const authUser = reactive({
@@ -56,8 +56,7 @@ async function handleLogin() {
     await login({
       username: authUser.username,
       password: authUser.password,
-    });
-    auth.setUserInfo(authUser);
+    });    
     emit("loginSuccess", { username: authUser.username });
     authUser.username = "";
     authUser.password = "";

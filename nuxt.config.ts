@@ -40,8 +40,8 @@ export default defineNuxtConfig({
     }
   },
   modules: [
-    'nuxt-quasar-ui',
     '@pinia/nuxt',
+    'nuxt-quasar-ui',
     '@nuxtjs/i18n',
     '@vite-pwa/nuxt'
   ],

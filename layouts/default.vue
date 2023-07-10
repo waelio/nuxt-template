@@ -156,7 +156,6 @@ const toggleLeftDrawer = () => {
           </template>
         </q-input>
 
-        <LangSwitcher />
         <q-space />
         <div v-if="isAuthenticated" class="q-gutter-sm row items-center no-wrap">
           <q-btn v-if="$q.screen.gt.sm" round dense flat color="text-grey-7" icon="apps">
@@ -185,8 +184,8 @@ const toggleLeftDrawer = () => {
                   <div class="text-h6 q-mb-md">Settings</div>
                   <q-toggle v-model="isDark" clickable :label="$t('general.lightMode')" />
                   <q-toggle v-model="leftDrawerOpen" :label="$t('button.toggle_langs')" />
+                  <LangSwitcher />
                 </div>
-
                 <q-separator vertical inset class="q-mx-lg" />
 
                 <div class="column items-center" v-if="isAuthenticated">
@@ -210,6 +209,7 @@ const toggleLeftDrawer = () => {
                     v-close-popup
                   />
                 </div>
+                <LangSwitcher v-if="!isAuthenticated"/>
               </div>
             </q-menu>
           </q-btn>

@@ -1,16 +1,16 @@
 import { defineStore } from 'pinia'
-import { IUSER } from '../types'
-export const useAuthStore = defineStore({
-  id: 'auth',
-  state: () => ({
-    user: null
-  }),
+import { TUSER } from '../types'
+export const useAuthStore = defineStore('auth', {
+  state: () => ({ _user: {} as TUSER }),
+  getters: {
+    user: state => state._user,
+    authenticated: state => Boolean(state._user && Object.keys(state._user).length),
+  },
   actions: {
-    setUserInfo(info: IUSER) {
-      this.user = info
+    async setUserInfo(info: TUSER) {
+      this._user = info
+      console.assert(info);
+
     }
   },
-  getters: {
-    user: state => state.user,
-  }
 })
