@@ -2,6 +2,7 @@
 import { IUSER } from "../types";
 import { Ref, ComputedRef } from "vue";
 import useAuth from "~/composables/useAuth";
+import { useCasl } from "~/composables/useCasl";
 
 const { useAuthUser, initAuth, useAuthLoading, logout } = useAuth();
 const router = useRouter();
@@ -10,6 +11,7 @@ const isAuthLoading = useAuthLoading();
 let isAuthenticated: ComputedRef<boolean> = computed(
   () => !!(user.value && user.value.username)
 );
+const { can, cannot } = useCasl();
 initAuth();
 
 const user: Ref<IUSER> = useAuthUser();
@@ -17,6 +19,7 @@ onBeforeMount(async () => {
   initAuth();
   isAuthenticated = computed(() => !!(user.value && user.value.username));
 
+  
   loading.value = true;
   if (user) {
     try {
@@ -42,6 +45,15 @@ onBeforeMount(async () => {
               Check Out Our Latest
             </h3>
           </section>
+          <div v-if="can('create', 'Post')">
+            <a @click="createPost">Add Post</a>
+          </div>
+          <div v-if="can('read', 'Post')">
+            <p>POST</p>
+          </div>
+          <div v-if="can('update', 'Post')">
+            <a @click="createPost">Update Post</a>
+          </div>
 
           <slot />
         </div>

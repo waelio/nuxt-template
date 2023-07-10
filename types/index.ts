@@ -273,3 +273,22 @@ export interface RequestIPOST {
 export interface RouteMiddleware {
   (to: RouteLocationNormalized, from: RouteLocationNormalized): ReturnType<NavigationGuard>
 }
+
+export enum eCaslAction {
+  CREATE = 'create',
+  READ = 'read',
+  UPDATE = 'update',
+  DELETE = 'delete'
+}
+export enum eCaslSubject {
+  CATEGORY = 'Category',
+  LIKES = 'Likes',
+  MEDIAFILE = 'MediaFile',
+  USER = 'User',
+  PERMISSIONS = 'Permissions',
+  POST = 'Post',
+  ROLES = 'Roles',
+  TWEET = 'Tweet'
+}
+export type TCaslActions = eCaslAction.CREATE | eCaslAction.READ | eCaslAction.UPDATE | eCaslAction.DELETE;
+export type TCaslSubjects = eCaslSubject.CATEGORY | eCaslSubject.LIKES | eCaslSubject.MEDIAFILE | eCaslSubject.PERMISSIONS | eCaslSubject.POST | eCaslSubject.ROLES | eCaslSubject.TWEET | eCaslSubject.USER;
