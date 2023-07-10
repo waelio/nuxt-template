@@ -1,7 +1,7 @@
 import {
   defaultStyles,
   notifyDefaults,
-} from '../statics'
+} from '../static'
 import { ENoteAcions } from '../types';
 
 function note(action: ENoteAcions, payload: string | number | object, notifyDefaults: any) {

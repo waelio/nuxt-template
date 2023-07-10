@@ -88,3 +88,9 @@ export const defaultStyles = {
     type: 'negative',
   },
 }
+
+export function c(can: (arg0: string, arg1: string) => void) {
+  can('read', 'post');
+  can('update', 'post');
+  can('add', 'post');
+}
