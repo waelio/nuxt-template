@@ -7,6 +7,7 @@ import { TUSER, IUSER, IToken, TToken } from '~/types'
 import useFetchApi from './useFetchApi'
 import { Ref } from 'vue'
 import { note } from './useNote'
+import { useAuthStore } from '~/store/auth.pinia'
 
 export const useAuth = () => {
   const useAuthToken = () => useState('auth_token') as Ref<JwtPayload>
@@ -14,6 +15,7 @@ export const useAuth = () => {
   const useAuthUsers = () => useState('auth_users') as Ref<IUSER[]>
   const useAuthLoading = () => useState('auth_loading', () => true) as Ref<boolean>
   const isAuthenticated = () => useState('isAuthenticated', () => false) as Ref<boolean>
+  const auth = useAuthStore()
 
 
 
@@ -44,6 +46,8 @@ export const useAuth = () => {
 
         setToken({})
         setUser({} as TUSER)
+        // @ts-ignore
+        auth.setUserInfo({})
         note.warning('Logout success.')
         isAuthenticated().value = false
         resolve(true)
