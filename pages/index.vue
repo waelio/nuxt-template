@@ -3,7 +3,11 @@ import { IUSER } from "../types";
 import { Ref, ComputedRef } from "vue";
 import useAuth from "~/composables/useAuth";
 import { useCasl } from "~/composables/useCasl";
+const { t } = useI18n();
 
+useHead({
+  title: t("welcome"),
+});
 const { useAuthUser, initAuth, useAuthLoading, logout } = useAuth();
 const router = useRouter();
 const loading = ref(false);
@@ -38,15 +42,17 @@ onBeforeMount(async () => {
         <LoadingPage v-if="isAuthLoading" />
 
         <!-- App -->
-        <div clas="all-pages fit q-px-md">
+        <div clas="all-pages q-px-md">
           <section class="lg:px-[15%] px-[5%] pt-20">
             <h3 class="lg:text-5xl text-2xl leading-normal font-semibold text-center">
               Check Out Our Latest
             </h3>
           </section>
-          <h4><a target="_blank" href="https://casl.js.org/v6/en">CASL Documentaions</a> </h4>
+          <h4>
+            <a target="_blank" href="https://casl.js.org/v6/en">CASL Documentaions</a>
+          </h4>
           <fieldset>
-            <legend>{{ $t('demoContent.q1') }}</legend>
+            <legend>{{ $t("demoContent.q1") }}</legend>
             <q-btn
               v-if="can('create', 'Post')"
               label="Create Post"
@@ -55,18 +61,16 @@ onBeforeMount(async () => {
             <pre lang="html">
               v-if="can('create', 'Post')"                         
             </pre>
-          
           </fieldset>
           <fieldset>
-            <legend>{{ $t('demoContent.q2') }}</legend>
+            <legend>{{ $t("demoContent.q2") }}</legend>
             <p v-if="can('read', 'Post')">POST content ...</p>
             <pre lang="html">
               v-if="can('read', 'Post')"                         
             </pre>
           </fieldset>
-
           <fieldset>
-            <legend>{{ $t('demoContent.q3') }}</legend>
+            <legend>{{ $t("demoContent.q3") }}</legend>
             <q-btn
               label="Create Post"
               color="warning"
@@ -77,8 +81,8 @@ onBeforeMount(async () => {
             </pre>
           </fieldset>
 
-                    <fieldset>
-            <legend>{{ $t('demoContent.q4') }}</legend>
+          <fieldset>
+            <legend>{{ $t("demoContent.q4") }}</legend>
             <q-btn
               label="Delete Post"
               color="negative"
@@ -93,7 +97,7 @@ onBeforeMount(async () => {
         </div>
         <div class="q-px-md">
           <q-btn
-          class="q-my-md q-ml-none`"
+            class="q-my-md q-ml-none`"
             :color="isAuthenticated ? 'green' : 'red'"
             text="white"
             :label="$t(isAuthenticated ? 'navigation.Signout' : 'navigation.Signin')"
