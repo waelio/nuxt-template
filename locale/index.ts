@@ -1,5 +1,5 @@
-import en from './langs/en'
-import ar from './langs/ar'
+import en from './langs/en.json'
+import ar from './langs/ar.json'
 import he from './langs/he'
 
 export { en }
