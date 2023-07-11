@@ -71,6 +71,9 @@
     }
   },
   "navigation": {
+    "Profile": "ملفي",
+    "Favorites": "قوائم المفضلة",
+    "Messages": "رسائل",
     "HomePageTitle": "الصفحة الرئيسية",
     "HomePageCaption": "الصفحة الرئيسية",
     "AuthPageTitle": "المصادقات",
@@ -96,7 +99,9 @@
     "GlossaryPageTitle": "قائمة المصطلحات",
     "GlossaryPageCaption": "صفحة المسرد الخاصة بنا",
     "MediaPageTitle": "وسائط",
-    "MediaPageCaption": "صفحة الوسائط الخاصة بنا"
+    "MediaPageCaption": "صفحة الوسائط الخاصة بنا",
+    "Signin": "تسجيل الدخول",
+    "Signout": "خروج"
   },
   "about": {
     "title": "ويليو",

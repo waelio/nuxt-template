@@ -2,12 +2,12 @@ import { /*fasEarthAmericas,*/ fasFlask } from "@quasar/extras/fontawesome-v6";
 import { QSpinnerGears } from 'quasar'
 
 export const links1 = [
-  { icon: "person", text: "For you", dist: "/auth/profile" },
-  { icon: "star_border", text: "Favourites", dist: "/auth/favorites" },
-  { icon: "settings", text: "Settings", dist: "/settings" },
-  { icon: "info", text: "About us", dist: "/about" },
-  { icon: "mail", text: "Messages", dist: "/user/inbox" },
-  { icon: "contact_page", text: "Contact us", dist: "/contact" },
+  { icon: "person", text: "navigation.Profile", dist: "/auth/profile" },
+  { icon: "star_border", text: "navigation.Favorites", dist: "/auth/favorites" },
+  { icon: "settings", text: "navigation.SettingsPageTitle", dist: "/settings" },
+  { icon: "info", text: "navigation.AboutPageTitle", dist: "/about" },
+  { icon: "mail", text: "navigation.Messages", dist: "/user/inbox" },
+  { icon: "contact_page", text: "navigation.ContactPageTitle", dist: "/contact" },
 
 ];
 export const links2 = [
@@ -15,7 +15,7 @@ export const links2 = [
   { icon: fasFlask, text: "Science", dist: "/" },
 ];
 export const links3 = [
-  { icon: "", text: "Settings", dist: '/settings' },
+  { icon: "", text: "navigation.SettingsPageTitle", dist: '/settings' },
   { icon: "", text: "Send feedback", dist: '/contact' },
   { icon: "help", text: "Help", dist: "/help" },
 ];

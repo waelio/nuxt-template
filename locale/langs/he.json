@@ -71,7 +71,10 @@
     }
   },
   "navigation": {
+    "Profile": "הפרופיל שלי",
     "HomePageTitle": "דף הבית",
+    "Favorites": "המועדפים שלי",
+    "Messages": "הודעות",
     "HomePageCaption": "דף הבית",
     "AuthPageTitle": "אימותים",
     "AuthPageCaption": "צור שם משתמש / התחברות",
@@ -79,8 +82,8 @@
     "AboutPageCaption": "עלינו",
     "ContactPageTitle": "צור קשר",
     "ContactPageCaption": "צור קשר",
-    "TermsPageTitle": "תנאים והגבלות",
-    "TermsPageCaption": "תנאים",
+    "TermsPageTitle": "תנאים",
+    "TermsPageCaption": "תנאים והגבלות",
     "BlogPageTitle": "הבלוג שלנו",
     "BlogPageCaption": "פוסטים ומאמרים",
     "ProductsPageTitle": "מוצרים",
@@ -96,7 +99,9 @@
     "GlossaryPageTitle": "מילון מונחים",
     "GlossaryPageCaption": "דף מילון המונחים שלנו",
     "MediaPageTitle": "כְּלֵי תִקְשׁוֹרֶת",
-    "MediaPageCaption": "עמוד המדיה שלנו"
+    "MediaPageCaption": "עמוד המדיה שלנו",
+    "Signin": "להתחבר",
+    "Signout": "התנתק"
   },
   "about": {
     "title": "וואליו",

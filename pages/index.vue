@@ -11,7 +11,7 @@ const isAuthLoading = useAuthLoading();
 let isAuthenticated: ComputedRef<boolean> = computed(
   () => !!(user.value && user.value.username)
 );
-const { can, cannot } = useCasl();
+const { can } = useCasl();
 initAuth();
 
 const user: Ref<IUSER> = useAuthUser();
@@ -96,7 +96,7 @@ onBeforeMount(async () => {
           class="q-my-md q-ml-none`"
             :color="isAuthenticated ? 'green' : 'red'"
             text="white"
-            :label="isAuthenticated ? 'Sign Out' : 'Sign In'"
+            :label="$t(isAuthenticated ? 'navigation.Signout' : 'navigation.Signin')"
             @click.prevent="isAuthenticated ? logout() : router.push('/auth/login')"
           />
         </div>

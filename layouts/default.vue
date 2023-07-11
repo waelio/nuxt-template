@@ -157,23 +157,8 @@ const toggleLeftDrawer = () => {
         </q-input>
 
         <q-space />
+        <LangSwitcher v-if="!isAuthenticated" />
         <div v-if="isAuthenticated" class="q-gutter-sm row items-center no-wrap">
-          <q-btn v-if="$q.screen.gt.sm" round dense flat color="text-grey-7" icon="apps">
-            <q-tooltip>Our Projects</q-tooltip>
-          </q-btn>
-          <q-btn
-            round
-            dense
-            flat
-            color="grey-8"
-            icon="notifications"
-            v-if="isAuthenticated"
-          >
-            <q-badge color="red" text-color="white" floating>
-              {{ user.username }}
-            </q-badge>
-            <q-tooltip>Notifications</q-tooltip>
-          </q-btn>
           <q-btn round :class="autoClass">
             <q-avatar size="42px">
               <img :src="user.profileImage" />
@@ -209,7 +194,7 @@ const toggleLeftDrawer = () => {
                     v-close-popup
                   />
                 </div>
-                <LangSwitcher v-if="!isAuthenticated"/>
+                <LangSwitcher v-if="!isAuthenticated" />
               </div>
             </q-menu>
           </q-btn>
@@ -217,7 +202,7 @@ const toggleLeftDrawer = () => {
         <q-btn
           v-if="!isAuthenticated"
           :color="isAuthenticated ? 'green' : 'red'"
-          :label="isAuthenticated ? 'Sign Out' : 'Sign In'"
+          :label="$t(isAuthenticated ? 'navigation.Signout' : 'navigation.Signin')"
           @click.prevent="isAuthenticated ? logout() : $router.push('/auth/login')"
           size="sm"
           v-close-popup
@@ -248,7 +233,7 @@ const toggleLeftDrawer = () => {
               <q-icon :name="link.icon" />
             </q-item-section>
             <q-item-section>
-              <q-item-label>{{ link.text }}</q-item-label>
+              <q-item-label>{{ $t(link.text) }}</q-item-label>
             </q-item-section>
           </q-item>
 
@@ -263,7 +248,7 @@ const toggleLeftDrawer = () => {
           >
             <q-item-section @click="$router.push(link.dist)">
               <q-item-label
-                >{{ link.text }}
+                >{{ $t(link.text) }}
                 <q-icon v-if="link.icon" :name="link.icon" />
               </q-item-label>
             </q-item-section>
@@ -276,7 +261,7 @@ const toggleLeftDrawer = () => {
                 href="javascript:void(0)"
                 aria-label="privacy"
                 to="/privacy"
-                >Privacy</nuxt-link
+                >{{ $t("navigation.PrivacyPageTitle") }}</nuxt-link
               >
               <span> · </span>
               <nuxt-link
@@ -284,7 +269,7 @@ const toggleLeftDrawer = () => {
                 href="javascript:void(0)"
                 aria-label="Terms"
                 to="/terms"
-                >Terms</nuxt-link
+                >{{ $t("navigation.TermsPageTitle") }}</nuxt-link
               >
               <span> · </span>
               <nuxt-link

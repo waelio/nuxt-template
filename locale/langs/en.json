@@ -71,6 +71,9 @@
     }
   },
   "navigation": {
+    "Profile": "My Profile",
+    "Favorites": "My Favorites",
+    "Messages": "Messages",
     "HomePageTitle": "Home Page",
     "HomePageCaption": "Home Page",
     "AuthPageTitle": "Authentications",
@@ -79,7 +82,7 @@
     "AboutPageCaption": "About us",
     "ContactPageTitle": "Contact us",
     "ContactPageCaption": "Contact us",
-    "TermsPageTitle": "Terms & Conditions",
+    "TermsPageTitle": "Terms",
     "TermsPageCaption": "Terms and conditions",
     "BlogPageTitle": "Our Blog",
     "BlogPageCaption": "Posts & Articles",
@@ -96,7 +99,9 @@
     "GlossaryPageTitle": "Glossary",
     "GlossaryPageCaption": "Our Glossary Page",
     "MediaPageTitle": "Media",
-    "MediaPageCaption": "Our Media Page"
+    "MediaPageCaption": "Our Media Page",
+    "Signin": "Sign in",
+    "Signout": "Sign out"
   },
   "about": {
     "title": "Waelio",
