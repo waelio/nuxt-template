@@ -5,6 +5,9 @@ Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introdu
 MongoDB
 QuasarUI
 CASL permissions
+#### npx prisma generate
+#### update .env file
+
 ## Setup
 
 Make sure to install the dependencies:
