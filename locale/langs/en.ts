@@ -100,16 +100,12 @@ export default {
   },
   about: {
     title: "Waelio",
-    par10: "A diverse/eclectic leader the in the digital world, with over couple of decades of professional success.",
-    par20: "As leader and a mentor for company of professionals, the bar sets to the highest level in the market.",
-    par21: "The logic behind our success extends beyond deep understanding of the products requirements,",
-    par22: "but rather the interpersonal skills with the team, the collective problem-solving skills and the capacity to acquire knowledge.",
-    par31: "For a over a decade, I assumed numerous executive business positions, nevertheless, I've always had as affinity for IoT.",
-    par32: "which is perfect for Iam an avid tracker of technological advancements, research and development.",
-    par33: "I have builtin love for r&d, which enabled me to successfully provide solutions and products such as Crm(s), Erp(s),",
-    par40: "Inventory Managers and Accounting Managers –some of which are being used today - for numerous prominent clients such Nike, PGA,",
-    par51: "NBA and other well-established businesses in Israel as well.",
-    par52: "I am a multilingual English, Arabic and Hebrew speaker, which are my native languages, however, I have learned to speak basic Russian as well.",
-    par53: "When possible, I am semi-professional aerial/sports photographer and video producer."
+    par10: "A diverse/eclectic leader the in the digital world, with over couple of decades of professional success.",    
+  },
+  demoContent: {
+    q1: 'Can I create a post?',
+    q2: 'Can I read a post?',
+    q3: 'Can I update a post?',
+    q4: 'Can I delete a post?',
   }
 }

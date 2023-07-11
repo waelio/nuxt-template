@@ -46,7 +46,7 @@ onBeforeMount(async () => {
           </section>
           <h4><a target="_blank" href="https://casl.js.org/v6/en">CASL Documentaions</a> </h4>
           <fieldset>
-            <legend>Can I create a post?</legend>
+            <legend>{{ $t('demoContent.q1') }}</legend>
             <q-btn
               v-if="can('create', 'Post')"
               label="Create Post"
@@ -58,7 +58,7 @@ onBeforeMount(async () => {
           
           </fieldset>
           <fieldset>
-            <legend>Can I read a post?</legend>
+            <legend>{{ $t('demoContent.q2') }}</legend>
             <p v-if="can('read', 'Post')">POST content ...</p>
             <pre lang="html">
               v-if="can('read', 'Post')"                         
@@ -66,7 +66,7 @@ onBeforeMount(async () => {
           </fieldset>
 
           <fieldset>
-            <legend>Can I update a post?</legend>
+            <legend>{{ $t('demoContent.q3') }}</legend>
             <q-btn
               label="Create Post"
               color="warning"
@@ -78,7 +78,7 @@ onBeforeMount(async () => {
           </fieldset>
 
                     <fieldset>
-            <legend>Can I delete a post?</legend>
+            <legend>{{ $t('demoContent.q4') }}</legend>
             <q-btn
               label="Delete Post"
               color="negative"
