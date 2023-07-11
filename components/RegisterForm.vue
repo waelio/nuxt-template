@@ -1,7 +1,7 @@
 <template>
   <div class="q-pa-lg border-2">
     <q-form @submit="onSubmit" @reset="onReset" class="q-pa-xl q-my-md q-gutter-md">
-      <h4 class="text-center">Register</h4>
+      <h4 class="text-center">{{ $t('navigation.Register') }}</h4>
       <q-input
         type="text"
         placeholder="email"

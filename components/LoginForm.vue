@@ -1,7 +1,7 @@
 <template>
   <div class="q-pa-lg border-2">
     <q-form @submit="handleLogin" @reset="onReset" class="q-my-md q-gutter-md">
-      <h4 class="text-center">Login</h4>
+      <h4 class="text-center">{{ $t('navigation.Signin') }}</h4>
       <q-input
         type="text"
         placeholder="username"
