@@ -19,7 +19,6 @@ onBeforeMount(async () => {
   initAuth();
   isAuthenticated = computed(() => !!(user.value && user.value.username));
 
-  
   loading.value = true;
   if (user) {
     try {
@@ -45,21 +44,56 @@ onBeforeMount(async () => {
               Check Out Our Latest
             </h3>
           </section>
-          <div v-if="can('create', 'Post')">
-            <a @click="createPost">Add Post</a>
-          </div>
-          <div v-if="can('read', 'Post')">          
-            <p>POST</p>
-          </div>
-          <div class="text-red">CANNOT READ POST</div>
-          <div v-if="can('update', 'Post')">
-            <a @click="createPost">Update Post</a>
-          </div>
+          <h4><a target="_blank" href="https://casl.js.org/v6/en">CASL Documentaions</a> </h4>
+          <fieldset>
+            <legend>Can I create a post?</legend>
+            <q-btn
+              v-if="can('create', 'Post')"
+              label="Create Post"
+              color="positive"
+            ></q-btn>
+            <pre lang="html">
+              v-if="can('create', 'Post')"                         
+            </pre>
+          
+          </fieldset>
+          <fieldset>
+            <legend>Can I read a post?</legend>
+            <p v-if="can('read', 'Post')">POST content ...</p>
+            <pre lang="html">
+              v-if="can('read', 'Post')"                         
+            </pre>
+          </fieldset>
+
+          <fieldset>
+            <legend>Can I update a post?</legend>
+            <q-btn
+              label="Create Post"
+              color="warning"
+              :disable="can('update', 'Post')"
+            ></q-btn>
+            <pre lang="html">
+              :disable="can('update', 'Post')"                         
+            </pre>
+          </fieldset>
+
+                    <fieldset>
+            <legend>Can I delete a post?</legend>
+            <q-btn
+              label="Delete Post"
+              color="negative"
+              :disable="can('delete', 'Post')"
+            ></q-btn>
+            <pre lang="html">
+              :disable="can('delete', 'Post')"                         
+            </pre>
+          </fieldset>
 
           <slot />
         </div>
         <div class="q-px-md">
           <q-btn
+          class="q-my-md q-ml-none`"
             :color="isAuthenticated ? 'green' : 'red'"
             text="white"
             :label="isAuthenticated ? 'Sign Out' : 'Sign In'"
