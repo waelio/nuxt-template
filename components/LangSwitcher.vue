@@ -19,9 +19,7 @@ const langs: LOCALE[] = [
 const aLocale = ref(langs[0]);
 
 watch(aLocale, (newLocale: LOCALE) => {
-  console.log(newLocale);
   locale.value = newLocale.value;
-  // setLocale(newLocale.value)
 });
 </script>
 <style scoped>
