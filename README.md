@@ -65,6 +65,6 @@ pnpm run preview
 # yarn
 yarn preview
 ```
-![Demo Page]([assets/Screenshot%20from%202023-07-11%2013-16-12.png]
+![Demo Page]([/assets/Screenshot%20from%202023-07-11%2013-16-12.png]
 
 Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
