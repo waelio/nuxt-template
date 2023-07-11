@@ -101,7 +101,8 @@
     "MediaPageTitle": "Media",
     "MediaPageCaption": "Our Media Page",
     "Signin": "Sign in",
-    "Signout": "Sign out"
+    "Signout": "Sign out",
+    "Register": "Sign up"
   },
   "about": {
     "title": "Waelio",
