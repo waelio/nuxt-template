@@ -186,7 +186,7 @@ const toggleLeftDrawer = () => {
                   <q-btn
                     dense
                     :color="isAuthenticated ? 'green' : 'red'"
-                    :label="isAuthenticated ? 'Sign Out' : 'Sign In'"
+                    :label="$t(isAuthenticated ? 'navigation.Signout' : 'navigation.Signin')"
                     @click.prevent="
                       isAuthenticated ? logout() : $router.push('/auth/login')
                     "
