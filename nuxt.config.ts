@@ -61,16 +61,16 @@ export default defineNuxtConfig({
       { name: 'theme-color', content: '#ffdd67' }
     ],
     link: [
-      { hid: 'icon', rel: 'icon', type: 'image/png', href: '/quasar-logo.png' },
+      { hid: 'icon', rel: 'icon', type: 'image/png', href: 'quasar-logo.png' },
       { hid: 'apple-touch-icon', rel: 'apple-touch-icon', href: '/quasar-logo.png' },
-      { rel: 'manifest', href: '/manifest.json' }
+      { rel: 'manifest', href: 'manifest.json' }
     ]
   },
   pwa: {
     base: '/',
     mode: 'production',
     registerType: 'autoUpdate',
-    includeAssets: ['favicon.svg', 'robots.txt', 'safari-pinned-tab.svg'],
+    includeAssets: ['favicon.svg', 'robots.txt'],
     includeManifestIcons: true,
 
     manifest: {
