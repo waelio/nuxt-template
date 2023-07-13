@@ -59,37 +59,31 @@ export default defineNuxtConfig({
     mode: 'production',
     registerType: 'autoUpdate',
     includeAssets: ['favicon.svg', 'robots.txt', 'safari-pinned-tab.svg'],
+    includeManifestIcons: true,
+
     manifest: {
-      name: 'Nuxt-Template',
-      short_name: 'Nuxt3',
-      theme_color: '#ffffff',
+      name: 'Nuxt Template',
+      lang: 'en',
+      display: "standalone",
+      scope: "./",
+      start_url: "./",
       icons: [
         {
-          src: 'quasar-logo.png',
-          sizes: '192x192',
-          type: 'image/png',
-        },
-        {
-          src: 'quasar-logo.png',
-          sizes: '512x512',
-          type: 'image/png',
-        },
-        {
-          src: 'quasar-logo.png',
-          sizes: '512x512',
-          type: 'image/png',
-          purpose: 'any maskable',
-        },
-      ],
+          src: "assets/quasar-logo.png",
+          sizes: "48x48",
+          type: "image/png",
+          purpose: "maskable any"
+        }
+      ]
     },
-    workbox: {
-      navigateFallback: '/',
-      globPatterns: ['**/*.{js,css,html,png,svg,ico}'],
-    },
-    client: {
-      installPrompt: true,
-      periodicSyncForUpdates: 3600,
-    }
+  },
+  workbox: {
+    navigateFallback: '/',
+    globPatterns: ['**/*.{js,css,html,png,svg,ico}'],
+  },
+  client: {
+    installPrompt: true,
+    periodicSyncForUpdates: 3600,
   },
   i18n: {
     vueI18n: './i18n.config.ts',
