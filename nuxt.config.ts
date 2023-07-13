@@ -58,7 +58,7 @@ export default defineNuxtConfig({
     base: '/',
     mode: 'production',
     registerType: 'autoUpdate',
-    includeAssets: ['favicon.svg', 'robots.txt'],
+    includeAssets: ['favicon.ico', 'robots.txt'],
     includeManifestIcons: true,
     
     manifest: {
