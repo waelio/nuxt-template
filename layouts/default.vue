@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { ref, Ref, watch, computed } from "vue";
-import { links1, links2, links3 } from "../static";
+import { links1, links2, links3 } from "~/statics/index";
 import { TUSER } from "../types/index";
 // import { LightModes } from '~~/types';
 import { isDark, useToggle, autoStyle, autoClass } from "../mixins";
@@ -186,7 +186,9 @@ const toggleLeftDrawer = () => {
                   <q-btn
                     dense
                     :color="isAuthenticated ? 'green' : 'red'"
-                    :label="$t(isAuthenticated ? 'navigation.Signout' : 'navigation.Signin')"
+                    :label="
+                      $t(isAuthenticated ? 'navigation.Signout' : 'navigation.Signin')
+                    "
                     @click.prevent="
                       isAuthenticated ? logout() : $router.push('/auth/login')
                     "

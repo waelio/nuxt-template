@@ -83,7 +83,7 @@ export default defineNuxtConfig({
       theme_color: "#000000",
       icons: [
         {
-          src: "assets/quasar-logo.png",
+          src: "/assets/quasar-logo.png",
           sizes: "48x48",
           type: "image/png",
           purpose: "maskable any"
@@ -93,7 +93,7 @@ export default defineNuxtConfig({
   },
   workbox: {
     navigateFallback: '/',
-    globPatterns: ['**/*.{js,css,html,png,svg,ico}'],
+    globPatterns: ['*/*.{js,css,html,png,svg,ico}'],
   },
   client: {
     installPrompt: true,
