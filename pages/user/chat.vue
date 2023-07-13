@@ -1,5 +1,5 @@
 <template>
-  
+  <NuxtLayout name="default">
     <div
       class="fit row wrap justify-start items-start content-start scroll overflow-hidden"
       ref="chat_main"
@@ -78,6 +78,7 @@
         </div>
       </div>
     </div>
+  </NuxtLayout>
 </template>
 <script setup>
 const loading = ref(false);
