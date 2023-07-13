@@ -290,5 +290,16 @@ export enum eCaslSubject {
   ROLES = 'Roles',
   TWEET = 'Tweet'
 }
+// CASL
 export type TCaslActions = eCaslAction.CREATE | eCaslAction.READ | eCaslAction.UPDATE | eCaslAction.DELETE;
 export type TCaslSubjects = eCaslSubject.CATEGORY | eCaslSubject.LIKES | eCaslSubject.MEDIAFILE | eCaslSubject.PERMISSIONS | eCaslSubject.POST | eCaslSubject.ROLES | eCaslSubject.TWEET | eCaslSubject.USER;
+
+
+export interface ISubscription {
+  endpoint: string;
+  expirationTime: string;
+  keys: {
+    p256dh: string
+    auth: string
+  }
+}
