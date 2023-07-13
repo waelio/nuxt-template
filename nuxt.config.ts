@@ -66,35 +66,6 @@ export default defineNuxtConfig({
       { rel: 'manifest', href: 'manifest.json' }
     ]
   },
-  pwa: {
-    base: '/',
-    mode: 'production',
-    registerType: 'autoUpdate',
-    includeAssets: ['favicon.svg', 'robots.txt'],
-    includeManifestIcons: true,
-
-    manifest: {
-      name: 'Nuxt Template',
-      lang: 'en',
-      display: "standalone",
-      scope: "./",
-      start_url: "/?source=pwa",
-      background_color: "#000000",
-      theme_color: "#000000",
-      icons: [
-        {
-          src: "/assets/quasar-logo.png",
-          sizes: "48x48",
-          type: "image/png",
-          purpose: "maskable any"
-        }
-      ]
-    },
-  },
-  workbox: {
-    navigateFallback: '/',
-    globPatterns: ['*/*.{js,css,html,png,svg,ico}'],
-  },
   client: {
     installPrompt: true,
     periodicSyncForUpdates: 3600,
