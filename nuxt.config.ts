@@ -4,7 +4,6 @@ import { resolve } from 'path'
 
 
 export default defineNuxtConfig({
-  mode: "spa",
   devtools: { enabled: true },
   alias: {
     '@server': resolve(__dirname, './server'),
@@ -20,6 +19,7 @@ export default defineNuxtConfig({
   imports: {
     autoImport: true,
   },
+  ssr: false,
   runtimeConfig: {
     // Auth
     jwtAccessSecret: process.env.JWT_ACCESS_TOKEN_SECRET,
@@ -42,7 +42,8 @@ export default defineNuxtConfig({
   modules: [
     '@pinia/nuxt',
     'nuxt-quasar-ui',
-    '@nuxtjs/i18n'
+    '@nuxtjs/i18n',
+    '@vite-pwa/nuxt'
   ],
   pinia: {
     autoImports: [
@@ -53,20 +54,26 @@ export default defineNuxtConfig({
   },
   // @ts-ignore
   quasar: QuasarOptions,
-  meta: {
-    title: 'nuxt-template',
-    charset: 'en',
-    meta: [
-      { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: process.env.npm_package_description || '' },
-      { name: 'theme-color', content: '#ffdd67' }
-    ],
-    link: [
-      { hid: 'icon', rel: 'icon', type: 'image/png', href: '/quasar-logo.png' },
-      { hid: 'apple-touch-icon', rel: 'apple-touch-icon', href: '/quasar-logo.png' },
-      { rel: 'manifest', href: '/manifest.json' }
-    ]
+  pwa: {
+    base: '/',
+    mode: 'production',
+    registerType: 'autoUpdate',
+    includeAssets: ['favicon.svg', 'robots.txt', 'safari-pinned-tab.svg'],
+    includeManifestIcons: true,
+    
+    manifest: {
+      name: 'Nuxt Template',
+      display: "standalone",
+      lang: 'en',
+      icons: [
+        {
+          "src": "assets/quasar-logo.png",
+          "sizes": "48x48",
+          "type": "image/png",
+          "purpose": "maskable any"
+        }
+      ]
+    },
   },
   client: {
     installPrompt: true,
