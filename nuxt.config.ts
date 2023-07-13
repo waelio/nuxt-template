@@ -19,7 +19,6 @@ export default defineNuxtConfig({
   imports: {
     autoImport: true,
   },
-  ssr: false,
   runtimeConfig: {
     // Auth
     jwtAccessSecret: process.env.JWT_ACCESS_TOKEN_SECRET,

@@ -1,5 +1,6 @@
 {
-    "name": "Nuxt3 PWA",
+    "name": "Nuxt3 Peace2074",
+    "short_name": "Peace2074",
     "icons": [
         {
             "src": "/logo_x512.png",
@@ -57,7 +58,7 @@
         }
     ],
     "start_url": "/?source=pwa",
-    "display": "fullscreen",
+    "display": "standalone",
     "background_color": "#000000",
     "theme_color": "#000000"
 }
