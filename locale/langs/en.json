@@ -100,9 +100,9 @@
     "GlossaryPageCaption": "Our Glossary Page",
     "MediaPageTitle": "Media",
     "MediaPageCaption": "Our Media Page",
-    "Signin": "Sign in",
-    "Signout": "Sign out",
-    "Register": "Sign up"
+    "Signin": "Signin",
+    "Signout": "Signout",
+    "Register": "Signup"
   },
   "about": {
     "title": "Waelio",

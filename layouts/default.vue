@@ -4,6 +4,7 @@ import { links1, links2, links3 } from "~/statics/index";
 import { TUSER } from "../types/index";
 // import { LightModes } from '~~/types';
 import { isDark, useToggle, autoStyle, autoClass } from "../mixins";
+let fabPos: Ref<number[]> = ref([18, 18]);
 
 const toggleDark = useToggle(isDark);
 const { useAuthUser, logout } = useAuth();
@@ -202,11 +203,12 @@ const toggleLeftDrawer = () => {
           </q-btn>
         </div>
         <q-btn
+          flat
           v-if="!isAuthenticated"
           :color="isAuthenticated ? 'green' : 'red'"
           :label="$t(isAuthenticated ? 'navigation.Signout' : 'navigation.Signin')"
           @click.prevent="isAuthenticated ? logout() : $router.push('/auth/login')"
-          size="sm"
+          size="md"
           v-close-popup
         />
       </q-toolbar>
@@ -288,10 +290,10 @@ const toggleLeftDrawer = () => {
     </q-drawer>
 
     <q-page-container class="scroll-y overflow-hidden">
-      <q-page padding class="fit" style="max-height: 100vh">
+      <q-page padding class="fit" style="height: 100vh">
         <slot class="all-pages" />
-        <q-page-scroller position="bottom-right" :scroll-offset="150" :offset="[18, 18]">
-          <q-btn fab icon="keyboard_arrow_up" color="primary" />
+        <q-page-scroller position="bottom-right" :scroll-offset="150" :offset="fabPos">
+          <q-btn fab icon="keyboard_arrow_up" color="secondary" />
         </q-page-scroller>
       </q-page>
     </q-page-container>
