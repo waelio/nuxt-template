@@ -55,10 +55,13 @@ export default defineNuxtConfig({
   // @ts-ignore
   quasar: QuasarOptions,
   pwa: {
+    base: '/',
+    mode: 'production',
     registerType: 'autoUpdate',
+    includeAssets: ['favicon.svg', 'robots.txt', 'safari-pinned-tab.svg'],
     manifest: {
-      name: 'Nuxt Vite PWA',
-      short_name: 'NuxtVitePWA',
+      name: 'Nuxt-Template',
+      short_name: 'Nuxt3',
       theme_color: '#ffffff',
       icons: [
         {
@@ -85,9 +88,7 @@ export default defineNuxtConfig({
     },
     client: {
       installPrompt: true,
-      // you don't need to include this: only for testing purposes
-      // if enabling periodic sync for update use 1 hour or so (periodicSyncForUpdates: 3600)
-      periodicSyncForUpdates: 20,
+      periodicSyncForUpdates: 3600,
     }
   },
   i18n: {
