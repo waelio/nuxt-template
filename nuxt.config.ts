@@ -58,7 +58,7 @@ export default defineNuxtConfig({
     base: '/',
     mode: 'production',
     registerType: 'autoUpdate',
-    includeAssets: ['favicon.svg', 'robots.txt', 'safari-pinned-tab.svg'],
+    includeAssets: ['favicon.svg', 'robots.txt'],
     includeManifestIcons: true,
     
     manifest: {
@@ -74,10 +74,6 @@ export default defineNuxtConfig({
         }
       ]
     },
-  },
-  client: {
-    installPrompt: true,
-    periodicSyncForUpdates: 3600,
   },
   i18n: {
     vueI18n: './i18n.config.ts',
