@@ -54,6 +54,18 @@ export default defineNuxtConfig({
   },
   // @ts-ignore
   quasar: QuasarOptions,
+  meta: {
+    title: 'nuxt-template',
+    charset: 'en',
+    meta: [
+      { name: 'theme-color', content: '#ffdd67' }
+    ],
+    link: [
+      { hid: 'icon', rel: 'icon', type: 'image/png', href: '/quasar-logo.png' },
+      { hid: 'apple-touch-icon', rel: 'apple-touch-icon', href: '/quasar-logo.png' },
+      { rel: 'manifest', href: '/manifest.json' }
+    ]
+  },
   pwa: {
     base: '/',
     mode: 'production',
@@ -66,7 +78,9 @@ export default defineNuxtConfig({
       lang: 'en',
       display: "standalone",
       scope: "./",
-      start_url: "./",
+      start_url: "/?source=pwa",
+      background_color: "#000000",
+      theme_color: "#000000",
       icons: [
         {
           src: "assets/quasar-logo.png",
