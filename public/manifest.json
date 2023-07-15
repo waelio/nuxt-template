@@ -1,6 +1,12 @@
 {
     "name": "Nuxt3 Peace2074",
     "short_name": "Peace2074",
+    "description": "Nuxt template peave2074",
+    "lang": "en",
+    "start_url": "/?standalone=true",
+    "display": "standalone",
+    "background_color": "#ffffff",
+    "theme_color": "#000000",
     "icons": [
         {
             "src": "/logo_x512.png",
@@ -56,9 +62,5 @@
             "sizes": "120x120",
             "purpose": "any"
         }
-    ],
-    "start_url": "/?source=pwa",
-    "display": "standalone",
-    "background_color": "#000000",
-    "theme_color": "#000000"
+    ]
 }
