@@ -67,12 +67,6 @@ export default defineNuxtConfig({
   // @ts-ignore
   quasar: QuasarOptions,
   pwa: {
-    base: '/',
-    mode: 'production',
-    registerType: 'autoUpdate',
-    includeAssets: ['favicon.ico', 'robots.txt'],
-    includeManifestIcons: true,
-
     manifest: {
       name: 'Nuxt Template',
       display: "standalone",
@@ -87,6 +81,13 @@ export default defineNuxtConfig({
           "purpose": "maskable any"
         }
       ]
+    },
+    workbox: {
+      navigateFallback: "/",
+    },
+    devOptions: {
+      enabled: true,
+      type: "module",
     },
   },
   i18n: {
