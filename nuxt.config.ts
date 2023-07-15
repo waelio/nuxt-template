@@ -79,8 +79,7 @@ export default defineNuxtConfig({
         {
           "src": "/logo_x48.png",
           "sizes": "48x48",
-          "type": "image/png",
-          "purpose": "maskable any"
+          "type": "image/png"
         }
       ]
     },
