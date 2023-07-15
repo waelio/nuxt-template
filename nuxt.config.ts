@@ -5,6 +5,18 @@ import { resolve } from 'path'
 
 export default defineNuxtConfig({
   devtools: { enabled: true },
+  app: {
+    head: {
+      charset: 'utf-8',
+      viewport: 'width=device-width, initial-scale=1',
+    }
+  },
+  meta: {
+    meta: [
+      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+      { name: 'manifest', content: './manifest.json' }
+    ],
+  },
   alias: {
     '@server': resolve(__dirname, './server'),
     '@sages': resolve(__dirname, './pages'),
@@ -60,11 +72,13 @@ export default defineNuxtConfig({
     registerType: 'autoUpdate',
     includeAssets: ['favicon.ico', 'robots.txt'],
     includeManifestIcons: true,
-    
+
     manifest: {
       name: 'Nuxt Template',
       display: "standalone",
       lang: 'en',
+      start_url: "/?standalone=true",
+
       icons: [
         {
           "src": "/logo_x48.png",
