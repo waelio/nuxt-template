@@ -1,5 +1,8 @@
 <template>
-  <RouterView />
+  <div>
+    <VitePwaManifest />
+    <RouterView />
+  </div>
 </template>
 <script setup>
 // if (process.client) {

@@ -69,7 +69,9 @@ export default defineNuxtConfig({
   pwa: {
     manifest: {
       name: 'Nuxt Template',
+      short_name: 'peace',
       display: "standalone",
+      description: 'nuxt3 template by peace_2074',
       lang: 'en',
       start_url: "/?standalone=true",
 
