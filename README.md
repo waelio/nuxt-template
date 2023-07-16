@@ -1,4 +1,4 @@
-# Nuxt Template
+# Nuxt3.6 Template
 
 Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
 ## Features
