@@ -45,7 +45,7 @@ onBeforeMount(async () => {
         <!-- App -->
         <div clas="all-pages q-px-md">
           <section class="lg:px-[15%] px-[5%] pt-20">
-            <h3 class="lg:text-5xl text-2xl leading-normal font-semibold text-center">
+            <h3 class="lg:text-5xl text-2xl leading-normal font-semibold text-center revrainbow">
               Check Out Our Latest
             </h3>
           </section>

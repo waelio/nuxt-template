@@ -7274,3 +7274,47 @@
   right: 0px;
   bottom: 0px;
 }
+.rainbow {
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-image: linear-gradient(to left, violet, indigo, blue, green, yellow, orange, red);   
+}
+.revrainbow {
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-image: linear-gradient(to left, #fa0602, #df4d0a, #e9c705, #08ee2e, #04e9cb, #05658b, #7e1ecc, #912f94);
+}
+
+.no-scroll{
+    overflow-x: hidden; 
+    overflow-y: auto;
+    touch-action: none;
+    -webkit-overflow-scrolling: none;    
+    overscroll-behavior: none;
+}
+.all-pages{
+      display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.fill{
+  height: var(--vh)!important;
+  width: var(--vw)!important;
+}
+
+.underline{
+  text-decoration: underline;
+}
+
+.view-fit{
+  height: var(--vh);
+  width: var(--vw);
+  overflow-y: scroll;
+  overflow-x: hidden;
+}

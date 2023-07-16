@@ -4,18 +4,14 @@ import { userTransformer } from "~/server/transformers/user"
 import { getUserById } from "~/server/db/users"
 import { decodeRefreshToken, generateTokens } from "../../utils/jwt"
 import type { TToken, IUSER } from "~/types"
-import { useStorage } from '@vueuse/core'
+// import { useStorage } from '@vueuse/core'
 import { core } from '~/utils/core'
 
-// @ts-ignore
+
 export default defineEventHandler(async (event: H3Event) => {
-
-    
-
     const cookies = parseCookies(event)
 
     const refreshToken = cookies.refresh_token as unknown as string
-    // console.assert(cookies.refresh_token, '17:cookies.refresh_token');
     if (!refreshToken) {
         return sendError(event, createError({
             statusCode: 200,
@@ -78,6 +74,9 @@ export default defineEventHandler(async (event: H3Event) => {
 
 
     const { accessToken } = generateTokens(dbUser as unknown as IUSER);
+
+    const getAllTokens = () => { }
+    
     
     return {
         user: event.context.auth.user,

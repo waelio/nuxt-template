@@ -19,7 +19,7 @@ export const useAuth = () => {
 
 
 
-  const setToken = (newToken: unknown) => {
+  const setToken = (newToken: TToken | object) => {
     const authToken: Ref<JwtPayload> = useAuthToken() as Ref<JwtPayload>
     authToken.value = newToken as JwtPayload
   }
@@ -44,7 +44,7 @@ export const useAuth = () => {
           method: 'POST'
         })
 
-        setToken({})
+        setToken({}) as unknown as object
         setUser({} as TUSER)
         // @ts-ignore
         auth.setUserInfo({})
@@ -124,9 +124,10 @@ export const useAuth = () => {
         note.warning('Session expired, please login.')
         reject(false)
       }
-      const access_token = data as unknown as Promise<IToken>
+      const access_token = data as unknown as Promise<TToken>
       try {
         if (access_token) {
+          // @ts-ignore
           setToken(access_token)
           resolve(true)
         } else {
@@ -167,6 +168,18 @@ export const useAuth = () => {
     })
   }
 
+  const getTokens = () => {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const data = await useFetchApi('/api/auth/refresh')
+        resolve(data)
+      } catch (error) {
+        reject(error)
+      }
+
+    })
+  }
+
   const initAuth = () => {
     return new Promise(async (resolve, _reject) => {
       setIsAuthLoading(true)
@@ -197,6 +210,7 @@ export const useAuth = () => {
     getUsers,
     refreshToken,
     setToken,
+    getTokens,
     isAuthenticated: isAuthenticated()?.value
 
   }

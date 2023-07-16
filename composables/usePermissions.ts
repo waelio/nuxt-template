@@ -5,13 +5,11 @@ export const usePermissions = () => {
   const getPermissionById = (id: string) => {
     return new Promise(async (resolve, reject) => {
       try {
-        const res = await useFetchApi('/api/permissions', {
-          // @ts-ignore
-          method: 'POST',
-          body: { permissionID: id }
-        })
+
+        const res = await useFetchApi(`/api/auth/permissions/`, { params: { id } })
         Permissions.value = res
         resolve(res)
+
       } catch (error) {
         reject(error)
       }

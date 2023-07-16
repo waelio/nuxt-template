@@ -282,16 +282,17 @@ export enum eCaslAction {
   MANAGE = 'manage'
 }
 export enum eCaslSubject {
-  CATEGORY = 'Category',
-  LIKES = 'Likes',
-  MEDIAFILE = 'MediaFile',
-  USER = 'User',
-  PERMISSIONS = 'Permissions',
-  POST = 'Post',
-  ROLES = 'Roles',
-  TWEET = 'Tweet',
+  ALL = 'all',
   ADMIN = 'admin',
-  ALL = 'all'
+  CATEGORY = 'category',
+  LIKES = 'likes',
+  MEDIAFILE = 'mediafile',
+  PERMISSIONS = 'permissions',
+  POST = 'post',
+  ROLES = 'roles',
+  REFRESH_TOKEN = 'reshresh_token',
+  TWEET = 'tweet',
+  USER = 'user',
 }
 // CASL
 export type TCaslActions = eCaslAction.CREATE | eCaslAction.READ | eCaslAction.UPDATE | eCaslAction.DELETE;

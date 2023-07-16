@@ -4,9 +4,9 @@
     </div>
 </template>
 <script setup>
-const { defaultTransition, twitterBorderColor } = useTailwindConfig()
 
-const wrapperClasses = computed(() => `${defaultTransition} ${twitterBorderColor}`)
+
+const wrapperClasses = computed(() => `fadeout green`)
 
 
 </script>

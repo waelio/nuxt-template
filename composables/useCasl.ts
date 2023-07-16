@@ -2,11 +2,8 @@
 import { useAbility } from '@casl/vue';
 
 
-export const useCasl = () => {
-
-
+export function useCasl() {
   const { can, cannot } = useAbility();
-
   return {
     can,
     cannot

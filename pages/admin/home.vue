@@ -1,29 +1,62 @@
 <script lang="ts" setup>
-import { usePermissions } from "../../composables/usePermissions";
 import { ref } from "vue";
+import { usePermissions } from "../../composables/usePermissions";
 import { useCasl } from "../../composables/useCasl";
-import { eCaslSubject, eCaslAction } from "../../types";
-const permissions = ref([]);
+
+import { useTokens } from "../../composables/useTokens";
+import { eCaslSubject, eCaslAction, TToken, TUSER } from "../../types";
+
+const permissions = ref({});
+const data = ref([]);
+const { can, cannot } = useCasl();
+
 const { getPermissionById } = usePermissions();
-const { can } = useCasl();
-async function main() {
-  permissions.value = [await getPermissionById("63070aa6f171adfa16083507")];
-}
+const loadPermissions = async () => {
+  permissions.value = await getPermissionById("63070aa6f171adfa16083507");
+};
+const loadRefreshTokens = async () => {
+  // @ts-ignore
+  const { tokens } = (await useTokens().getAllTokens()) as Promise<TToken[]>;
+
+  data.value = await tokens;
+};
 </script>
 <template>
   <NuxtLayout name="admin">
-    <q-page padding>
-      <div class="admin-home" v-if="can(eCaslAction.MANAGE, eCaslSubject.ADMIN)">
-        <h3 class="text-center">Back Office</h3>
+    <q-page padding class="view-fit">
+      <h3 class="text-center rainbow underline">Back Office</h3>
+      <div
+        class="admin-home no-scroll"
+        v-if="can(eCaslAction.MANAGE, eCaslSubject.ADMIN)"
+      >
         <q-btn
           class="q-my-sm"
           color="warning"
           text-color="white"
           label="Load Permissions"
-          @click="main"
+          @click="loadPermissions"
         />
         <p class="text-left text-h5">Current Permissions</p>
-        <p>{{ permissions }}</p>
+        <pre>{{ permissions }}</pre>
+        <q-btn
+          class="q-my-sm"
+          color="warning"
+          text-color="white"
+          label="Load Permissions"
+          @click="loadRefreshTokens"
+        />
+        <!-- <pre>{{ data }}</pre> -->
+        <fieldset v-for="tkn in data" :key="tkn.id">
+          <legend>{{ tkn.id }}</legend>
+          <p>user: {{ tkn.userId }}</p>
+          <p>updatedAt: {{ tkn.updatedAt }}</p>
+          <q-btn
+            color="negative"
+            text-color="white"
+            :disabled="cannot(eCaslAction.DELETE, eCaslSubject.REFRESH_TOKEN)"
+            label="delete Token"
+          />
+        </fieldset>
       </div>
       <div v-else>
         <p class="text-center text-h3 text-red q-my-md">Not Authorized</p>
