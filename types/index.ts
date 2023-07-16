@@ -278,7 +278,8 @@ export enum eCaslAction {
   CREATE = 'create',
   READ = 'read',
   UPDATE = 'update',
-  DELETE = 'delete'
+  DELETE = 'delete',
+  MANAGE = 'manage'
 }
 export enum eCaslSubject {
   CATEGORY = 'Category',
@@ -288,12 +289,19 @@ export enum eCaslSubject {
   PERMISSIONS = 'Permissions',
   POST = 'Post',
   ROLES = 'Roles',
-  TWEET = 'Tweet'
+  TWEET = 'Tweet',
+  ADMIN = 'admin'
 }
 // CASL
 export type TCaslActions = eCaslAction.CREATE | eCaslAction.READ | eCaslAction.UPDATE | eCaslAction.DELETE;
-export type TCaslSubjects = eCaslSubject.CATEGORY | eCaslSubject.LIKES | eCaslSubject.MEDIAFILE | eCaslSubject.PERMISSIONS | eCaslSubject.POST | eCaslSubject.ROLES | eCaslSubject.TWEET | eCaslSubject.USER;
+export type TCaslSubjects = eCaslSubject.CATEGORY | eCaslSubject.LIKES | eCaslSubject.MEDIAFILE | eCaslSubject.PERMISSIONS | eCaslSubject.POST | eCaslSubject.ROLES | eCaslSubject.TWEET | eCaslSubject.USER | eCaslSubject.ADMIN;
 
+export interface ICaslActions {
+  actions:  TCaslActions
+}
+export interface ICaslSubjects {
+  actions: TCaslSubjects
+}
 
 export interface ISubscription {
   endpoint: string;
