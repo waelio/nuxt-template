@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { TUSER,eCaslAction, eCaslSubject } from '../types'
+import { TUSER, eCaslAction, eCaslSubject } from '../types'
 export const useAuthStore = defineStore('auth', {
   state: () => ({
     _user: {} as TUSER,
@@ -17,6 +17,9 @@ export const useAuthStore = defineStore('auth', {
       { action: eCaslAction.CREATE, subject: eCaslSubject.USER },
       { action: eCaslAction.UPDATE, subject: eCaslSubject.USER },
       { action: eCaslAction.READ, subject: eCaslSubject.USER },
+
+      // Admin Page
+      { action: eCaslAction.MANAGE, subject: eCaslSubject.ADMIN }
     ]
   }),
   getters: {

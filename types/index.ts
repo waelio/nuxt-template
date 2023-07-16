@@ -290,14 +290,15 @@ export enum eCaslSubject {
   POST = 'Post',
   ROLES = 'Roles',
   TWEET = 'Tweet',
-  ADMIN = 'admin'
+  ADMIN = 'admin',
+  ALL = 'all'
 }
 // CASL
 export type TCaslActions = eCaslAction.CREATE | eCaslAction.READ | eCaslAction.UPDATE | eCaslAction.DELETE;
 export type TCaslSubjects = eCaslSubject.CATEGORY | eCaslSubject.LIKES | eCaslSubject.MEDIAFILE | eCaslSubject.PERMISSIONS | eCaslSubject.POST | eCaslSubject.ROLES | eCaslSubject.TWEET | eCaslSubject.USER | eCaslSubject.ADMIN;
 
 export interface ICaslActions {
-  actions:  TCaslActions
+  actions: TCaslActions
 }
 export interface ICaslSubjects {
   actions: TCaslSubjects
