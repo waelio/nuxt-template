@@ -16,7 +16,7 @@
     "@types/node": "^18.16.19",
     "@vite-pwa/assets-generator": "^0.0.3",
     "@vite-pwa/nuxt": "^0.1.0",
-    "nuxt": "^3.6.2",
+    "nuxt": "^3.6.3",
     "nuxt-quasar-ui": "^2.0.3",
     "prisma": "4.15.0",
     "sass": "^1.63.6"

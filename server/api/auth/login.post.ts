@@ -8,7 +8,7 @@ import { sendError } from "h3"
 import { IUSER } from "~~/types"
 import { getPermissionsByRoleByName } from "../../db/roles"
 import { _to } from 'waelio-utils'
-import { defineAbility } from '@casl/ability';
+// import { defineAbility } from '@casl/ability';
 
 export default defineEventHandler(async (event) => {
     const body = await readBody(event)
@@ -50,13 +50,8 @@ export default defineEventHandler(async (event) => {
             }
         })
 
-    const permissions = getDbRole(role)
-    console.log(permissions);
 
-
-
-
-
+    const permissions = Promise.resolve(getDbRole(role))
     const doesThePasswordMatch = await bcrypt.compare(password, user.password)
 
     if (!doesThePasswordMatch) {
@@ -78,11 +73,7 @@ export default defineEventHandler(async (event) => {
     return {
         access_token: accessToken,
         user: userTransformer(user as unknown as IUSER),
-        auth: event.context.nuxtState
+        permissions
     }
 
 })
-
-
-
-
