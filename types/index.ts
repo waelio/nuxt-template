@@ -188,15 +188,12 @@ export interface IUSER {
   id?: string;
   email: string;
   username: string;
-  name?: string;
   handle?: string;
   password: string;
   first_name?: string;
   last_name?: string;
   profileImage?: string;
   role: string;
-  createdAt?: string | null;
-  updatedAt?: string | null;
   // Refresh token
   refreshToken?: RefreshToken[];
 

@@ -32,6 +32,8 @@ export default defineNuxtConfig({
   imports: {
     autoImport: true,
   },
+  // @ts-expect-error
+  vite: false,
   ssr: false,
   runtimeConfig: {
     // Auth
@@ -43,6 +45,8 @@ export default defineNuxtConfig({
     cloudinaryApiSecret: process.env.CLOUDINARY_API_SECRET,
     // EmailJS
     emailPrivateKey: process.env.EMAIL_PRIVATE_KEY,
+    // Root User
+    rootEmail: process.env.ROOT_USER,
     public: {
       // EmailJS
       EMAIL_SERVICE: process.env.EMAIL_PUBLIC_KEY,

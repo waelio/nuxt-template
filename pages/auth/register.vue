@@ -1,7 +1,7 @@
 <template>
   <div class="q-page q-pa-lg">
-    <RegisterForm />
-    <p class="q-pl-lg q-ml-xl" >
+    <RegisterForm @signup-success="localSignup" :data="data" />
+    <p class="q-pl-lg q-ml-xl">
       Already Registered?
       <NuxtLink to="/auth/login">Login</NuxtLink>
     </p>
@@ -10,25 +10,15 @@
 
 <script lang="ts" setup>
 import { ComputedRef, Ref, ref } from "vue";
-
+const emit = defineEmits(["signup-success"]);
 const email = useState(() => "user-email");
 const password = useState(() => "user-password");
 
-const isPwd1 = ref(true);
-
-const scopes = ref([
-  { network: "facebook", scope: "social" },
-  { network: "google", scope: "profile" },
-]);
 
 useHead({
   title: "Register Page",
 });
 
-const emit = defineEmits(["registerSuccess"]);
-const handleUsernameEmit = (e: string) => {
-  console.log(e);
-};
 const router = useRouter();
 
 type RegUser = {
@@ -42,9 +32,9 @@ type RegUser = {
 let data: Ref<RegUser> = ref({
   email: "",
   username: "",
-  password: "",
   first_name: "",
   last_name: "",
+  password: "",
   loading: false,
 });
 const validateUser = (object: Ref<RegUser>): ComputedRef<boolean> =>
@@ -59,14 +49,14 @@ const validateUser = (object: Ref<RegUser>): ComputedRef<boolean> =>
       )
   );
 const valid = validateUser(data);
-async function localSignup() {
+const localSignup = async () => {
   if (!valid) return;
   email.value = data.value.email as string;
   password.value = data.value.password as string;
   const { register } = useAuth();
   data.value.loading = true;
   try {
-    const Signup = await register({
+    await register({
       username: data.value.username as string,
       user_email: data.value.email as string,
       first_name: data.value.first_name as string,
@@ -97,14 +87,14 @@ async function localSignup() {
       message: "User regeretered successfully",
     });
 
-    emit("registerSuccess", { username: data.value.username });
+    emit("signup-success", { username: data.value.username });
   } catch (error) {
     console.log(error);
   } finally {
     data.value.loading = false;
-    router.push("/");
+    // router.push("/");
   }
-}
+};
 
 const isButtonDisabled = computed(() => {
   return !data.value.username || !data.value.password || data.value.loading;

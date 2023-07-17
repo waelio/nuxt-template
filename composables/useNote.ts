@@ -50,6 +50,5 @@ note.debug = (title: string, err: { message: string }) => {
 
 
 export {
-  note,
-  // Notify, Dialog, Loading
+  note
 }

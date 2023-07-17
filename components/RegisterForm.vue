@@ -1,49 +1,69 @@
 <template>
   <div class="q-pa-lg border-2">
-    <q-form @submit="onSubmit" @reset="onReset" class="q-pa-xl q-my-md q-gutter-md">
-      <h4 class="text-center">{{ $t('navigation.Register') }}</h4>
+    <q-form
+      @submit.prevent="onSubmit"
+      @reset="onReset"
+      class="q-pa-xl q-my-md q-gutter-md"
+    >
+      <h4 class="text-center">{{ $t("navigation.Register") }}</h4>
       <q-input
         type="text"
         placeholder="email"
         label="Email"
         name="email"
-        v-model="newUser.email"
+        v-model="data.email"
       />
       <q-input
         type="text"
         placeholder="username"
         label="Username"
         name="username"
-        v-model="newUser.username"
+        v-model="data.username"
       />
       <q-input
         type="text"
         placeholder="first Name"
         label="First Name"
-        name="username"
-        v-model="newUser.firstName"
+        name="first_name"
+        v-model="data.first_name"
       />
       <q-input
         type="text"
         placeholder="last name"
         label="Last Name"
-        name="username"
-        v-model="newUser.lastName"
+        name="last_name"
+        v-model="data.last_name"
       />
       <q-input
-        type="password"
+        :type="isPwd ? 'password' : 'text'"
         placeholder="password"
         label="Password"
         name="password"
-        v-model="newUser.password"
-      />
+        v-model="data.password"
+      >
+        <template v-slot:append>
+          <q-icon
+            :name="isPwd ? 'visibility_off' : 'visibility'"
+            class="cursor-pointer"
+            @click="isPwd = !isPwd"
+          />
+        </template>
+      </q-input>
       <q-input
-        type="password"
+        :type="isPwd ? 'password' : 'text'"
         placeholder="repeat password"
         label="Reapeat password"
         name="password"
-        v-model="newUser.password"
-      />
+        v-model="data.repeatPassword"
+      >
+        <template v-slot:append>
+          <q-icon
+            :name="isPwd ? 'visibility_off' : 'visibility'"
+            class="cursor-pointer"
+            @click="isPwd = !isPwd"
+          />
+        </template>
+      </q-input>
       <q-btn label="Register" type="submit" color="positive" text-color="white" />
       <q-btn
         label="Reset"
@@ -58,9 +78,13 @@
 
 <script lang="ts" setup>
 import { useTitle } from "@vueuse/core";
-const title = useTitle("Signup Page");
+const emit = defineEmits(["signup-success"]);
+const props = defineProps(['data']);
 
-const newUser = reactive({
+const isPwd = ref(true);
+useTitle("Signup Page");
+
+const lData = reactive({
   email: "",
   username: "",
   firstName: "",
@@ -69,12 +93,15 @@ const newUser = reactive({
   repeatPassword: "",
 });
 function onReset() {
-  newUser.email = "";
-  newUser.username = "";
-  newUser.firstName = "";
-  newUser.lastName = "";
-  newUser.password = "";
-  newUser.repeatPassword = "";
+  lData.email = "";
+  lData.username = "";
+  lData.firstName = "";
+  lData.lastName = "";
+  lData.password = "";
+  lData.repeatPassword = "";
 }
-function onSubmit() {}
+function onSubmit() {
+  emit("signup-success", lData);
+  onReset()
+}
 </script>
