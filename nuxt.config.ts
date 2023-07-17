@@ -32,8 +32,6 @@ export default defineNuxtConfig({
   imports: {
     autoImport: true,
   },
-  // @ts-expect-error
-  vite: false,
   ssr: false,
   runtimeConfig: {
     // Auth
