@@ -1,13 +1,14 @@
 <script lang="ts" setup>
 let fabPos: Ref<number[]> = ref([18, 18]);
+const logoSRC = ref('quasar-logo.png')
 </script>
 <template>
   <q-layout view="hHh lpR fFf">
-    <q-header elevated height-hint="64" class="bg-accent text-white">
+    <q-header elevated  class="bg-accent text-white">
       <q-toolbar >
         <q-toolbar-title shrink class="row items-center no-wrap">
           <nuxt-link to="/" class="text-white">
-            <q-img ratio="1/1" src="quasar-logo.png" class="quasar-logo" />
+            <q-img ratio="1/1" :src="logoSRC" class="quasar-logo" />
           </nuxt-link>
         </q-toolbar-title>
 
@@ -42,6 +43,7 @@ let fabPos: Ref<number[]> = ref([18, 18]);
 
                   <div class="text-subtitle1 q-mt-md q-mb-xs">0</div>
                   <q-btn
+                  class="q-mr-lg"
                     dense
                     :color="isAuthenticated ? 'green' : 'red'"
                     :label="

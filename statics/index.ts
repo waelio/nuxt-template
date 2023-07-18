@@ -8,7 +8,7 @@ export const links1 = [
   { icon: "info", text: "navigation.AboutPageTitle", dist: "/about" },
   { icon: "mail", text: "navigation.Messages", dist: "/user/inbox" },
   { icon: "contact_page", text: "navigation.ContactPageTitle", dist: "/contact" },
-  { icon: "manage_accounts", text: "navigation.AdminPage", dist: "/admin/home" },
+  { icon: "manage_accounts", text: "navigation.AdminPage", dist: "/admin" },
 
 ];
 export const links2 = [

@@ -7,7 +7,7 @@ import { useTokens } from "../../composables/useTokens";
 import { CaslSubjectE, CaslActionE, TokenT, UserT } from "../../types";
 
 const permissions = ref({});
-const data = ref([]);
+const data: Ref<TokenT> = ref([]);
 const { can, cannot } = useCasl();
 
 const { getPermissionById } = usePermissions();
@@ -42,14 +42,13 @@ const loadRefreshTokens = async () => {
           class="q-my-sm"
           color="warning"
           text-color="white"
-          label="Load Permissions"
+          label="Load Tokens"
           @click="loadRefreshTokens"
         />
         <!-- <pre>{{ data }}</pre> -->
         <fieldset v-for="tkn in data" :key="tkn.id">
           <legend>{{ tkn.id }}</legend>
           <p>user: {{ tkn.userId }}</p>
-          <p>updatedAt: {{ tkn.updatedAt }}</p>
           <q-btn
             color="negative"
             text-color="white"
