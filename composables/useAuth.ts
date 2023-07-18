@@ -3,7 +3,7 @@ import { useState } from '#app'
 // import jwt_decode from "jwt-decode"
 // @ts-ignore
 import type { JwtPayload } from 'jwt-decode'
-import { TUSER, IUSER, IToken, TToken } from '~/types'
+import { UserT, UserI, TokenT } from '~/types'
 import useFetchApi from './useFetchApi'
 import { Ref } from 'vue'
 import { note } from './useNote'
@@ -11,26 +11,26 @@ import { useAuthStore } from '~/store/auth.pinia'
 
 export const useAuth = () => {
   const useAuthToken = () => useState('auth_token') as Ref<JwtPayload>
-  const useAuthUser = () => useState('auth_user') as Ref<IUSER>
-  const useAuthUsers = () => useState('auth_users') as Ref<IUSER[]>
+  const useAuthUser = () => useState('auth_user') as Ref<UserI>
+  const useAuthUsers = () => useState('auth_users') as Ref<UserI[]>
   const useAuthLoading = () => useState('auth_loading', () => true) as Ref<boolean>
   const isAuthenticated = () => useState('isAuthenticated', () => false) as Ref<boolean>
   const auth = useAuthStore()
 
 
 
-  const setToken = (newToken: TToken | object) => {
+  const setToken = (newToken: TokenT | object) => {
     const authToken: Ref<JwtPayload> = useAuthToken() as Ref<JwtPayload>
     authToken.value = newToken as JwtPayload
   }
-  const setUser = (newUser: TUSER) => {
-    const authUser = useAuthUser() as Ref<TUSER>
-    authUser.value = newUser as TUSER
+  const setUser = (newUser: UserT) => {
+    const authUser = useAuthUser() as Ref<UserT>
+    authUser.value = newUser as UserT
 
   }
-  const setUsers = (newUser: IUSER[]) => {
+  const setUsers = (newUser: UserI[]) => {
     const authUsers = useAuthUsers()
-    authUsers.value = [...newUser] as TUSER[]
+    authUsers.value = [...newUser] as UserT[]
   }
   const setIsAuthLoading = (value: boolean) => {
     const authLoading = useAuthLoading()
@@ -45,7 +45,7 @@ export const useAuth = () => {
         })
 
         setToken({}) as unknown as object
-        setUser({} as TUSER)
+        setUser({} as UserT)
         // @ts-ignore
         auth.setUserInfo({})
         note.warning('Logout success.')
@@ -68,10 +68,10 @@ export const useAuth = () => {
             password
           }
         })
-        const { user, access_token } = data as { user: TUSER, access_token: TToken }
+        const { user, access_token } = data as { user: UserT, access_token: TokenT }
         if (user && access_token) {
           setToken(access_token)
-          setUser(user as TUSER)
+          setUser(user as UserT)
           note.success('Successful login')
           isAuthenticated().value = true
           resolve(user)
@@ -101,7 +101,7 @@ export const useAuth = () => {
             repeatPassword: password,
             password
           }
-        }) as { body: TUSER }
+        }) as { body: UserT }
         const user = data.body
 
         resolve(user)
@@ -124,7 +124,7 @@ export const useAuth = () => {
         note.warning('Session expired, please login.')
         reject(false)
       }
-      const access_token = data as unknown as Promise<TToken>
+      const access_token = data as unknown as Promise<TokenT>
       try {
         if (access_token) {
           // @ts-ignore
@@ -145,7 +145,7 @@ export const useAuth = () => {
   const getUser = () => {
     return new Promise(async (resolve, reject) => {
       try {
-        const data = await useFetchApi('/api/auth/user') as { user: TUSER }
+        const data = await useFetchApi('/api/auth/user') as { user: UserT }
         setUser(data.user)
         resolve(true)
       } catch (error) {
@@ -158,7 +158,7 @@ export const useAuth = () => {
   const getUsers = () => {
     return new Promise(async (resolve, reject) => {
       try {
-        const data = await useFetchApi('/api/auth/users') as { users: TUSER[] }
+        const data = await useFetchApi('/api/auth/users') as { users: UserT[] }
         setUsers(data.users)
         resolve(true)
 

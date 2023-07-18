@@ -1,6 +1,5 @@
 import { defineNuxtConfig } from 'nuxt/config'
 import { QuasarOptions } from './qusarOptions'
-// import { resolve } from 'path'
 import { fileURLToPath } from 'url'
 
 
@@ -19,10 +18,10 @@ export default defineNuxtConfig({
     ],
   },
   alias: {
-    "~": fileURLToPath(new URL('.', import.meta.url)),
-    "@": fileURLToPath(new URL('.', import.meta.url)),
-    "~~": fileURLToPath(new URL('./', import.meta.url)),
-    "@@": fileURLToPath(new URL('./', import.meta.url)),
+    "@": fileURLToPath(new URL('./', import.meta.url)),
+    "@store": fileURLToPath(new URL('./store/', import.meta.url)),
+    "@pages": fileURLToPath(new URL('./pages/', import.meta.url)),
+    "@cmps": fileURLToPath(new URL('./composables/', import.meta.url)),
   },
   css: [
     '@quasar/extras/material-icons/material-icons.css',

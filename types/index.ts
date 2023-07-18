@@ -1,39 +1,38 @@
 import { MediaFile, RefreshToken, Tweet } from "@prisma/client"
 import { NavigationGuard, RouteLocationNormalized } from "~/.nuxt/vue-router"
 
-export type TKey = number
-export type TColor = string
-export type TName = string
-export type TLink = string
-export type TYear = string
-export type TText = string
-export type TValue = string
-export type TDescription = string
+export type KeyT = number
+export type ColorT = string
+export type NameT = string
+export type YearT = string
+export type TextT = string
+export type ValueT = string
+export type DescriptionT = string
 
-export interface Window {
+export interface WindowI {
   Etherium: any;
   web3: any;
 }
 /** User Roles from casl */
-export interface IRole {
-  name: TName;
-  subject: TName;
-  actions: TName[];
+export interface RoleI {
+  name: NameT;
+  subject: NameT;
+  actions: NameT[];
   inverted?: boolean;
-  conditions?: TName[]
-  fields?: TName[];
-  reason?: TName;
+  conditions?: NameT[]
+  fields?: NameT[];
+  reason?: NameT;
 }
 
 /** Loght Modes */
-export enum LightModes {
+export enum LightModesE {
   Dark = 'dark',
   Light = 'light',
   System = 'auto'
 }
 
 /** Enum Note Actions */
-export enum ENoteAcions {
+export enum NoteAcionsE {
   Show = 'show',
   Hide = 'hide',
   success = 'success',
@@ -43,12 +42,12 @@ export enum ENoteAcions {
   Loading = 'loading'
 }
 /** Loding Defaults */
-export type TLoadingDefaults = {
+export type LoadingDefaultsT = {
   spinner: string;
   message: string;
 }
 /** Notify Positions */
-export enum EPOSITIONS {
+export enum PositionsE {
   top = 'top',
   topRight = 'top-right',
   topLeft = 'top-left',
@@ -60,26 +59,26 @@ export enum EPOSITIONS {
   center = 'center'
 }
 /** Education History interface */
-export interface IHistory {
-  key: TKey,
-  color: TColor,
-  name: TName,
-  link: LINK,
-  year: TYear,
+export interface HistoryI {
+  key: KeyT,
+  color: ColorT,
+  name: NameT,
+  link: LinkT,
+  year: YearT,
   text: string
 }
 /** Project interface */
 export interface IProject {
   key: string
-  value: TValue,
+  value: ValueT,
   selected: boolean
 }
-export interface ISponsor {
+export interface SponsorI {
   name: string,
   img: string,
   url: string
 }
-export interface IWorkOptions {
+export interface WorkOptionsI {
   name?: "SHA-256" | "PBKDF2";
   encode?: "base64" | "utf8" | "hex";
   salt?: any;
@@ -87,7 +86,7 @@ export interface IWorkOptions {
   length?: number;
 }
 /** Authentication Strategies */
-export enum ENetworksNames {
+export enum NetworksNamesE {
   google = "google",
   facebook = "facebook",
   twitter = "twitter",
@@ -96,23 +95,23 @@ export enum ENetworksNames {
 }
 
 /** Social login user scopes */
-export enum EScopesNames {
+export enum ScopesNamesE {
   profile = "profile",
   social = "social",
   email = "email",
   fullname = "fullname",
 }
 /** Social login scope */
-export interface IScope {
+export interface ScopeI {
   name?: string;
-  network: Partial<ENetworksNames>;
-  scope: Partial<EScopesNames>;
+  network: Partial<NetworksNamesE>;
+  scope: Partial<ScopesNamesE>;
   icon?: string;
   emitName?: string | Function;
 }
-export type TScope = IScope
+export type ScopeT = ScopeI
 
-export interface IHARF {
+export interface HarfI {
   name: string;
   weight: number;
   value: string
@@ -120,53 +119,53 @@ export interface IHARF {
   color?: string;
   encoding?: string;
 }
-export interface IkALEMAT {
-  horuf: IHARF[];
+export interface kalimatI {
+  horuf: HarfI[];
 }
-export interface IAYA {
-  Kalemat: IkALEMAT[];
+export interface AyaI {
+  Kalemat: kalimatI[];
 }
-export interface ISURA {
-  Ayat: IAYA[];
+export interface SuraI {
+  Ayat: AyaI[];
 }
-export interface IQuran {
-  Surah: ISURA[];
+export interface QuranI {
+  Surah: SuraI[];
 }
-export interface ISTATE {
-  quran: IQuran;
-  Surah: ISURA[];
-  Index: IQuran;
+export interface StateI {
+  quran: QuranI;
+  Surah: SuraI[];
+  Index: QuranI;
 }
 
-export interface IQ2B {
-  state: ISTATE
+export interface Q2bI {
+  state: StateI
 }
-export interface LINK {
+export interface LinkT {
   text: string;
   icon: string;
 }
 
-export interface IHistory {
-  key: TKey,
-  color: TColor,
-  name: TName,
-  link: LINK,
-  year: TYear,
+export interface HistoryI {
+  key: KeyT,
+  color: ColorT,
+  name: NameT,
+  link: LinkT,
+  year: YearT,
   text: string
 }
-export interface IProjects {
+export interface ProjectsI {
   key: string
-  value: TValue,
+  value: ValueT,
   selected: boolean
 }
-export type TProjects = IProjects
-export interface ISponsors {
+export type ProjectsT = ProjectsI
+export interface SponsorsI {
   name: string,
   img: string,
   url: string
 }
-export type TSponsors = ISponsors
-export interface TransactionInterface {
+export type SponsorsT = SponsorsI
+export interface TransactionInterfaceI {
   addressFrom: string;
   addressTo: string;
   amount: number;
@@ -178,12 +177,12 @@ export interface TransactionInterface {
   receiver: string;
   sender: string;
 }
-export type Transaction = TransactionInterface & {
+export type TransactionT = TransactionInterfaceI & {
   id?: string | number;
 };
-export type Transactions = Transaction[];
+export type TransactionsT = TransactionT[];
 
-export interface IUSER {
+export interface UserI {
   [x: string]: any
   id?: string;
   email: string;
@@ -205,10 +204,10 @@ export interface IUSER {
   // MediaFiles
   mediaFiles?: MediaFile[]
 }
-export type TUSER = IUSER
+export type UserT = UserI
 
 
-export interface IPermession {
+export interface PermessionI {
   id?: string;
   action: string | string[];
   subject: string | string[];
@@ -220,14 +219,14 @@ export interface IPermession {
   createdAt?: string;
   updatedAt?: string;
 }
-export type TPermession = IPermession
+export type PermessionT = PermessionI
 
-export interface IToken {
+export interface TokenI {
   userId: string;
   iat: number;
   exp: number;
 }
-export type TToken = {
+export type TokenT = {
   id: string
   token: string;
   createdAt: string;
@@ -236,7 +235,7 @@ export type TToken = {
 }
 
 
-export interface ISubscription {
+export interface SubscriptionI {
   id: string;
   endpoint: string;
   expirationTime: string;
@@ -245,10 +244,10 @@ export interface ISubscription {
   createdAt: string;
   updatedAt: string;
   userId: string;
-  user: object;
+  user: UserI;
 }
 
-export type TReshreshToken = {
+export type ReshreshTokenT = {
   id: string;
   token: string;
   userId: string;
@@ -256,29 +255,29 @@ export type TReshreshToken = {
   createdAt?: Date;
 }
 
-export interface IPOST {
-  [x: string]: any
-  userId: number,
+export interface PostI {
+  [x: string]: string | number
+  userId: number | string,
   id: number,
   title: string
 }
 
-export interface RequestIPOST {
-  data: IPOST
+export interface RequestPostI {
+  data: PostI
 }
 
-export interface RouteMiddleware {
+export interface RouteMiddlewareI {
   (to: RouteLocationNormalized, from: RouteLocationNormalized): ReturnType<NavigationGuard>
 }
 
-export enum eCaslAction {
+export enum CaslActionE {
   CREATE = 'create',
   READ = 'read',
   UPDATE = 'update',
   DELETE = 'delete',
   MANAGE = 'manage'
 }
-export enum eCaslSubject {
+export enum CaslSubjectE {
   ALL = 'all',
   ADMIN = 'admin',
   CATEGORY = 'category',
@@ -292,21 +291,23 @@ export enum eCaslSubject {
   USER = 'user',
 }
 // CASL
-export type TCaslActions = eCaslAction.CREATE | eCaslAction.READ | eCaslAction.UPDATE | eCaslAction.DELETE;
-export type TCaslSubjects = eCaslSubject.CATEGORY | eCaslSubject.LIKES | eCaslSubject.MEDIAFILE | eCaslSubject.PERMISSIONS | eCaslSubject.POST | eCaslSubject.ROLES | eCaslSubject.TWEET | eCaslSubject.USER | eCaslSubject.ADMIN;
+export type CaslActionsT = CaslActionE.CREATE | CaslActionE.READ | CaslActionE.UPDATE | CaslActionE.DELETE;
+export type CaslSubjectsT = CaslSubjectE.CATEGORY | CaslSubjectE.LIKES | CaslSubjectE.MEDIAFILE | CaslSubjectE.PERMISSIONS | CaslSubjectE.POST | CaslSubjectE.ROLES | CaslSubjectE.TWEET | CaslSubjectE.USER | CaslSubjectE.ADMIN;
 
-export interface ICaslActions {
-  actions: TCaslActions
+export interface CaslActionsI {
+  actions: CaslActionsT
 }
-export interface ICaslSubjects {
-  actions: TCaslSubjects
+export interface CaslSubjectsI {
+  actions: CaslSubjectsT
 }
 
-export interface ISubscription {
+type KeysT = {
+  p256dh: string
+  auth: string
+}
+export interface SubscriptionI {
   endpoint: string;
   expirationTime: string;
-  keys: {
-    p256dh: string
-    auth: string
-  }
+  keys: KeysT
 }
+export type SubscriptionT = SubscriptionI

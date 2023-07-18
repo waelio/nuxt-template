@@ -1,10 +1,11 @@
+import { WatchSource } from "nuxt/dist/app/compat/vue-demi"
 import useAuth from "./useAuth"
 
 type UseFetchOptions = {
   key?: string
   method?: string
-  query?: SearchParams
-  params?: SearchParams
+  query?: URLSearchParams
+  params?: URLSearchParams
   body?: RequestInit['body'] | Record<string, any>
   headers?: Record<string, string> | [key: string, value: string][] | Headers
   baseURL?: string
@@ -17,7 +18,7 @@ type UseFetchOptions = {
   watch?: WatchSource[]
 }
 
-export default (url: any, options: UseFetchOptions) => {
+export default (url: any, options: UseFetchOptions = {}) => {
   const { useAuthToken } = useAuth()
 
   return $fetch(url, {

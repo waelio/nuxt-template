@@ -1,6 +1,6 @@
 // @ts-ignore
 import prisma from './index'
-import { TReshreshToken } from "../../types";
+import { ReshreshTokenT } from "../../types";
 
 export const createRefreshToken = async (refreshToken: { token: any; userId: any; }) => {
   return await prisma.refreshToken?.create({
@@ -18,7 +18,7 @@ export const getRefreshTokenByToken = async (rtoken: string) => {
 }
 
 
-export const removeRefreshToken = async (rtoken: TReshreshToken) => {
+export const removeRefreshToken = async (rtoken: ReshreshTokenT) => {
   return await prisma.refreshToken?.delete({
     where: {
       id: rtoken.id

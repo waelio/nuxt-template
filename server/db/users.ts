@@ -13,25 +13,24 @@ type UserData = {
 }
 
 export const createUser = (userData: UserData) => {
-    const finalUserData: UserData = {
-        ...userData,
-        password: bcrypt.hashSync(userData.password, 10)
-    }
+  const finalUserData: UserData = {
+    ...userData,
+    password: bcrypt.hashSync(userData.password, 10)
+  }
 
   return prisma.user?.create({
-      // @ts-ignore
-        data: finalUserData
-    })
+    // @ts-ignore
+    data: finalUserData
+  })
 }
 
-export const getUserByUsername = async (daUsername: string) => {
-  const user = await prisma.user.findUnique({
+export const getUserByUsername = (username: string) => {
+  return prisma.user?.findUnique({
     where: {
-      username: daUsername
+      username: username
     }
   })
 
-  return user
 }
 
 

@@ -1,34 +1,34 @@
 import { defineStore } from 'pinia'
-import { TUSER, eCaslAction, eCaslSubject } from '../types'
+import { UserT, CaslActionE, CaslSubjectE } from '../types'
 export const useAuthStore = defineStore('auth', {
   state: () => ({
-    _user: {} as TUSER,
+    _user: {} as UserT,
     _permissions: [
       // Categoty
-      { action: eCaslAction.CREATE, subject: eCaslSubject.CATEGORY },
-      { action: eCaslAction.READ, subject: eCaslSubject.CATEGORY },
-      { action: eCaslAction.UPDATE, subject: eCaslSubject.CATEGORY },
-      { action: eCaslAction.DELETE, subject: eCaslSubject.CATEGORY },
+      { action: CaslActionE.CREATE, subject: CaslSubjectE.CATEGORY },
+      { action: CaslActionE.READ, subject: CaslSubjectE.CATEGORY },
+      { action: CaslActionE.UPDATE, subject: CaslSubjectE.CATEGORY },
+      { action: CaslActionE.DELETE, subject: CaslSubjectE.CATEGORY },
       // POST
-      { action: eCaslAction.CREATE, subject: eCaslSubject.POST },
-      { action: eCaslAction.READ, subject: eCaslSubject.POST },
-      { action: eCaslAction.UPDATE, subject: eCaslSubject.POST },
-      { action: eCaslAction.DELETE, subject: eCaslSubject.POST },
+      { action: CaslActionE.CREATE, subject: CaslSubjectE.POST },
+      { action: CaslActionE.READ, subject: CaslSubjectE.POST },
+      { action: CaslActionE.UPDATE, subject: CaslSubjectE.POST },
+      { action: CaslActionE.DELETE, subject: CaslSubjectE.POST },
 
       // Refresh_Token
-      { action: eCaslAction.CREATE, subject: eCaslSubject.REFRESH_TOKEN },
-      { action: eCaslAction.READ, subject: eCaslSubject.REFRESH_TOKEN },
-      { action: eCaslAction.UPDATE, subject: eCaslSubject.REFRESH_TOKEN },
-      { action: eCaslAction.DELETE, subject: eCaslSubject.REFRESH_TOKEN },
+      { action: CaslActionE.CREATE, subject: CaslSubjectE.REFRESH_TOKEN },
+      { action: CaslActionE.READ, subject: CaslSubjectE.REFRESH_TOKEN },
+      { action: CaslActionE.UPDATE, subject: CaslSubjectE.REFRESH_TOKEN },
+      { action: CaslActionE.DELETE, subject: CaslSubjectE.REFRESH_TOKEN },
 
       // User Permissions
-      { action: eCaslAction.CREATE, subject: eCaslSubject.USER },
-      { action: eCaslAction.READ, subject: eCaslSubject.USER },
-      { action: eCaslAction.UPDATE, subject: eCaslSubject.USER },
-      { action: eCaslAction.DELETE, subject: eCaslSubject.USER },
+      { action: CaslActionE.CREATE, subject: CaslSubjectE.USER },
+      { action: CaslActionE.READ, subject: CaslSubjectE.USER },
+      { action: CaslActionE.UPDATE, subject: CaslSubjectE.USER },
+      { action: CaslActionE.DELETE, subject: CaslSubjectE.USER },
 
       // Admin Page
-      { action: eCaslAction.MANAGE, subject: eCaslSubject.ADMIN }
+      { action: CaslActionE.MANAGE, subject: CaslSubjectE.ADMIN }
     ]
   }),
   getters: {
@@ -37,7 +37,7 @@ export const useAuthStore = defineStore('auth', {
     permissions: state => state._permissions
   },
   actions: {
-    async setUserInfo(info: TUSER) {
+    async setUserInfo(info: UserT) {
       this._user = info
     }
   },

@@ -3,7 +3,7 @@ export const runSetup = () => {
     const root = document.querySelector(':root') as HTMLElement;
     const width: number = window.innerWidth;
     const height: number = window.innerHeight;
-    const html = document.querySelector('html')
+    // const html = document.querySelector('html')
     root.style.setProperty('--vh', `${height}px`)
     root.style.setProperty('--vw', `${width}px`)
     window.addEventListener('resize', () => {

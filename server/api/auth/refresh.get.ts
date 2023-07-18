@@ -3,7 +3,7 @@ import { getRefreshTokenByToken } from "~/server/db/refreshTokens"
 import { userTransformer } from "~/server/transformers/user"
 import { getUserById } from "~/server/db/users"
 import { decodeRefreshToken, generateTokens } from "../../utils/jwt"
-import type { TToken, IUSER } from "~/types"
+import type { TokenT, UserI } from "~/types"
 // import { useStorage } from '@vueuse/core'
 import { core } from '~/utils/core'
 
@@ -19,7 +19,7 @@ export default defineEventHandler(async (event: H3Event) => {
         }))
     }
     // @ts-ignore
-    const rToken:TToken = await getRefreshTokenByToken(refreshToken)
+    const rToken:TokenT = await getRefreshTokenByToken(refreshToken)
  
     if (!rToken) {
         return sendError(event, createError({
@@ -27,7 +27,7 @@ export default defineEventHandler(async (event: H3Event) => {
             statusMessage: 'Refresh rToken is invalid'
         }))
     }
-    const token = decodeRefreshToken(rToken) as TToken
+    const token = decodeRefreshToken(rToken) as TokenT
      
     if (!token) {
         return sendError(event, createError({
@@ -37,7 +37,7 @@ export default defineEventHandler(async (event: H3Event) => {
     }
 
     
-    const { userId } = token as TToken
+    const { userId } = token as TokenT
 
     if (!userId) {
         return sendError(event, createError({
@@ -53,7 +53,7 @@ export default defineEventHandler(async (event: H3Event) => {
             statusMessage: 'user not found'
         }))
     }    
-    const { username } = dbUser as unknown as IUSER;
+    const { username } = dbUser as unknown as UserI;
 
     if (!username) {
         return sendError(event, createError({
@@ -73,7 +73,7 @@ export default defineEventHandler(async (event: H3Event) => {
     
 
 
-    const { accessToken } = generateTokens(dbUser as unknown as IUSER);
+    const { accessToken } = generateTokens(dbUser as unknown as UserI);
 
     const getAllTokens = () => { }
     

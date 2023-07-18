@@ -4,7 +4,7 @@ import { usePermissions } from "../../composables/usePermissions";
 import { useCasl } from "../../composables/useCasl";
 
 import { useTokens } from "../../composables/useTokens";
-import { eCaslSubject, eCaslAction, TToken, TUSER } from "../../types";
+import { CaslSubjectE, CaslActionE, TokenT, UserT } from "../../types";
 
 const permissions = ref({});
 const data = ref([]);
@@ -16,7 +16,7 @@ const loadPermissions = async () => {
 };
 const loadRefreshTokens = async () => {
   // @ts-ignore
-  const { tokens } = (await useTokens().getAllTokens()) as Promise<TToken[]>;
+  const { tokens } = (await useTokens().getAllTokens()) as Promise<TokenT[]>;
 
   data.value = await tokens;
 };
@@ -27,7 +27,7 @@ const loadRefreshTokens = async () => {
       <h3 class="text-center rainbow underline">Back Office</h3>
       <div
         class="admin-home no-scroll"
-        v-if="can(eCaslAction.MANAGE, eCaslSubject.ADMIN)"
+        v-if="can(CaslActionE.MANAGE, CaslSubjectE.ADMIN)"
       >
         <q-btn
           class="q-my-sm"
@@ -53,7 +53,7 @@ const loadRefreshTokens = async () => {
           <q-btn
             color="negative"
             text-color="white"
-            :disabled="cannot(eCaslAction.DELETE, eCaslSubject.REFRESH_TOKEN)"
+            :disabled="cannot(CaslActionE.DELETE, CaslSubjectE.REFRESH_TOKEN)"
             label="delete Token"
           />
         </fieldset>

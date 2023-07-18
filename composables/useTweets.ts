@@ -2,7 +2,6 @@
 import { useState } from '#app'
 import { Tweet } from '@prisma/client'
 import { Ref, ref } from 'vue'
-// import { IUSER } from '~/types'
 export default () => {
 
   const usePostTweetModal = () => useState('post_tweet_modal', () => ref(false))
@@ -42,13 +41,12 @@ export default () => {
     })
   }
 
-  const getTweets = (params = {}) => {
+  const getTweets = () => {
     return new Promise(async (resolve, reject) => {
       try {
         const response = await useFetchApi('/api/tweets', {
           // @ts-ignore
           method: 'GET',
-          params
         })
 
         resolve(response)

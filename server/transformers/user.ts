@@ -1,6 +1,6 @@
-import { TUSER } from "../../types"
+import { UserT } from "../../types"
 
-export const userTransformer = (user: TUSER): Partial<TUSER> => {
+export const userTransformer = (user: UserT): Partial<UserT> => {
   return !!user
     ? {
       id: user.id,

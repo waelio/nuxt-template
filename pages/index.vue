@@ -1,9 +1,9 @@
 <script lang="ts" setup>
-import { IUSER } from "../types";
+import { UserI } from "../types";
 import { Ref, ComputedRef } from "vue";
 import useAuth from "~/composables/useAuth";
 // import { useCasl } from "~/composables/useCasl";
-import { eCaslAction, eCaslSubject } from "../types";
+import { CaslActionE, CaslSubjectE } from "../types";
 const { t } = useI18n();
 
 useHead({
@@ -16,10 +16,10 @@ const isAuthLoading = useAuthLoading();
 let isAuthenticated: ComputedRef<boolean> = computed(
   () => !!(user.value && user.value.username)
 );
-const { can } = useCasl();
+const { can, cannot } = useCasl();
 initAuth();
 
-const user: Ref<IUSER> = useAuthUser();
+const user: Ref<UserI> = useAuthUser();
 onBeforeMount(async () => {
   initAuth();
   isAuthenticated = computed(() => !!(user.value && user.value.username));
@@ -55,7 +55,7 @@ onBeforeMount(async () => {
           <fieldset>
             <legend>{{ $t("demoContent.q1") }}</legend>
             <q-btn
-              v-if="can(eCaslAction.READ, eCaslSubject.POST)"
+              v-if="can(CaslActionE.READ, CaslSubjectE.POST)"
               label="Create Post"
               color="positive"
             ></q-btn>
@@ -65,7 +65,7 @@ onBeforeMount(async () => {
           </fieldset>
           <fieldset>
             <legend>{{ $t("demoContent.q2") }}</legend>
-            <p v-if="can(eCaslAction.READ, eCaslSubject.POST)">POST content ...</p>
+            <p v-if="can(CaslActionE.READ, CaslSubjectE.POST)">POST content ...</p>
             <pre lang="html">
               v-if="can('read', 'Post')"                         
             </pre>
@@ -75,7 +75,7 @@ onBeforeMount(async () => {
             <q-btn
               label="Update Post"
               color="warning"
-              :disable="can(eCaslAction.UPDATE, eCaslSubject.POST)"
+              :disable="can(CaslActionE.UPDATE, CaslSubjectE.POST)"
             ></q-btn>
             <pre lang="html">
               :disable="can('update', 'Post')"                         
@@ -87,10 +87,10 @@ onBeforeMount(async () => {
             <q-btn
               label="Delete Post"
               color="negative"
-              :disable="can(eCaslAction.DELETE, eCaslSubject.POST)"
+              :disable="cannot(CaslActionE.DELETE, CaslSubjectE.POST)"
             ></q-btn>
             <pre lang="javascript">
-              :disable="can('delete', 'Post')"                         
+              :disable="cannot('delete', 'Post')"                         
             </pre>
           </fieldset>
 

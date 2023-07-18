@@ -32,5 +32,8 @@ watch(aLocale, (newLocale: LOCALE) => {
   margin: 0em 1em;
   padding: 1rem;
   max-width: 10em;
+  color: white;
+  background-color: inherit;
 }
+
 </style>

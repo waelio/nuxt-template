@@ -1,14 +1,14 @@
 <script lang="ts" setup>
 import { ref, Ref, watch, computed } from "vue";
 import { links1, links2, links3 } from "~/statics/index";
-import { TUSER } from "../types/index";
+import { UserT } from "../types/index";
 // import { LightModes } from '~~/types';
 import { isDark, useToggle, autoStyle, autoClass } from "../mixins";
 let fabPos: Ref<number[]> = ref([18, 18]);
 
 const toggleDark = useToggle(isDark);
 const { useAuthUser, logout } = useAuth();
-const user: Ref<TUSER> = useAuthUser() as Ref<TUSER>;
+const user: Ref<UserT> = useAuthUser() as Ref<UserT>;
 const isAuthenticated = computed(() => !!(user.value && user.value.username));
 let route = computed(() =>
   useRoute().path && useRoute().path.length ? useRoute().path.split("/")[1] : "/"

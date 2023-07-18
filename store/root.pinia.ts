@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { projects as importedProjects } from '../statics'
-import { IUSER } from '../types'
+import { UserI } from '../types'
 
 export const userStore = defineStore({
   id: 'root',
@@ -12,7 +12,7 @@ export const userStore = defineStore({
     name: 'Waelio.com'
   }),
   actions: {
-    setUserInfo(info: IUSER & { currency: string, ip: string }) {
+    setUserInfo(info: UserI & { currency: string, ip: string }) {
       this.userInfo = info
     },
     setUserCurrencies(currencies: string[]) {

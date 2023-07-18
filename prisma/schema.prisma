@@ -9,24 +9,28 @@ datasource db {
 }
 
 model Category {
-  id   String @id @default(auto()) @map("_id") @db.ObjectId
-  name String @unique
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  name      String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Likes {
-  id     String @id @default(auto()) @map("_id") @db.ObjectId
-  postId String @unique @db.ObjectId
-  userId String @unique @db.ObjectId
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  postId    String   @unique @db.ObjectId
+  userId    String   @unique @db.ObjectId
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model MediaFile {
   id               String   @id @default(auto()) @map("_id") @db.ObjectId
-  createdAt        DateTime @db.Date
   providerPublicId String
   tweetId          String   @db.ObjectId
-  updatedAt        DateTime @db.Date
   url              String
   userId           String   @db.ObjectId
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
 }
 
 model Permissions {
@@ -36,60 +40,69 @@ model Permissions {
   fields     String[]
   inverted   Boolean
   subject    String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
 }
 
 model Post {
-  id   String @id @default(auto()) @map("_id") @db.ObjectId
-  name String
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  name      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Profile {
-  id     String @id @default(auto()) @map("_id") @db.ObjectId
-  userId String @unique @db.ObjectId
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId    String   @unique @db.ObjectId
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model RefreshToken {
-  id    String @id @default(auto()) @map("_id") @db.ObjectId
-  token String @unique
-
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  token     String   @unique
+  userId    String   @db.ObjectId
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-
-  userId String @db.ObjectId
-  user   User   @relation(fields: [userId], references: [id])
 }
 
 model Roles {
-  id          String @id @default(auto()) @map("_id") @db.ObjectId
-  name        String @unique
-  permissions String @db.ObjectId
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  name        String   @unique
+  permissions String   @db.ObjectId
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }
 
 model Subscription {
-  id        String @id @default(auto()) @map("_id") @db.ObjectId
-  /// Field referred in an index, but found no data to define the type.
-  keys_auth Json?  @unique
+  id             String   @id @default(auto()) @map("_id") @db.ObjectId
+  endpoint       String
+  expirationTime String
+  keys_auth      String   @unique
+  keys_p256dh    String
+  userId         String   @db.ObjectId
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
 }
 
 model Tweet {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
   authorId  String   @db.ObjectId
-  createdAt DateTime @db.Date
   replyToId String?  @db.ObjectId
   text      String
-  updatedAt DateTime @db.Date
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model User {
-  id           String         @id @default(auto()) @map("_id") @db.ObjectId
-  email        String         @unique
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  email        String   @unique
   first_name   String
   last_name    String
-  name         String
   password     String
   profileImage String
   role         String
-  updatedAt    DateTime
-  username     String         @unique
-  RefreshToken RefreshToken[]
+  username     String   @unique
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
 }

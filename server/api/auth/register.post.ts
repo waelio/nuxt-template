@@ -1,7 +1,7 @@
 import { sendError } from "h3"
 import { createUser } from "../../db/users.js"
 import { userTransformer } from "~~/server/transformers/user.js"
-import { IUSER } from "~~/types"
+import { UserI } from "~~/types"
 
 export default defineEventHandler(async (event) => {
     const config = useRuntimeConfig()
@@ -33,7 +33,7 @@ export default defineEventHandler(async (event) => {
     try {
 
         // @ts-ignore
-        const user: IUSER = await createUser(userData)
+        const user: UserI = await createUser(userData)
         console.assert(user)
         return {
             body: user && userTransformer(user)

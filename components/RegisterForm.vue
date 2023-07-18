@@ -79,7 +79,7 @@
 <script lang="ts" setup>
 import { useTitle } from "@vueuse/core";
 const emit = defineEmits(["signup-success"]);
-const props = defineProps(['data']);
+defineProps(['data']);
 
 const isPwd = ref(true);
 useTitle("Signup Page");

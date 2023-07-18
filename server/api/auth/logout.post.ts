@@ -1,3 +1,4 @@
+import { useCookie } from "nuxt/app"
 import { removeRefreshToken } from "~~/server/db/refreshTokens"
 import { sendRefreshToken } from "~~/server/utils/jwt"
 

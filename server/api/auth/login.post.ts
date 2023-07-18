@@ -5,7 +5,7 @@ import { generateTokens, sendRefreshToken } from "~~/server/utils/jwt"
 import { userTransformer } from "~~/server/transformers/user"
 import { createRefreshToken } from "~~/server/db/refreshTokens"
 import { sendError } from "h3"
-import { IUSER } from "~~/types"
+import { UserI } from "~~/types"
 import { getPermissionsByRoleByName } from "../../db/roles"
 import { _to } from 'waelio-utils'
 // import { defineAbility } from '@casl/ability';
@@ -61,7 +61,7 @@ export default defineEventHandler(async (event) => {
         }))
     }
 
-    const { accessToken, refreshToken } = generateTokens(user as unknown as IUSER)
+    const { accessToken, refreshToken } = generateTokens(user as unknown as UserI)
 
     await createRefreshToken({
         token: refreshToken,
@@ -72,7 +72,7 @@ export default defineEventHandler(async (event) => {
 
     return {
         access_token: accessToken,
-        user: userTransformer(user as unknown as IUSER),
+        user: userTransformer(user as unknown as UserI),
         permissions
     }
 

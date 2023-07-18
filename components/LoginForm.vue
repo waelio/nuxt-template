@@ -41,7 +41,6 @@
 <script lang="ts" setup>
 import { reactive } from "vue";
 import useAuth from "~/composables/useAuth";
-// import { useAuthStore } from "~/store/auth.pinia";
 import { useTitle } from "@vueuse/core";
 useTitle("Login Page");
 

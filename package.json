@@ -18,14 +18,14 @@
     "@vite-pwa/nuxt": "^0.1.0",
     "nuxt": "^3.6.3",
     "nuxt-quasar-ui": "^2.0.4",
-    "prisma": "4.15.0",
+    "prisma": "5.0.0",
     "sass": "^1.63.6"
   },
   "dependencies": {
     "@casl/ability": "^6.5.0",
     "@casl/vue": "^2.2.1",
     "@pinia/nuxt": "^0.4.11",
-    "@prisma/client": "4.15.0",
+    "@prisma/client": "5.0.0",
     "@quasar/extras": "^1.16.5",
     "@vueuse/core": "^10.2.1",
     "bcrypt": "^5.1.0",

@@ -2,9 +2,9 @@ import {
   defaultStyles,
   notifyDefaults,
 } from '~/statics/index'
-import { ENoteAcions } from '../types';
+import { NoteAcionsE } from '../types';
 
-function note(action: ENoteAcions, payload: string | number | object, notifyDefaults: any) {
+function note(action: NoteAcionsE, payload: string | number | object, notifyDefaults: any) {
   return Notify.create({ type: action, message: payload, ...notifyDefaults })
 }
 note.dialog = (...{ }) => Dialog
@@ -16,20 +16,20 @@ note.show = function (message: string, style: string, config?: typeof notifyDefa
   return Notify.create(payload)
 }
 
-note.success = (message: string, config?: typeof notifyDefaults) => note.show(message, ENoteAcions.success, config)
+note.success = (message: string, config?: typeof notifyDefaults) => note.show(message, NoteAcionsE.success, config)
 
-note.info = (message: string, config?: typeof notifyDefaults) => note.show(message, ENoteAcions.Info, config)
+note.info = (message: string, config?: typeof notifyDefaults) => note.show(message, NoteAcionsE.Info, config)
 
-note.warning = (message: string, config?: typeof notifyDefaults) => note.show(message, ENoteAcions.warning, config)
+note.warning = (message: string, config?: typeof notifyDefaults) => note.show(message, NoteAcionsE.warning, config)
 
 note.error = (error: any, config = {}) => {
   const { status, statusCode, errorMessage, message, statusMessage } = error
   // const errorMsg = message || errorMessage || statusMessage || 'Undandled Error!'
   if (statusCode || errorMessage || message || statusMessage) {
-    note.show(statusCode || errorMessage || message || statusMessage, ENoteAcions.Errror, {
+    note.show(statusCode || errorMessage || message || statusMessage, NoteAcionsE.Errror, {
       // @ts-ignore
       caption: status || statusCode,
-      type: ENoteAcions.Errror,
+      type: NoteAcionsE.Errror,
       ...config
     }
     )
