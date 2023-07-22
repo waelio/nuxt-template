@@ -27,7 +27,8 @@
       "express",
       "@types/node",
       "@nuxt/types",
-      "@types/jest"
+      "@types/jest",
+      "@types/lodash"
     ],
     "exclude": [
       "node_modules",

@@ -234,6 +234,14 @@ export type TokenT = {
   userId: string;
 }
 
+export type RegisterUserT = {
+  username: string,
+  user_email: string,
+  password: string,
+  repeatPassword: string,
+  first_name: string,
+  last_name: string
+}
 
 export interface SubscriptionI {
   id: string;

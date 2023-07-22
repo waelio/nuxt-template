@@ -1,34 +1,23 @@
 import { defineStore } from 'pinia'
+import { abilitiesPlugin } from '@casl/vue';
+import { Abilities, Ability, MatchConditions, PureAbility } from "@casl/ability";
 import { UserT, CaslActionE, CaslSubjectE } from '../types'
+
+const ability = new Ability();
+
+type AppAbility = PureAbility<Abilities, MatchConditions>;
+
+
 export const useAuthStore = defineStore('auth', {
   state: () => ({
     _user: {} as UserT,
     _permissions: [
-      // Categoty
-      { action: CaslActionE.CREATE, subject: CaslSubjectE.CATEGORY },
       { action: CaslActionE.READ, subject: CaslSubjectE.CATEGORY },
-      { action: CaslActionE.UPDATE, subject: CaslSubjectE.CATEGORY },
-      { action: CaslActionE.DELETE, subject: CaslSubjectE.CATEGORY },
-      // POST
-      { action: CaslActionE.CREATE, subject: CaslSubjectE.POST },
       { action: CaslActionE.READ, subject: CaslSubjectE.POST },
-      { action: CaslActionE.UPDATE, subject: CaslSubjectE.POST },
-      { action: CaslActionE.DELETE, subject: CaslSubjectE.POST },
-
-      // Refresh_Token
-      { action: CaslActionE.CREATE, subject: CaslSubjectE.REFRESH_TOKEN },
-      { action: CaslActionE.READ, subject: CaslSubjectE.REFRESH_TOKEN },
-      { action: CaslActionE.UPDATE, subject: CaslSubjectE.REFRESH_TOKEN },
-      { action: CaslActionE.DELETE, subject: CaslSubjectE.REFRESH_TOKEN },
-
-      // User Permissions
       { action: CaslActionE.CREATE, subject: CaslSubjectE.USER },
       { action: CaslActionE.READ, subject: CaslSubjectE.USER },
       { action: CaslActionE.UPDATE, subject: CaslSubjectE.USER },
-      { action: CaslActionE.DELETE, subject: CaslSubjectE.USER },
-
-      // Admin Page
-      { action: CaslActionE.MANAGE, subject: CaslSubjectE.ADMIN }
+      { action: CaslActionE.MANAGE, subject: CaslSubjectE.ADMIN },
     ]
   }),
   getters: {
@@ -39,6 +28,24 @@ export const useAuthStore = defineStore('auth', {
   actions: {
     async setUserInfo(info: UserT) {
       this._user = info
+    },
+    setPermission(s: CaslSubjectE, a: CaslActionE) {
+      this._permissions.push({
+        subject: s, action: a
+      })
+      this.SetAbilities()
+    },
+    resetPermistions(d: object) { 
+      // @ts-ignore
+      this._permissions = [d]
+      this.SetAbilities()
+    },
+    SetAbilities() {
+      const nuxtApp = useNuxtApp()
+      ability.update(this._permissions);
+      nuxtApp.vueApp.use(abilitiesPlugin, ability)
+      return this._permissions
     }
   },
+
 })

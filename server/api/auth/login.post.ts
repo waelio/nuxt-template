@@ -8,10 +8,12 @@ import { sendError } from "h3"
 import { UserI } from "~~/types"
 import { getPermissionsByRoleByName } from "../../db/roles"
 import { _to } from 'waelio-utils'
-// import { defineAbility } from '@casl/ability';
 
 export default defineEventHandler(async (event) => {
+
     const body = await readBody(event)
+    let myPermissions = {}
+
 
     //@ts-ignore
     const { username, password } = body
@@ -32,26 +34,23 @@ export default defineEventHandler(async (event) => {
     }
     event.context.nuxtState = { user }
 
-
-
-
     const role = user.role as string
 
-
     const getDbRole = async (role: string) =>
-        new Promise((resolve, reject) => {
-
-            const dbr = getPermissionsByRoleByName(role)
+        new Promise(async (resolve, reject) => {
             try {
-                resolve(dbr)
+                const dbr = await getPermissionsByRoleByName(role)
+                const { data } = dbr
+                Object.assign(myPermissions, data)
+                resolve(data)
 
             } catch (error) {
                 reject(error)
             }
         })
 
+    getDbRole(role)
 
-    const permissions = Promise.resolve(getDbRole(role))
     const doesThePasswordMatch = await bcrypt.compare(password, user.password)
 
     if (!doesThePasswordMatch) {
@@ -73,7 +72,7 @@ export default defineEventHandler(async (event) => {
     return {
         access_token: accessToken,
         user: userTransformer(user as unknown as UserI),
-        permissions
+        permissions: myPermissions
     }
 
 })

@@ -6,7 +6,6 @@
 </template>
 <script setup>
 import runSetup from "./utils/setup";
-
 if (process.client) {
   runSetup();
 }

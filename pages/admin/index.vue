@@ -2,17 +2,21 @@
 import { ref } from "vue";
 import { usePermissions } from "../../composables/usePermissions";
 import { useCasl } from "../../composables/useCasl";
-
 import { useTokens } from "../../composables/useTokens";
-import { CaslSubjectE, CaslActionE, TokenT, UserT } from "../../types";
+import { CaslSubjectE, CaslActionE, TokenT, UserI } from "../../types";
+import { _sniffId } from "waelio-utils";
 
 const permissions = ref({});
-const data: Ref<TokenT> = ref([]);
+const data: Ref<TokenT[]> = ref([]);
 const { can, cannot } = useCasl();
-
 const { getPermissionById } = usePermissions();
+
 const loadPermissions = async () => {
-  permissions.value = await getPermissionById("63070aa6f171adfa16083507");
+  const p = usePermissions().Permissions;
+  const npId = _sniffId(p.value);
+  if (!npId) return;
+  const data = await getPermissionById(npId);
+  permissions.value = data.permission;
 };
 const loadRefreshTokens = async () => {
   // @ts-ignore
@@ -23,7 +27,7 @@ const loadRefreshTokens = async () => {
 </script>
 <template>
   <NuxtLayout name="admin">
-    <q-page padding class="view-fit">
+    <q-page padding class="fit">
       <h3 class="text-center rainbow underline">Back Office</h3>
       <div
         class="admin-home no-scroll"
@@ -52,7 +56,7 @@ const loadRefreshTokens = async () => {
           <q-btn
             color="negative"
             text-color="white"
-            :disabled="cannot(CaslActionE.DELETE, CaslSubjectE.REFRESH_TOKEN)"
+            :disabled="cannot(CaslActionE.MANAGE, CaslSubjectE.REFRESH_TOKEN)"
             label="delete Token"
           />
         </fieldset>

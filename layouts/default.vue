@@ -291,9 +291,10 @@ const toggleLeftDrawer = () => {
 
     <q-page-container class="scroll-y overflow-hidden">
       <q-page padding class="fit" style="height: 100vh">
+        <NuxtLoadingIndicator />
         <slot class="all-pages" />
         <q-page-scroller position="bottom-right" :scroll-offset="150" :offset="fabPos">
-          <q-btn fab icon="keyboard_arrow_up" color="secondary" />
+          <q-btn fab icon="keyboard_arrow_up" color="accent" />
         </q-page-scroller>
       </q-page>
     </q-page-container>

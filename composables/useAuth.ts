@@ -1,13 +1,14 @@
-// @ts-ignore
 import { useState } from '#app'
-// import jwt_decode from "jwt-decode"
+// @ts-ignore
+import jwt_decode from "jwt-decode"
 // @ts-ignore
 import type { JwtPayload } from 'jwt-decode'
-import { UserT, UserI, TokenT } from '~/types'
+import { UserT, UserI, TokenT, PermessionT, RegisterUserT } from '~/types'
 import useFetchApi from './useFetchApi'
 import { Ref } from 'vue'
 import { note } from './useNote'
 import { useAuthStore } from '~/store/auth.pinia'
+import { _decrypt, _encrypt } from 'waelio-utils'
 
 export const useAuth = () => {
   const useAuthToken = () => useState('auth_token') as Ref<JwtPayload>
@@ -15,27 +16,36 @@ export const useAuth = () => {
   const useAuthUsers = () => useState('auth_users') as Ref<UserI[]>
   const useAuthLoading = () => useState('auth_loading', () => true) as Ref<boolean>
   const isAuthenticated = () => useState('isAuthenticated', () => false) as Ref<boolean>
+  const myPermissions = useState('user_permissions') as Ref<PermessionT>
   const auth = useAuthStore()
-
-
 
   const setToken = (newToken: TokenT | object) => {
     const authToken: Ref<JwtPayload> = useAuthToken() as Ref<JwtPayload>
     authToken.value = newToken as JwtPayload
+
   }
+
   const setUser = (newUser: UserT) => {
     const authUser = useAuthUser() as Ref<UserT>
     authUser.value = newUser as UserT
-
+    localStorage.setItem('user', _encrypt(JSON.stringify(newUser)))
   }
+
+  const getStorageUser = () => {
+    const stUser = localStorage.getItem('user')
+    return stUser ? _decrypt(stUser) : {}
+  }
+
   const setUsers = (newUser: UserI[]) => {
     const authUsers = useAuthUsers()
     authUsers.value = [...newUser] as UserT[]
   }
+
   const setIsAuthLoading = (value: boolean) => {
     const authLoading = useAuthLoading()
     authLoading.value = value
   }
+
   const logout = () => {
     return new Promise(async (resolve, reject) => {
       try {
@@ -48,6 +58,7 @@ export const useAuth = () => {
         setUser({} as UserT)
         // @ts-ignore
         auth.setUserInfo({})
+        localStorage.removeItem('user')
         note.warning('Logout success.')
         isAuthenticated().value = false
         resolve(true)
@@ -56,6 +67,21 @@ export const useAuth = () => {
         reject(error)
       }
     })
+  }
+
+  const usePermissions = () => ({
+    get: () => {
+      return myPermissions.value
+    },
+    set: (v: any) => {
+      myPermissions.value = v
+      return myPermissions.value
+    }
+  })
+
+  const setPermission = (v: PermessionT) => {
+    myPermissions.value = v
+    auth.resetPermistions(v)
   }
 
   const login = ({ username, password }: { username: string, password: string }) => {
@@ -68,10 +94,11 @@ export const useAuth = () => {
             password
           }
         })
-        const { user, access_token } = data as { user: UserT, access_token: TokenT }
+        const { user, access_token, permissions } = data as { user: UserT, access_token: TokenT, permissions: PermessionT }
         if (user && access_token) {
           setToken(access_token)
           setUser(user as UserT)
+          setPermission(permissions)
           note.success('Successful login')
           isAuthenticated().value = true
           resolve(user)
@@ -87,20 +114,21 @@ export const useAuth = () => {
       }
     })
   }
-  type RegisterUser = { username: string, user_email: string, password: string, repeatPassword: string, first_name: string, last_name: string }
-  const register = ({ username, user_email, password, first_name, last_name }: RegisterUser) => {
+
+  const register = ({ username, user_email, password, first_name, last_name }: RegisterUserT) => {
+    const body = {
+      username,
+      first_name,
+      last_name,
+      user_email,
+      repeatPassword: password,
+      password
+    }
     return new Promise(async (resolve, reject) => {
       try {
+        // @ts-ignore
         const data = await $fetch('/api/auth/register', {
-          method: 'POST',
-          body: {
-            username,
-            first_name,
-            last_name,
-            user_email,
-            repeatPassword: password,
-            password
-          }
+          method: 'POST', body
         }) as { body: UserT }
         const user = data.body
 
@@ -113,6 +141,23 @@ export const useAuth = () => {
         reject(error)
       }
     })
+  }
+
+  const reRefreshAccessToken = () => {
+    const authToken = useAuthToken() as Ref<{ token: JwtPayload }>
+
+    if (!authToken.value.token) {
+      return
+    }
+
+    const jwt: Ref<JwtPayload> = jwt_decode(authToken.value?.token)
+    // @ts-ignore
+    const newRefreshTime = jwt.exp - 60000
+
+    setTimeout(async () => {
+      await refreshToken()
+      reRefreshAccessToken()
+    }, newRefreshTime);
   }
 
   const refreshToken = () => {
@@ -186,8 +231,7 @@ export const useAuth = () => {
       try {
         await refreshToken()
         await getUser()
-
-        // reRefreshAccessToken()
+        reRefreshAccessToken()
 
         resolve(true)
       } catch (error) {
@@ -198,6 +242,8 @@ export const useAuth = () => {
       }
     })
   }
+
+
   return {
     login,
     logout,
@@ -210,7 +256,10 @@ export const useAuth = () => {
     getUsers,
     refreshToken,
     setToken,
+    setUser,
+    getStorageUser,
     getTokens,
+    usePermissions,
     isAuthenticated: isAuthenticated()?.value
 
   }
