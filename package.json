@@ -1,48 +1,42 @@
 {
   "name": "nuxt-app",
   "private": true,
+  "type": "module",
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare && npx prisma generate",
-    "generate-pwa-assets": "pwa-assets-generator"
-  },
-  "devDependencies": {
-    "@nuxt/devtools": "latest",
-    "@nuxtjs/i18n": "8.0.0-beta.13",
-    "@types/express": "^4.17.17",
-    "@types/lodash": "^4.14.195",
-    "@types/node": "^18.16.20",
-    "@vite-pwa/assets-generator": "^0.0.3",
-    "@vite-pwa/nuxt": "^0.1.0",
-    "lodash": "^4.17.21",
-    "nuxt": "^3.6.5",
-    "nuxt-quasar-ui": "^2.0.4",
-    "prisma": "5.0.0",
-    "sass": "^1.64.1"
+    "postinstall": "nuxt prepare"
   },
   "dependencies": {
-    "@casl/ability": "5.1.0-next.15",
-    "@casl/vue": "2.2.1",
-    "@pinia/nuxt": "^0.4.11",
-    "@prisma/client": "5.0.0",
-    "@quasar/extras": "^1.16.5",
-    "@vueuse/core": "^10.2.1",
-    "bcrypt": "^5.1.0",
-    "express": "^4.18.2",
-    "exxpress": "^1.0.0",
-    "h3": "^1.7.1",
-    "jsonwebtoken": "^9.0.1",
-    "jwt-decode": "^3.1.2",
+    "@casl/ability": "^6.7.1",
+    "@casl/vue": "^2.2.2",
+    "@nuxt/fonts": "^0.10.2",
+    "@nuxt/scripts": "^0.9.5",
+    "@pinia/nuxt": "^0.5.5",
+    "@prisma/client": "5.21.1",
+    "@quasar/extras": "^1.16.12",
+    "@vueuse/nuxt": "^11.1.0",
+    "jsonwebtoken": "^9.0.2",
     "mitt": "^3.0.1",
-    "pinia": "^2.1.4",
-    "quasar": "^2.12.3",
+    "nuxt": "^3.13.2",
+    "nuxt-og-image": "^3.0.8",
+    "nuxt-quasar-ui": "^2.1.6",
+    "pinia": "^2.2.4",
+    "quasar": "^2.17.0",
+    "uuid": "^11.0.2",
+    "vue": "latest",
+    "vue-router": "latest",
     "waelio-utils": "^5.0.1"
   },
-  "overrides": {
-    "vue": "latest"
-  },
-  "version": "1.0.0"
+  "devDependencies": {
+    "@nuxt/devtools": "^1.6.0",
+    "@nuxtjs/tailwindcss": "^6.12.2",
+    "@types/bcryptjs": "^2.4.6",
+    "@types/node": "^22.7.6",
+    "bcryptjs": "^2.4.3",
+    "jose": "^5.9.4",
+    "prisma": "5.21.1"
+  }
 }

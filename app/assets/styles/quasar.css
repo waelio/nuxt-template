@@ -1,0 +1,9 @@
+body.body--dark {
+    color: #fbfafa!important;
+    background-color: var(--q-dark)!important;
+}
+
+body.body--light {
+    color: #0e0e0e!important;
+    background-color: var(--q-light)!important;
+}

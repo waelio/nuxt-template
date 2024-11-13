@@ -3,7 +3,7 @@ const prisma = new PrismaClient()
 
 export const getAll = async () => {
   
-  const data = await prisma.RefreshToken.findMany()
+  const data = await prisma.refreshToken.findMany()
   
-  return await data
+  return data
 }

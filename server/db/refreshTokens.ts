@@ -1,6 +1,6 @@
 // @ts-ignore
 import prisma from './index'
-import { ReshreshTokenT } from "../../types";
+import type { ReshreshTokenT } from "~~/shared/types";
 
 export const createRefreshToken = async (refreshToken: { token: any; userId: any; }) => {
   return await prisma.refreshToken?.create({
@@ -8,11 +8,11 @@ export const createRefreshToken = async (refreshToken: { token: any; userId: any
   })
 }
 
-export const getRefreshTokenByToken = async (rtoken: string) => {
+export const getRefreshTokenByToken = async (rtoken: ReshreshTokenT) => {
   if (!rtoken) return 'null'
   return await prisma.refreshToken?.findUnique({
     where: {
-      token: rtoken
+      token: rtoken.token
     }
   })
 }

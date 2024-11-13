@@ -1,9 +1,6 @@
 import { prisma } from './index'
 import { getPermissionById } from './permissions'
 
-
-
-
 export const getPermissionsByRoleByName = async (roleName: string) => {
   const role = await prisma.roles.findUnique({
     where: {

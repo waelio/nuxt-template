@@ -1,39 +1,92 @@
-import { defineNuxtConfig } from 'nuxt/config'
-import { QuasarOptions } from './qusarOptions'
-import { fileURLToPath } from 'url'
+import { defineNuxtConfig } from "nuxt/config";
 
-
+// https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: true },
+  future: {
+    compatibilityVersion: 4,
+  },
+  debug: false,
+  modules: [
+    'nuxt-quasar-ui',
+    '@pinia/nuxt',
+    '@vueuse/nuxt',
+    "@nuxtjs/tailwindcss",
+    "@nuxt/fonts",
+    "@nuxt/scripts",
+    'nuxt-og-image'
+  ],
+  // @ts-ignore
+  tailwindcss: {
+    cssPath: './assets/globals.css'
+  },
   app: {
     head: {
-      charset: 'utf-8',
-      viewport: 'width=device-width, initial-scale=1',
+      htmlAttrs: {
+        style: 'background-color: #f0f0f0'
+      }
     }
   },
-  meta: {
-    meta: [
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { name: 'manifest', content: './manifest.json' }
-    ],
+  vite: {
+    build: {
+      minify: false
+    }
   },
-  alias: {
-    "@": fileURLToPath(new URL('./', import.meta.url)),
-    "@store": fileURLToPath(new URL('./store/', import.meta.url)),
-    "@pages": fileURLToPath(new URL('./pages/', import.meta.url)),
-    "@cmps": fileURLToPath(new URL('./composables/', import.meta.url)),
+
+  nitro: {
+    minify: false,
+    rollupConfig: {
+      external: ['bcrypt', 'waelio-utils', 'jsonwebtoken'],
+    },
+  },
+  imports: {
+    autoImport: true,
+    dirs: [
+      './constants/',
+      './layouts',
+      './store',
+      '../shared/',
+      '../server/uils'
+    ]
   },
   css: [
     '@quasar/extras/material-icons/material-icons.css',
     'quasar/dist/quasar.prod.css',
-    '~/assets/styles/quasar.scss',
+    "./assets/styles/quasar.css"
   ],
-  imports: {
-    autoImport: true,
+  // @ts-ignore
+  quasar: {
+    // Configurable Component Defaults
+    components: {
+      defaults: {
+        QBtn: {
+          dense: true,
+          flat: true,
+        },
+      }
+    }
   },
-  ssr: false,
+  experimental: {
+    sharedPrerenderData: true,
+    compileTemplate: true,
+    resetAsyncDataToUndefined: true,
+    templateUtils: true,
+    relativeWatchPaths: true,
+    defaults: {
+      useAsyncData: {
+        deep: true
+      }
+    }
+  },
+  unhead: {
+    renderSSRHeadOptions: {
+      omitLineBreaks: false
+    }
+  },
   runtimeConfig: {
     // Auth
+    authSecret: process.env.AUTH_SECRET,
+    authKey: process.env.AUTH_KEY,
     jwtAccessSecret: process.env.JWT_ACCESS_TOKEN_SECRET,
     jwtRefreshSecret: process.env.JWT_REFRESH_TOKEN_SECRET,
     // Cloudinary
@@ -44,6 +97,12 @@ export default defineNuxtConfig({
     emailPrivateKey: process.env.EMAIL_PRIVATE_KEY,
     // Root User
     rootEmail: process.env.ROOT_USER,
+    // Mongo DB
+    mongoose: process.env.MONGODB_URI,
+    mongo: process.env.MONGODB_URI,
+    //Deno JS
+    deno: process.env.DENO_ID,
+    denoToken: process.env.DENO_TOKEN,
     public: {
       // EmailJS
       EMAIL_SERVICE: process.env.EMAIL_PUBLIC_KEY,
@@ -53,93 +112,5 @@ export default defineNuxtConfig({
       apiBase: process.env.API_URL,
     }
   },
-  modules: [
-    '@pinia/nuxt',
-    'nuxt-quasar-ui',
-    '@nuxtjs/i18n',
-    '@vite-pwa/nuxt'
-  ],
-  pinia: {
-    autoImports: [
-      // automatically imports `defineStore`
-      'defineStore', // import { defineStore } from 'pinia'
-      ['defineStore', 'definePiniaStore'], // import { defineStore as definePiniaStore } from 'pinia'
-    ],
-  },
-  // @ts-ignore
-  quasar: QuasarOptions,
-  pwa: {
-    manifest: {
-      "name": "Peace Nuxt3 Template",
-      "short_name": "Peace2074",
-      "theme_color": "#1976d2",
-      "background_color": "#fafafa",
-      "display": "standalone",
-      "scope": "./",
-      "start_url": "./",
-      "icons": [
-        {
-          "src": "/icons/icon-72x72.png",
-          "sizes": "72x72",
-          "type": "image/png"
-        },
-        {
-          "src": "/icons/icon-48x48.png",
-          "sizes": "48x48",
-          "type": "image/png"
-        },
-        {
-          "src": "/icons/icon-96x96.png",
-          "sizes": "96x96",
-          "type": "image/png"
-        },
-        {
-          "src": "/icons/icon-128x128.png",
-          "sizes": "128x128",
-          "type": "image/png"
-        },
-        {
-          "src": "/icons/icon-144x144.png",
-          "sizes": "144x144",
-          "type": "image/png"
-        },
-        {
-          "src": "/icons/icon-152x152.png",
-          "sizes": "152x152",
-          "type": "image/png"
-        },
-        {
-          "src": "/icons/icon-192x192.png",
-          "sizes": "192x192",
-          "type": "image/png"
-        },
-        {
-          "src": "/icons/icon-384x384.png",
-          "sizes": "384x384",
-          "type": "image/png"
-        },
-        {
-          "src": "/icons/icon-512x512.png",
-          "sizes": "512x512",
-          "type": "image/png"
-        }
-      ]
-    },
-    workbox: {
-      navigateFallback: "/",
-    },
-    devOptions: {
-      enabled: true,
-      type: "module",
-    },
-  },
-  i18n: {
-    vueI18n: './i18n.config.ts',
-    detectBrowserLanguage: {
-      useCookie: true,
-      cookieKey: 'i18n_redirected',
-      redirectOn: 'root',  // recommended
-    }
-  },
-
+  compatibilityDate: '2024-10-03',
 })
