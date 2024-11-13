@@ -4,7 +4,6 @@ export class UCORE {
   _STORE: Ref<any> = ref(null);
   constructor(initial = {}) {
     if (initial) {
-      // @ts-expect-error
       this._STORE.value = JSON.stringify(initial[0] === "{")
         ? JSON.stringify(initial)
         : initial;

@@ -27,6 +27,9 @@ export default defineNuxtConfig({
       }
     }
   },
+  plugins:  [
+      '~/plugins/storage.server.ts'
+  ],
   vite: {
     build: {
       minify: false
