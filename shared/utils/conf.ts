@@ -1,7 +1,7 @@
-import client from '~/config/client'
-import dev from '~/config/dev'
-import prod from '~/config/prod'
-import server from '~/config/server'
+import client from '../../app/config/client'
+import dev from '../../app/config/dev'
+import prod from '../../app/config/prod'
+import server from '../../server/config/server'
 
 class Conf {
   [x: string]: {};
