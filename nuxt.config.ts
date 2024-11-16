@@ -18,7 +18,7 @@ export default defineNuxtConfig({
   ],
   // @ts-ignore
   tailwindcss: {
-    cssPath: './assets/globals.css'
+    cssPath: '~/assets/globals.css'
   },
   app: {
     head: {

@@ -1,7 +1,8 @@
 import type { H3Event } from 'h3'
-import book from "../data/quran.json";
+import hnames from "../data/gnames.json";
+
 export default defineEventHandler(async(_event: H3Event) => {
     return {
-        quran: book
+        names: hnames
     }
 })
