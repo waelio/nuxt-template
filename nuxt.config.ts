@@ -22,13 +22,20 @@ export default defineNuxtConfig({
   },
   app: {
     head: {
+      charset: 'utf-8',
+      viewport: 'width=device-width, initial-scale=1',
       htmlAttrs: {
         style: 'background-color: #f0f0f0'
-      }
+      },
+      meta: [
+        { name: "description", content: "nuxt4 typescript quasar" },
+        { name: 'keywords', content: "nuxt4,tempate,typescript,peace2074,waelio"  }
+
+      ]
     }
   },
-  plugins:  [
-      '~/plugins/storage.server.ts'
+  plugins: [
+    '~/plugins/storage.server.ts'
   ],
   vite: {
     build: {
