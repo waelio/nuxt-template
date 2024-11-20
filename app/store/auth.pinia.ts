@@ -7,7 +7,7 @@ import { createMongoAbility } from '@casl/ability';
 import { useNuxtApp } from 'nuxt/app';
 
 const ability = createMongoAbility()
-const nuxtApp = useNuxtApp()
+const nuxtApp = await useNuxtApp()
 
 
 export const useAuthStore = defineStore('auth', {

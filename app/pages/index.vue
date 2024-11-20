@@ -1,5 +1,5 @@
 <script setup lang="ts">
-
+// const nuxtApp = useNxtApp()
 </script>
 <template>
   <NuxtLayout name="default">

@@ -1,27 +1,32 @@
-// import type { AuthPayload } from '../../shared/types'
+import { useState, useRequestFetch } from 'nuxt/app'
+import { computed } from 'vue'
+import type { AuthPayload } from '../../shared/types'
 
-// const useUserSessionState = () => useState<AuthPayload>('nuxt-mongoose-auth', () => ({}))
 
-// export function useAuth() {
-//   const sessionState = useUserSessionState()
+let useUserSessionState = () => useState<AuthPayload>('nuxt-mongoose-auth', () => ({}))
 
-//   return {
-//     loggedIn: computed(() => Boolean(sessionState.value?.email)),
-//     user: computed(() => sessionState.value || null),
-//     clear,
-//     me,
-//   }
-// }
+export function useAuth() {
+  var sessionState = useUserSessionState()
 
-// async function me() {
-//   useUserSessionState().value = await useRequestFetch()('/api/auth/me', {
-//     headers: {
-//       Accept: 'text/json'
-//     }
-//   }).catch(() => ({}))
-// }
+  return {
+    loggedIn: computed(() => Boolean(sessionState.value?.email)),
+    user: computed(() => sessionState.value || null),
+    clear,
+    me,
+  }
+}
 
-// async function clear() {
-//   await $fetch('/api/auth/logout', { method: 'DELETE' })
-//   useUserSessionState().value = {}
-// }
+async function me() {
+    const sessionState = useUserSessionState()
+
+  useUserSessionState().value = await useRequestFetch()('/api/auth/me', {
+    headers: {
+      Accept: 'text/json'
+    }
+  }).catch(() => ({}))
+}
+
+async function clear() {
+  await $fetch('/api/auth/logout', { method: 'DELETE' })
+  useUserSessionState().value = {}
+}
