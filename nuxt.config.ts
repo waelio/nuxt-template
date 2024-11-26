@@ -6,7 +6,6 @@ export default defineNuxtConfig({
   future: {
     compatibilityVersion: 4,
   },
-  debug: false,
   modules: [
     'nuxt-quasar-ui',
     '@pinia/nuxt',
@@ -43,10 +42,10 @@ export default defineNuxtConfig({
   },
   routeRules: {
     '/api/quran': {
-      cache: {
-        maxAge: 31536000000,
-        swr: true
-      }
+      // cache: {
+      //   maxAge: 31536000000,
+      //   swr: true
+      // }
     },
     '/api/holynames': {
       cache: {
@@ -60,6 +59,14 @@ export default defineNuxtConfig({
     rollupConfig: {
       external: ['bcrypt', 'waelio-utils', 'jsonwebtoken'],
     },
+    imports: {
+      autoImport: true,
+      dirs: [
+        'shared/types',
+        'shared/utils',
+        '../commposables',
+      ]
+    }
   },
   imports: {
     autoImport: true,
@@ -67,8 +74,9 @@ export default defineNuxtConfig({
       './constants/',
       './layouts',
       './store',
-      '../shared/',
-      '../server/uils'
+      '../shared/utils/',
+      '../shared/types/',
+      '../server/uils',
     ]
   },
   css: [

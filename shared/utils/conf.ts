@@ -1,7 +1,11 @@
-import client from '../../app/config/client'
-import dev from '../../app/config/dev'
-import prod from '../../app/config/prod'
+import client from '../config/client'
+import dev from '../config/dev'
+import prod from '../config/prod'
 import server from '../../server/config/server'
+type CT = typeof client
+type DT = typeof dev
+type PT = typeof prod
+type ST = typeof server
 
 class Conf {
   [x: string]: {};
@@ -9,12 +13,12 @@ class Conf {
     const self = this;
 
     self.setEnvironment()
-    self._server = self.getServerVars()
-    self._client = self.getClientVars()
-    self._dev = self.getUrgentOverrides()
+    self._server = self.getServerVars() as ST
+    self._client = self.getClientVars() as CT
+    self._dev = self.getUrgentOverrides() as DT
+    self._prod = self.getUrgentOverrides() as PT
 
     self._store = Object.assign(
-      {},
       { ...self._client },
       { ...(self._server ? self._server : self._server) },
       { ...self._dev },
@@ -24,7 +28,6 @@ class Conf {
     )
     // console.log("this._store", this._store);
   }
-
   set(key: string, value: string | number | object) {
     if (key.match(/:/)) {
       const keys = key.split(':')
@@ -88,7 +91,7 @@ class Conf {
   }
 
   setEnvironment() {
-    if (process.browser) {
+    if (import.meta.client) {
       this._env = 'client'
     } else {
       this._env = 'server'
@@ -98,7 +101,7 @@ class Conf {
   getServerVars() {
     let serverVars = {}
 
-    if (this._env === 'server') {
+    if (import.meta.server) {
       try {
         serverVars = server
       } catch (e) {
@@ -118,8 +121,7 @@ class Conf {
       clientVars = client
     } catch (e) {
       clientVars = {}
-
-      if (process.env.NODE_ENV === 'development') {
+      if (import.meta.dev) {
         console.warn("Didn't find a client config in `./config`.")
       }
     }
@@ -129,16 +131,16 @@ class Conf {
 
   getUrgentOverrides() {
     let overrides
-    const filename = process.env.NODE_ENV === 'production' ? 'prod' : 'dev'
+    const filename = import.meta.dev ? 'dev' : 'prod'
     try {
       overrides =
-        process.env.NODE_ENV === 'production'
-          ? prod
-          : dev
-
-      console.warn(
-        `FYI: data in \`./config/${filename}.js\` file will override Server & Client equal data/values.`,
-      )
+        import.meta.dev
+          ? dev
+          : prod
+      if (filename === 'dev') 
+        console.warn(
+          `FYI: data in \`./config/${filename}.js\` file will override Server & Client equal data/values.` )
+    
     } catch (e) {
       overrides = {}
     }
@@ -163,7 +165,6 @@ class Conf {
     return storeKey
   }
 }
-
 const conf = new Conf()
 
 export { conf }

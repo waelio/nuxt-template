@@ -1,15 +1,10 @@
 import { defineStore } from 'pinia'
-import { abilitiesPlugin } from '@casl/vue';
-import { Abilities, MatchConditions, PureAbility } from "@casl/ability";
 import type { UserT, } from '../../shared/types'
 import  { CaslActionE, CaslSubjectE } from '../../shared/types'
 import { createMongoAbility } from '@casl/ability';
-import { useNuxtApp } from 'nuxt/app';
+
 
 const ability = createMongoAbility()
-const nuxtApp = await useNuxtApp()
-
-
 export const useAuthStore = defineStore('auth', {
   state: () => ({
     _user: {} as UserT,
@@ -44,7 +39,6 @@ export const useAuthStore = defineStore('auth', {
     },
     SetAbilities() {
       ability.update(this._permissions);
-      nuxtApp.vueApp.use(abilitiesPlugin, ability)
       return this._permissions
     }
   },

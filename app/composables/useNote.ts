@@ -1,12 +1,16 @@
 import {
   defaultStyles,
-  notifyDefaults,
+  notifyDefaults ,
 } from '../constants/global'
 import { NoteAcionsE } from '../../shared/types';
 import { Notify, Dialog } from 'quasar';
 
-function note(action: NoteAcionsE, payload: string | number | object, notifyDefaults: any) {
-  return Notify.create({ type: action, message: payload, ...notifyDefaults })
+function note(action: NoteAcionsE, payload: string, defaults:  notifyDefaults) {
+  return Notify.create({
+    type: action as string,
+    message: payload as string,
+    ...defaults,
+  })
 }
 note.dialog = (...{ }) => Dialog
 note.show = function (message: string, style: string, config?: typeof notifyDefaults) {

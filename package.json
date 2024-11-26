@@ -21,6 +21,7 @@
     "jsonwebtoken": "^9.0.2",
     "mitt": "^3.0.1",
     "mongodb": "^6.10.0",
+    "mongoose": "^8.8.2",
     "nuxt": "^3.13.2",
     "nuxt-og-image": "^3.0.8",
     "nuxt-quasar-ui": "^2.1.6",
@@ -41,7 +42,8 @@
     "bcryptjs": "^2.4.3",
     "jose": "^5.9.4",
     "prisma": "5.21.1",
-    "sass": "^1.81.0"
+    "sass": "^1.81.0",
+    "types": "link:@waelio/ustore/types"
   },
   "version": "0.0.1"
 }

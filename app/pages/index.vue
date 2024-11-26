@@ -1,8 +1,16 @@
 <script setup lang="ts">
-// const nuxtApp = useNxtApp()
+import { useFetch } from '#imports';
+
+const pageviews = ref(0)
+onMounted(async()=> {
+  pageviews.value = await useFetch('/api/pageviews')
+})
+definePageMeta({
+  layout: 'default'
+})
+
 </script>
 <template>
-  <NuxtLayout name="default">
     <QPage padding>
       <q-menu class="menu q-mt-lg bg-orange text-white">
         <q-list>
@@ -33,6 +41,6 @@
       <h1>NUXT 4</h1>
       <h2>{{ appName }}</h2>
       <h5>{{ appDescription }}</h5>
+      <h6>views:{{ padding }}</h6>
     </QPage>
-  </NuxtLayout>
 </template>
