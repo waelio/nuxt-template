@@ -4,7 +4,7 @@ import details from "../data/chapters/en.json"
 import { _sniffId, _resetString } from "waelio-utils"
 // @ts-ignore
 import _ from "lodash"
-import { SuraI } from '~~/shared/types'
+// import { SuraI } from '~~/shared/types'
 type FIL = {
     chapter: number
     verse: number

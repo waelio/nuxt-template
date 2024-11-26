@@ -28,7 +28,7 @@ export default defineNuxtConfig({
       },
       meta: [
         { name: "description", content: "nuxt4 typescript quasar" },
-        { name: 'keywords', content: "nuxt4,tempate,typescript,peace2074,waelio"  }
+        { name: 'keywords', content: "nuxt4,tempate,typescript,peace2074,waelio" }
       ]
     }
   },
@@ -42,10 +42,10 @@ export default defineNuxtConfig({
   },
   routeRules: {
     '/api/quran': {
-      // cache: {
-      //   maxAge: 31536000000,
-      //   swr: true
-      // }
+      cache: {
+        maxAge: 31536000000,
+        swr: true
+      }
     },
     '/api/holynames': {
       cache: {
