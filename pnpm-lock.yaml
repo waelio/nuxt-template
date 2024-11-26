@@ -71,9 +71,6 @@ importers:
       vue-router:
         specifier: latest
         version: 4.4.5(vue@3.5.12)
-      waelio-utils:
-        specifier: ^5.0.1
-        version: 5.0.1
     devDependencies:
       '@nuxt/devtools':
         specifier: ^1.6.0
@@ -105,6 +102,9 @@ importers:
       types:
         specifier: link:@waelio/ustore/types
         version: link:@waelio/ustore/types
+      waelio-utils:
+        specifier: ^5.0.1
+        version: 5.0.1
 
 packages:
 

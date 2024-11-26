@@ -30,8 +30,7 @@
     "unstorage": "^1.13.1",
     "uuid": "^11.0.2",
     "vue": "latest",
-    "vue-router": "latest",
-    "waelio-utils": "^5.0.1"
+    "vue-router": "latest"
   },
   "devDependencies": {
     "@nuxt/devtools": "^1.6.0",
@@ -43,7 +42,8 @@
     "jose": "^5.9.4",
     "prisma": "5.21.1",
     "sass": "^1.81.0",
-    "types": "link:@waelio/ustore/types"
+    "types": "link:@waelio/ustore/types",
+    "waelio-utils": "^5.0.1"
   },
   "version": "0.0.1"
 }
