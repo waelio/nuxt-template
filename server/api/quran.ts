@@ -21,8 +21,14 @@ export default defineEventHandler(async (event: H3Event) => {
     const ready = info.map(detail => {
         const prep: FIL = book[detail.id - 1]
         const V = _.flattenDeep(prep).map((v: FIL) => v.text)
-        return {
+        return !!I ? {
             params: I,
+            Index: detail.id as number,
+            Name: detail.name as string,
+            Location: detail.type as string,
+            TotalVerses: detail.total_verses as number,
+            Verses: V
+        } : {
             Index: detail.id as number,
             Name: detail.name as string,
             Location: detail.type as string,
