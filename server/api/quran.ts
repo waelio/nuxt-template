@@ -1,7 +1,7 @@
 import type { H3Event } from 'h3'
 import hbook from "../data/quran.json"
 import details from "../data/chapters/en.json"
-import { _sniffId } from "waelio-utils"
+import { _sniffId, _resetString } from "waelio-utils"
 // @ts-ignore
 import _ from "lodash"
 // import { SuraI } from '~~/shared/types'
@@ -20,7 +20,8 @@ export default defineEventHandler(async (event: H3Event) => {
 
     const ready = info.map(detail => {
         const prep: FIL = book[detail.id - 1]
-        const V = _.flattenDeep(prep).map((v: FIL) => v.text)
+        let V = _.flattenDeep(prep).map((v: FIL) => v.text)
+        V = _resetString(V)
         return !!I ? {
             params: I,
             Index: detail.id as number,
