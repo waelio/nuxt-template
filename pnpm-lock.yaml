@@ -102,6 +102,9 @@ importers:
       types:
         specifier: link:@waelio/ustore/types
         version: link:@waelio/ustore/types
+      utf-8:
+        specifier: ^3.0.0
+        version: 3.0.0
       waelio-utils:
         specifier: ^5.0.1
         version: 5.0.1
@@ -4611,6 +4614,10 @@ packages:
   urlpattern-polyfill@8.0.2:
     resolution: {integrity: sha512-Qp95D4TPJl1kC9SKigDcqgyM2VDVO4RiJc2d4qe5GrYm+zbIQCWWKAFaJNQ4BhdFeDGwBmAxqJBwWSJDb9T3BQ==}
 
+  utf-8@3.0.0:
+    resolution: {integrity: sha512-0wd+rDF0tLpj5ZVepWv7C+mfnxqhTCLPMUD6uLMGEpZQeCev98d6AXjBKkO5YcfAIrNY/7bzny5dlj3YBnWesQ==}
+    engines: {node: '>=20.11.1'}
+
   util-deprecate@1.0.2:
     resolution: {integrity: sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==}
 
@@ -4881,6 +4888,10 @@ packages:
   yargs@17.7.2:
     resolution: {integrity: sha512-7dSzzRQ++CKnNI/krKnYRV7JKKPUXMEh61soaHKg9mrWEhzFWhFnxPxGl+69cD1Ou63C13NUPCnmIcrvqCuM6w==}
     engines: {node: '>=12'}
+
+  yerror@8.0.0:
+    resolution: {integrity: sha512-FemWD5/UqNm8ffj8oZIbjWXIF2KE0mZssggYpdaQkWDDgXBQ/35PNIxEuz6/YLn9o0kOxDBNJe8x8k9ljD7k/g==}
+    engines: {node: '>=18.16.0'}
 
   ylru@1.4.0:
     resolution: {integrity: sha512-2OQsPNEmBCvXuFlIni/a+Rn+R2pHW9INm0BxXJ4hVDA8TirqMj+J/Rp9ItLatT/5pZqWwefVrTQcHpixsxnVlA==}
@@ -10118,6 +10129,10 @@ snapshots:
 
   urlpattern-polyfill@8.0.2: {}
 
+  utf-8@3.0.0:
+    dependencies:
+      yerror: 8.0.0
+
   util-deprecate@1.0.2: {}
 
   uuid@11.0.2: {}
@@ -10373,6 +10388,8 @@ snapshots:
       string-width: 4.2.3
       y18n: 5.0.8
       yargs-parser: 21.1.1
+
+  yerror@8.0.0: {}
 
   ylru@1.4.0: {}
 

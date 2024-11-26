@@ -43,6 +43,7 @@
     "prisma": "5.21.1",
     "sass": "^1.81.0",
     "types": "link:@waelio/ustore/types",
+    "utf-8": "^3.0.0",
     "waelio-utils": "^5.0.1"
   },
   "version": "0.0.1"
