@@ -5,19 +5,20 @@ type ONET = {
     text: string
 }
 
-const book = await useQuran()
+const book: ONET[] = await useQuran()
 </script>
 <template>
     <QPage>
-        <div class="flex space-around items-center">
-            <div v-for="(one) in book" :key="one.chapter">
-                <hr>
-                <ul class="text-center align-center text-lg" v-for="(V, index) in one" :key="index">
-                    <section>
-                        <p>{{ V.text }}</p>
-                    </section>
-                </ul>
-            </div>
+        <div class="flex column space-around items-center">
+            <q-list padding bordered class="rounded-borders" v-for="(one, number) in book" :key="one.chapter">
+                <q-expansion-item dense dense-toggle expand-separator icon="perm_identity" :label="number">
+                    <q-card v-for="(V, index) in one" :key="index">
+                        <q-card-section class="justify fit">
+                            {{ V.text }}
+                        </q-card-section>
+                    </q-card>
+                </q-expansion-item>
+            </q-list>
         </div>
     </QPage>
 </template>
