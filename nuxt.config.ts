@@ -75,8 +75,8 @@ export default defineNuxtConfig({
       './constants',
       './layouts',
       './store',
-      '../shared/utils/',
-      '../shared/types/',
+      '../shared/utils',
+      '../shared/types',
       '../server/uils',
     ]
   },

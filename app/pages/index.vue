@@ -1,11 +1,11 @@
 <script setup lang="ts">
 
-
 </script>
 <template>
   <QPage padding>
     <q-menu class="menu q-mt-lg bg-orange text-white">
       <q-list>
+        <NuxtLink class="text-h3 text-black" title="Quran" to="/quran"></NuxtLink>
         <q-menu>
           <q-item>
             <q-item-label>Profile</q-item-label>

@@ -1,5 +1,4 @@
 import { useState } from "nuxt/app";
-// import useQ2B from '../store/q2b.pinia'
 export function useQuran() {
     const savedBook = useState('book', () => { })
     return new Promise(async (resolve, reject) => {
@@ -7,7 +6,7 @@ export function useQuran() {
         try {
             const data = await $fetch('/api/quran', {
                 method: 'get',
-                pick: []
+                pick: ['text']
             })
 
             savedBook.value = data.data
