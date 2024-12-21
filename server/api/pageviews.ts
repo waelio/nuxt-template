@@ -1,17 +1,19 @@
-import { conf } from "~~/shared/utils/conf";
+import { H3Event } from "h3";
+import { c } from "~/constants/global";
 
-const LABEL = 'server:pageview'
-const startAt = Date.now()
-// core.setItem(LABEL, 0)
+export default defineEventHandler(async (Event: H3Event) => {
+  const LABEL = 'client:user';
+  const startAt = Date.now();
 
-let count = conf.getItem(LABEL) || 0;
-export default defineEventHandler(() => {
-  count = conf.getItem(LABEL) || 0
-  conf.set(LABEL, count++)
-  count = conf.getItem(LABEL)
-  console.log('count', count)
+  let count = core.getItem(LABEL).then(v => v)
+  if (await count) {
+    console.log(count)
+  }
+  core.setItem(LABEL, 1)
+
+
+
   return {
-    pageview: count as number,
-    startAt,
+    pageview: count,
   }
 })
