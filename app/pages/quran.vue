@@ -8,13 +8,13 @@ type ONET = {
 const book: ONET[] = await useQuran()
 </script>
 <template>
-    <QPage>
+    <QPage padding class="fit rtl">
         <div class="flex column space-around items-center">
-            <q-list padding bordered class="rounded-borders" v-for="(one, number) in book" :key="one.chapter">
-                <q-expansion-item dense dense-toggle expand-separator icon="perm_identity" :label="number">
+            <q-list padding bordered class="fit rounded-borders" v-for="(one, number) in book" :key="one.chapter">
+                <q-expansion-item dense dense-toggle expand-separator :label="number.toString()">
                     <q-card v-for="(V, index) in one" :key="index">
-                        <q-card-section class="justify fit">
-                            {{ V.text }}
+                        <q-card-section class="text-center justify fit">
+                            <p>{{ V.text }}</p>
                         </q-card-section>
                     </q-card>
                 </q-expansion-item>
