@@ -10,7 +10,6 @@ export default defineNuxtConfig({
     'nuxt-quasar-ui',
     '@pinia/nuxt',
     '@vueuse/nuxt',
-    "@nuxtjs/tailwindcss",
     "@nuxt/fonts",
     "@nuxt/scripts",
     'nuxt-og-image'
@@ -24,7 +23,7 @@ export default defineNuxtConfig({
       charset: 'utf-8',
       viewport: 'width=device-width, initial-scale=1',
       htmlAttrs: {
-        style: 'background-color: #000000'
+        style: ''
       },
       meta: [
         { name: "description", content: "nuxt4 typescript quasar" },
@@ -62,28 +61,27 @@ export default defineNuxtConfig({
     imports: {
       autoImport: true,
       dirs: [
-        'shared/types',
-        'shared/utils',
-        '../constants/',
-        '../commposables',
+        '~~/shared/types',
+        '~~/shared/utils',
+        './constants/',
+        './commposables',
       ]
     }
   },
   imports: {
     autoImport: true,
     dirs: [
-      './constants',
-      './layouts',
-      './store',
-      '../shared/utils',
-      '../shared/types',
-      '../server/uils',
+      '~/constants',
+      '~/layouts',
+      '~/store',
+      '~~/shared/utils',
+      '~~/shared/types',
+      '~~/server/uils',
     ]
   },
   css: [
     '@quasar/extras/material-icons/material-icons.css',
-    'quasar/dist/quasar.prod.css',
-    "./assets/styles/quasar.css"
+    "~/assets/styles/quasar.css"
   ],
   // @ts-ignore
   quasar: {

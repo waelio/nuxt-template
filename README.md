@@ -2,7 +2,7 @@
 
 Look at the [Nuxt 4 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
 
-DEMO at [Nuxt 4 domo](https://nuxt.com/docs/getting-started/introduction) to learn more.
+DEMO at [Nuxt 4 domo](https://nuxt4-template.netlify.app)
 
 ## Setup
 
