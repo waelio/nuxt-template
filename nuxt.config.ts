@@ -1,4 +1,8 @@
 import { defineNuxtConfig } from "nuxt/config";
+import { fileURLToPath } from 'url'
+import { dirname, join } from 'path'
+
+const currentDir = dirname(fileURLToPath(import.meta.url))
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
@@ -53,6 +57,13 @@ export default defineNuxtConfig({
       }
     }
   },
+  pinia: {
+    autoImports: [
+      // automatically imports `defineStore`
+      'defineStore', // import { defineStore } from 'pinia'
+      ['defineStore', 'definePiniaStore'], // import { defineStore as definePiniaStore } from 'pinia'
+    ],
+  },
   nitro: {
     minify: false,
     rollupConfig: {
@@ -61,22 +72,20 @@ export default defineNuxtConfig({
     imports: {
       autoImport: true,
       dirs: [
-        '~~/shared/types',
-        '~~/shared/utils',
-        './constants/',
-        './commposables',
+        '../shared',
+        '../app/constants',
       ]
     }
   },
   imports: {
     autoImport: true,
     dirs: [
-      '~/constants',
-      '~/layouts',
-      '~/store',
-      '~~/shared/utils',
-      '~~/shared/types',
-      '~~/server/uils',
+      '../app/constants',
+      '../app/layouts',
+      '../app/store/',
+      '../app/composables',
+      '../shared/',
+      '../server/uils'
     ]
   },
   css: [

@@ -5,7 +5,6 @@
   <QPage padding>
     <q-menu class="menu q-mt-lg bg-orange text-white">
       <q-list>
-        <NuxtLink class="text-h3 text-black" title="Quran" to="/quran"></NuxtLink>
         <q-menu>
           <q-item>
             <q-item-label>Profile</q-item-label>
@@ -33,5 +32,8 @@
     <h1>NUXT 4</h1>
     <h2>{{ appName }}</h2>
     <h5>{{ appDescription }}</h5>
+    <NuxtLink class="q-mt-xl text-h3 block" title="Quran" to="/quran">Quran</NuxtLink>
+    <NuxtLink class="q-mt-xl text-h3 block" title="HolyNames" to="/holynames">HolyNames</NuxtLink>
+
   </QPage>
 </template>
