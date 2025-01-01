@@ -18,7 +18,7 @@ const bBook = q2p.GetQ
 </script>
 <template>
     <QPage padding class="fit rtl">
- <pre>{{ bBook[0] }}</pre>
+  <!-- <pre>{{ bBook[0] }}</pre> -->
         <div class="flex column space-around fit items-center">
             <q-list padding bordered class="fit rounded-borders" v-for="one in bBook" :label="one.Name" :key="one.Index">
                 <q-expansion-item dense dense-toggle expand-separator :label="one.Name">
