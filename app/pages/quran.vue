@@ -22,7 +22,7 @@ const bBook = q2p.GetQ
         <div class="flex column space-around items-center">
             <q-list padding bordered class="fit rounded-borders" v-for="(one, X) in bBook" :label="one.Name" :key="one.Index">
                 <q-expansion-item dense dense-toggle expand-separator :label="X">
-                    <q-card v-for="(V, X) in one" :key="x">
+                    <q-card v-for="V in one" :key="V.">
                         <q-card-section class="text-center justify fit">
                             <p>{{ V.text }}</p>
                         </q-card-section>
