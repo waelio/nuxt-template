@@ -20,8 +20,8 @@ const bBook = q2p.GetQ
     <QPage padding class="fit rtl">
  <pre>{{ bBook[0] }}</pre>
         <div class="flex column space-around items-center">
-            <q-list padding bordered class="fit rounded-borders" v-for="(one, X) in bBook" :label="one.Name" :key="one.Index">
-                <q-expansion-item dense dense-toggle expand-separator :label="X">
+            <q-list padding bordered class="fit rounded-borders" v-for="one in bBook" :label="one.Name" :key="one.Index">
+                <q-expansion-item dense dense-toggle expand-separator :label="one.Index">
                     <q-card v-for="V in one" :key="V.">
                         <q-card-section class="text-center justify fit">
                             <p>{{ V.text }}</p>
