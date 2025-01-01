@@ -23,8 +23,9 @@ const bBook = q2p.GetQ
             <q-list padding bordered class="fit rounded-borders" v-for="one in bBook" :label="one.Name" :key="one.Index">
                 <q-expansion-item dense dense-toggle expand-separator :label="one.Index">
                     <q-card v-for="V in one" :key="V.Name">
+												<p>{{ V.Name }}</p>
                         <q-card-section class="text-center justify fit">
-                            <p>{{ V }}</p>
+                            <p>{{ V.Verses }}</p>
                         </q-card-section>
                     </q-card>
                 </q-expansion-item>
