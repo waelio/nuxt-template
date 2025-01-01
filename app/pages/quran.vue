@@ -14,11 +14,12 @@ const bookSize = book.length
 if (!!bookSize) {
     q2p.setQuran(book)
 }
+const bBook = q2p.GetQ
 </script>
 <template>
     <QPage padding class="fit rtl">
         <div class="flex column space-around items-center">
-            <q-list padding bordered class="fit rounded-borders" v-for="(one, X) in book" :key="one.chapter">
+            <q-list padding bordered class="fit rounded-borders" v-for="(one, X) in bBook" :key="one.chapter">
                 <q-expansion-item dense dense-toggle expand-separator :label="X">
                     <q-card v-for="(V, X) in one" :key="x">
                         <q-card-section class="text-center justify fit">
