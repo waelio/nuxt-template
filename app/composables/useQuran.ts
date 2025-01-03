@@ -14,5 +14,5 @@ export function useQuran() {
 
     })
 }
-
+useQuran()
 export default useQuran
