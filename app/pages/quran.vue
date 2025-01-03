@@ -9,7 +9,9 @@ import { useQuran } from "../composables/useQuran";
 import { useQ2B } from "../store/q2p.pinia";
 import type { Ref } from "#imports";
 const q2p = useQ2B()
-const book: Promise<Ref<ONET[]>> = await useQuran()
+const book: Promise<Ref<ONET[]>> = q2p.book
+
+
 const bookSize = book.length
 if (!!bookSize) {
     q2p.setQuran(book)
