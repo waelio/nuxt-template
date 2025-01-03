@@ -23,7 +23,7 @@ const bookSize = bBook.length
             <q-list padding bordered class="fit rounded-borders" v-for="one in bBook" :label="one.Name" :key="one.Index">
                 <q-expansion-item dense dense-toggle expand-separator :label="one.Name">
                     <q-card v-for="V in one" :key="V.Index">
-												<p>{{ V.Name }}</p>
+												<pre>{{ V }}</pre>
                         <!-- <q-card-section class="text-center justify fit" v-for="wrd in V.versus">
                             <p>{{ wrd }}</p>
                         </q-card-section> -->
