@@ -9,14 +9,12 @@ import { useQuran } from "../composables/useQuran";
 import { useQ2B } from "../store/q2p.pinia";
 import type { Ref } from "#imports";
 const q2p = useQ2B()
-const book: Promise<Ref<ONET[]>> = q2p.book
+const bBook: Promise<Ref<ONET[]>> = q2p.GetQ
 
 
-const bookSize = book.length
-if (!!bookSize) {
-    q2p.setQuran(book)
-}
-const bBook = q2p.GetQ
+const bookSize = bBook.length
+
+
 </script>
 <template>
     <QPage padding class="fit rtl">
