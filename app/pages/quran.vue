@@ -18,7 +18,7 @@ const bookSize = bBook.length
 </script>
 <template>
     <QPage padding class="fit rtl">
-      <pre>{{ bBook[0] }}</pre>
+      <pre>{{ bBook }}</pre>
         <div class="flex column space-around fit items-center" v-if="bookSize">
             <q-list padding bordered class="fit rounded-borders" v-for="one in bBook" :label="one.Name" :key="one.Index">
                 <q-expansion-item dense dense-toggle expand-separator :label="one.Name">
