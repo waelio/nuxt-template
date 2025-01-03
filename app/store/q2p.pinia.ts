@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-export const useQ2B = defineStore('q2b', {
+export const useQ2P = defineStore('q2p', {
   state: () => ({
     Quran: {},
     Sura: {},
@@ -89,3 +89,5 @@ export const useQ2B = defineStore('q2b', {
   }
 
 })
+
+export default useQ2P
