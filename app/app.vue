@@ -1,4 +1,5 @@
 <script setup lag="ts">
+
 useServerHead({
   bodyAttrs: {
     class: "font-geist antialiased",
@@ -7,16 +8,16 @@ useServerHead({
 });
 
 useSeoMeta({
-  appName,
-  appDescription,
-  // Either NuxtSeo SEO Experiments OR set it manually
+  title: appName,
+  appDescription: appDescription,
   ogTitle: appName,
   ogDescription: appDescription,
 });
+
 </script>
 <template>
-    <NuxtLayout>
-      <NuxtRouteAnnouncer />
-      <NuxtPage />
-    </NuxtLayout>
+  <NuxtLayout>
+    <NuxtRouteAnnouncer />
+    <NuxtPage />
+  </NuxtLayout>
 </template>

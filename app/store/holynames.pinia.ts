@@ -1,20 +1,26 @@
+import { useFetch, useLazyFetch } from 'nuxt/app'
 import { defineStore } from 'pinia'
-import { getHolyNames } from './services'
 
+type HolyNameI = {
+  name: string,
+  text: string
+}
 export const useHN = defineStore('holynames', {
-    state: async () => ({
-        names: []
-    }),
-    actions: {
-        getNames() {
-            this.names = getHolyNames()
-        },
-        setNames(payload: { name: string, text: string }) {
-            this.names = payload
-        }
+  state: async () => ({
+    names: []
+  }),
+  actions: {
+    getNames: async function () {
+      const { data } = await useFetch('/api/holynames')
+      if (data && data.value) {
+        this.setNames(data.value.data)
+      }
     },
-    getters: {
-        gn: (state) => state.names
+    setNames: function (payload: { name: string, text: string }) {
+      this.names = payload
     }
+  },
+  getters: {
+    gn: (state) => state.names
+  }
 })
-useHN().getNames()

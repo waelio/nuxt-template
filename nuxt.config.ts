@@ -1,8 +1,5 @@
 import { defineNuxtConfig } from "nuxt/config";
-import { fileURLToPath } from 'url'
-import { dirname, join } from 'path'
 
-const currentDir = dirname(fileURLToPath(import.meta.url))
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
@@ -12,7 +9,8 @@ export default defineNuxtConfig({
   },
   modules: [
     'nuxt-quasar-ui',
-    '@pinia/nuxt',
+    '@pinia/nuxt', // required
+    'pinia-plugin-persistedstate/nuxt',
     '@vueuse/nuxt',
     "@nuxt/fonts",
     "@nuxt/scripts",
@@ -105,10 +103,12 @@ export default defineNuxtConfig({
     }
   },
   experimental: {
+    componentIslands: true,
     sharedPrerenderData: true,
     compileTemplate: true,
     resetAsyncDataToUndefined: true,
     templateUtils: true,
+    buildCache: true,
     relativeWatchPaths: true,
     defaults: {
       useAsyncData: {

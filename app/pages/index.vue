@@ -1,5 +1,5 @@
 <script setup lang="ts">
-
+// const nuxtApp = useNuxtApp()
 </script>
 <template>
   <QPage padding>
@@ -30,6 +30,7 @@
       </q-list>
     </q-menu>
     <h1>NUXT 4</h1>
+    <h2>{{ extra }}</h2>
     <h2>{{ appName }}</h2>
     <h5>{{ appDescription }}</h5>
     <NuxtLink class="q-mt-xl text-h3 block" title="Quran" to="/quran">Quran</NuxtLink>

@@ -1,13 +1,12 @@
 <script lang="ts" setup>
-import { onBeforeMount } from 'vue';
-import useNames from '../composables/useNames';
 import { useHN } from '../store/holynames.pinia';
+
 interface HolyNameI {
     name: string,
     text: string
 }
-onBeforeMount(() => useNames())
 const holynames = useHN()
+holynames.getNames()
 const names: HolyNameI[] = holynames.gn
 
 </script>

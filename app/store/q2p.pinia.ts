@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
-export const useQ2B = defineStore('q2b', {
-  state: () => ({
+export const useQ2P = defineStore('q2p', {
+  state: async () => ({
     Quran: {},
     Sura: {},
     Index: [],
@@ -59,6 +59,12 @@ export const useQ2B = defineStore('q2b', {
     }
   }),
   actions: {
+    setUpQuran: async function () {
+      const { data } = await $fetch('/api/quran')
+      if (await data && data.data) {
+        this.Quran = await data.data
+      }
+    },
     setQuran(payload: object) {
       this.Quran = payload
     },
