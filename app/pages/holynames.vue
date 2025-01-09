@@ -1,13 +1,10 @@
 <script lang="ts" setup>
-import { useHN } from '../store/holynames.pinia';
 
 interface HolyNameI {
     name: string,
     text: string
 }
-const holynames = useHN()
-holynames.getNames()
-const names: HolyNameI[] = holynames.gn
+const holynames =
 
 </script>
 <template>

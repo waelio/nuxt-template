@@ -1,5 +1,6 @@
 <script lang="ts" async setup>
-import useQuran from '../composables/useQuran';
+import { useNuxtApp } from 'nuxt/app';
+import useQuran from '../plugins/Quran';
 import { useQ2P } from '../store/q2p.pinia';
 
 type ONET = {
@@ -7,23 +8,20 @@ type ONET = {
     verse: number,
     text: string
 }
-const quran = useQuran()
-const q2p = useQ2P
-const gbook = q2p.GetQ
+const nuxtApp = useNuxtApp()
+
+const Quran = nuxtApp.payload.data['B6H5jvHlMH'].data
 
 </script>
 <template>
     <QPage padding class="fit rtl">
-        <!-- <pre>{{ bBook[0] }}</pre> -->
         <div class="flex column space-around fit items-center">
-            <q-list padding bordered class="fit rounded-borders" v-for="one in gbook" :label="one.Name"
+            <q-list padding bordered class="fit rounded-borders" v-for="one in Quran" :label="one.Name"
                 :key="one.Index">
                 <q-expansion-item dense dense-toggle expand-separator :label="one.Name">
-                    <q-card v-for="V in one" :key="V.Index">
-                        <p>{{ V.Name }}</p>
-                        <q-card-section class="text-center justify fit" v-for="wrd in V.versus">
-                            <p>{{ wrd }}</p>
-                        </q-card-section>
+                    <q-card v-for="V in one.Verses" :key="V.Index">
+                        <p>{{ V.text }}</p>
+
                     </q-card>
                 </q-expansion-item>
             </q-list>
