@@ -8,3 +8,12 @@ export async function getHolyNames() {
     }
     return data
 }
+
+export async function getHolyBook() {
+    const { data, error, clear } = useFetch('/api/quran')
+    if (error) {
+        console.log(error)
+        clear()
+    }
+    return data
+}
