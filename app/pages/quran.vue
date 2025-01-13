@@ -16,7 +16,7 @@ const Verses = sura.value.Verses
 </script>
 <template>
     <QPage padding class="fit rtl">
-        <div class="flex column space-around fit items-center">
+        <div class=" column space-around items-center">
             <q-btn v-model="lok" :min="1" :max="114" label="Next" @click="lok = lok++" />
             <q-btn v-model="lok" :min="1" :max="114" label="Previose" @click="lok = lok--" />
             <pre>{{ sura[lok] }}</pre>
@@ -26,10 +26,8 @@ const Verses = sura.value.Verses
                     <h1>{{ sura.Name }}</h1>
                 </q-card-section>
             </q-card>
-            <q-card>
-                <q-card-section>
-                    <p v-for="l in Verses" :key="l" class="flex block justify"> {{ !!l ? l : '@' }}</p>
-                </q-card-section>
+            <q-card class="q-mt-md">
+                <p class=" block justify"> {{ Verses }}</p>
             </q-card>
         </div>
     </QPage>
