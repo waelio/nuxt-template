@@ -33,7 +33,7 @@
     <h2>{{ extra }}</h2>
     <h2>{{ appName }}</h2>
     <h5>{{ appDescription }}</h5>
-    <NuxtLink class="q-mt-xl text-h3 block" title="Quran" to="/quran">Quran</NuxtLink>
+    <NuxtLink class="q-mt-xl text-h3 block" title="Quran" to="/quran/1">Quran</NuxtLink>
     <NuxtLink class="q-mt-xl text-h3 block" title="HolyNames" to="/holynames">HolyNames</NuxtLink>
 
   </QPage>
