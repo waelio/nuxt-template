@@ -1,11 +1,16 @@
 <script lang="ts" async setup>
 import { useNuxtApp, useRoute } from 'nuxt/app';
 import { computed, ref, watchEffect } from 'vue';
-const lok = ref(0)
+import { useRouter } from 'vue-router';
+
+const lok = ref(1)
 const route = useRoute()
+const router = useRouter()
+console.log(router);
+
 
 watchEffect(() => {
-    lok.value = +route.params.name || 0
+    lok.value = +route.params.name || 1
 })
 type ONET = {
     Index: number | string,
@@ -22,15 +27,15 @@ function dec() {
 
 const nuxtApp = useNuxtApp()
 const Quran: ONET[] = nuxtApp.payload.data['B6H5jvHlMH'].data
-const sura = computed(() => Quran[lok.value])
-const Verses = sura.value.Verses
+const sura = computed(() => Quran[lok.value - 1])
+const Verses = computed(() => sura.value.Verses)
 </script>
 <template>
     <QPage padding class="fit rtl">
         <div class=" column space-around items-center">
-            <q-btn v-model="lok" :min="1" :max="114" label="Next" @click="inc" />
-            <q-btn v-model="lok" :min="1" :max="114" label="Previose" @click="dec" />
-            <pre>{{ sura[lok] }}</pre>
+            <q-btn fab v-model="lok" :min="1" :max="114" label="Next" @click="inc" />
+            <q-btn fab v-model="lok" :min="1" :max="114" label="Previous" @click="dec" />
+            <p>{{ lok }}</p>
 
             <q-card>
                 <q-card-section>

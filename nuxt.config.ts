@@ -1,6 +1,5 @@
 import { defineNuxtConfig } from "nuxt/config";
 
-
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: true },
@@ -72,6 +71,7 @@ export default defineNuxtConfig({
       dirs: [
         '../shared',
         '../app/constants',
+        '../app/components'
       ]
     }
   },
@@ -82,6 +82,7 @@ export default defineNuxtConfig({
       '../app/layouts',
       '../app/store/',
       '../app/composables',
+      '../app/components',
       '../shared/',
       '../server/uils'
     ]
