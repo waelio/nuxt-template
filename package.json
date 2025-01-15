@@ -22,7 +22,7 @@
     "jsonwebtoken": "^9.0.2",
     "mitt": "^3.0.1",
     "mongodb": "^6.10.0",
-    "mongoose": "^8.8.2",
+    "mongoose": "^8.8.3",
     "nuxt": "^3.13.2",
     "nuxt-og-image": "^3.0.8",
     "nuxt-quasar-ui": "^2.1.6",
