@@ -7,7 +7,7 @@ useServerHead({
   link: [{ rel: "icon", type: "image/svg+xml", href: "/favicon.svg" }],
 });
 
-useSeoMeta({
+useHead({
   title: appName,
   appDescription: appDescription,
   ogTitle: appName,
@@ -16,8 +16,24 @@ useSeoMeta({
 
 </script>
 <template>
+
   <NuxtLayout>
     <NuxtRouteAnnouncer />
+    <VitePwaManifest />
     <NuxtPage />
   </NuxtLayout>
 </template>
+<style>
+html,
+body,
+#__nuxt {
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+html.dark {
+  background: #222;
+  color: white;
+}
+</style>

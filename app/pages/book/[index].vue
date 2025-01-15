@@ -1,8 +1,14 @@
 <script lang="ts" async setup>
-import { useNuxtApp, useRoute } from 'nuxt/app';
+import { useNuxtApp, useRoute, useSeoMeta } from 'nuxt/app';
 import { computed, ref, watchEffect } from 'vue';
 import { useRouter } from 'vue-router';
 
+useSeoMeta({
+    title: appName,
+    appDescription: appDescription,
+    ogTitle: appName,
+    ogDescription: appDescription,
+});
 const lok = ref(1)
 const route = useRoute()
 const router = useRouter()

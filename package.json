@@ -17,6 +17,7 @@
     "@pinia/nuxt": "^0.5.5",
     "@prisma/client": "5.21.1",
     "@quasar/extras": "^1.16.12",
+    "@vite-pwa/nuxt": "^0.10.6",
     "@vueuse/nuxt": "^11.1.0",
     "jsonwebtoken": "^9.0.2",
     "mitt": "^3.0.1",

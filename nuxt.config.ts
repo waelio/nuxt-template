@@ -13,7 +13,8 @@ export default defineNuxtConfig({
     '@vueuse/nuxt',
     "@nuxt/fonts",
     "@nuxt/scripts",
-    'nuxt-og-image'
+    'nuxt-og-image',
+    '@vite-pwa/nuxt',
   ],
   // @ts-ignore
   tailwindcss: {
