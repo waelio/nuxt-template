@@ -1,4 +1,5 @@
 import { defineNuxtConfig } from "nuxt/config";
+import { pwa } from './app/config/pwa'
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
@@ -118,6 +119,7 @@ export default defineNuxtConfig({
       }
     }
   },
+  pwa,
   unhead: {
     renderSSRHeadOptions: {
       omitLineBreaks: false
