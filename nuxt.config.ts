@@ -73,6 +73,7 @@ export default defineNuxtConfig({
       dirs: [
         '../shared',
         '../app/constants',
+        '~/constants',
         '../app/components'
       ]
     }

@@ -1,9 +1,9 @@
 <script lang="ts" async setup>
-import { useNuxtApp, useRoute, useSeoMeta } from 'nuxt/app';
+import { useHead, useNuxtApp, useRoute } from 'nuxt/app';
 import { computed, ref, watchEffect } from 'vue';
 import { useRouter } from 'vue-router';
 
-useSeoMeta({
+useHead({
     title: appName,
     appDescription: appDescription,
     ogTitle: appName,
@@ -20,6 +20,7 @@ watchEffect(() => {
 })
 type ONET = {
     Index: number | string,
+    Name: string,
     Location: string,
     TotalVerses: number,
     Verses: string[],
@@ -37,19 +38,22 @@ const sura = computed(() => Quran[lok.value - 1])
 const Verses = computed(() => sura.value.Verses)
 </script>
 <template>
-    <QPage padding class="fit rtl">
-        <div class=" column space-around items-center">
-            <q-btn fab v-model="lok" :min="1" :max="114" label="Next" @click="inc" />
-            <q-btn fab v-model="lok" :min="1" :max="114" label="Previous" @click="dec" />
-            <p>{{ lok }}</p>
+    <QPage padding class=" rtl">
+        <div class="q-mt-xl q-gutter-md">
+            <menu>
+                <q-pagination v-model="lok" max="114" min="1" direction-links outline color="orange"
+                    active-design="unelevated" active-color="brown" active-text-color="orange" />
+            </menu>
 
             <q-card>
                 <q-card-section>
-                    <h1>{{ sura.Name }}</h1>
+                    <h1 class="text-h3">{{ sura.Name }}</h1>
                 </q-card-section>
             </q-card>
-            <q-card class="q-mt-md">
-                <p class=" block justify"> {{ Verses }}</p>
+            <q-card class="q-mt-xs">
+                <q-card-section>
+                    <p class=" block justify fit"> {{ Verses }}</p>
+                </q-card-section>
             </q-card>
         </div>
     </QPage>
