@@ -42,7 +42,7 @@ const Verses = computed(() => sura.value.Verses)
         <div class="q-mt-xl q-gutter-md">
             <menu>
                 <q-pagination v-model="lok" max="114" min="1" direction-links outline color="orange"
-                    active-design="unelevated" active-color="brown" active-text-color="orange" />
+                    active-design="flat" active-color="brown" active-text-color="white" />
             </menu>
 
             <q-card>
@@ -52,9 +52,25 @@ const Verses = computed(() => sura.value.Verses)
             </q-card>
             <q-card class="q-mt-xs">
                 <q-card-section>
-                    <p class=" block justify fit"> {{ Verses }}</p>
+                    <p class=" block just fit"> {{ Verses }}</p>
                 </q-card-section>
             </q-card>
         </div>
     </QPage>
 </template>
+<style lang="scss">
+.just {
+    text-align: justify;
+    letter-spacing: 1px;
+    font-size: larger;
+}
+
+
+.rtl {
+    direction: rtl;
+}
+
+.ltr {
+    direction: ltr;
+}
+</style>
