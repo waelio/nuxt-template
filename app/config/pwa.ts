@@ -13,6 +13,7 @@ export const pwa: ModuleOptions = {
         scope,
         name: appName,
         short_name: appName,
+        display: 'standalone',
         description: appDescription,
         theme_color: '#ffffff',
         icons: [
