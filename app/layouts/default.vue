@@ -1,13 +1,23 @@
 <script lang="ts" setup>
-import { useRouter } from 'nuxt/app';
+type ONET = {
+  Index: number | string,
+  Name: string,
+  Location: string,
+  TotalVerses: number,
+  Verses: string[],
+}
+import { useNuxtApp, useRouter } from 'nuxt/app';
 import { useQuasar } from 'quasar';
 import { ref } from 'vue';
 import { appName } from '../constants/global';
 
+const nuxtApp = useNuxtApp()
+const Quran: ONET[] = nuxtApp.payload.data['B6H5jvHlMH'].data
+const names = ref(Quran).value.map(v => ({ names: v.Name }))
 
 const $q = useQuasar()
 const offset = ref([0, 18])
-
+const leftOpen = ref(false)
 const { toggle } = $q.dark
 function toggleDark() {
   toggle()
@@ -17,11 +27,24 @@ const router = useRouter()
 </script>
 
 <template>
-  <q-layout view="hHh lpR fFf" class="bg-blue-1">
-    <q-header reveal class="flex">
-      <q-btn fab class="q-mx-auto" @click="router.push('/')">HOME</q-btn>
-      <q-btn icon="light" class="q-mx-auto" @click="toggleDark">Light</q-btn>
+  <q-layout view="hHh lpR fFf">
+
+    <q-header elevated class="bg-primary text-white" height-hint="98">
+      <q-toolbar>
+        <q-btn dense flat round icon="menu" @click="toggleLeftDrawer" />
+        <q-toolbar-title>{{ appName }}</q-toolbar-title>
+        <q-header reveal class="flex">
+        </q-header>
+      </q-toolbar>
     </q-header>
+
+    <q-drawer show-if-above v-model="leftOpen" side="left" bordered>
+      <ol class="column">
+        <nuxt-link class="cursor-pointer" v-for="(i, ind) in names" :key="i.names"
+          @click="router.push({ name: 'book', params: { index: ind + 1 } })">{{ ind + 1 }} - {{ i.names }}
+        </nuxt-link>
+      </ol>
+    </q-drawer>
 
     <q-page-container>
 
