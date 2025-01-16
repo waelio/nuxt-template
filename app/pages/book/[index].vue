@@ -12,7 +12,6 @@ useHead({
 const lok = ref(1)
 const route = useRoute()
 const router = useRouter()
-console.log(router);
 
 
 watchEffect(() => {
@@ -25,12 +24,7 @@ type ONET = {
     TotalVerses: number,
     Verses: string[],
 }
-function inc() {
-    lok.value = lok.value + 1
-}
-function dec() {
-    lok.value = lok.value - 1
-}
+
 
 const nuxtApp = useNuxtApp()
 const Quran: ONET[] = nuxtApp.payload.data['B6H5jvHlMH'].data
@@ -46,8 +40,16 @@ const Verses = computed(() => sura.value.Verses)
             </menu>
 
             <q-card>
-                <q-card-section>
-                    <h1 class="text-h3">{{ sura.Name }}</h1>
+                <q-card-section class="flex">
+                    <div>
+
+                        <h1 class="text-h3">{{ sura.Name }}</h1>
+                    </div>
+                    <div>
+                        <h4>{{ sura.TotalVerses }}</h4>
+                        <h5>{{ sura.Location }}</h5>
+                    </div>
+
                 </q-card-section>
             </q-card>
             <q-card class="q-mt-xs">
@@ -72,5 +74,13 @@ const Verses = computed(() => sura.value.Verses)
 
 .ltr {
     direction: ltr;
+}
+
+.flex {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: nowrap;
 }
 </style>
