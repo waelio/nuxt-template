@@ -35,6 +35,8 @@
 
     <NuxtLink class="q-mt-xl text-h3 block" title="Quran" :to="{ name: 'book', params: { index: 1 } }">Quran</NuxtLink>
     <NuxtLink class="q-mt-xl text-h3 block" title="HolyNames" to="/holynames">HolyNames</NuxtLink>
+    <NuxtLink class="q-mt-xl text-h3 block" title="stats" to="/stats">Stats</NuxtLink>
+
 
   </QPage>
 </template>
