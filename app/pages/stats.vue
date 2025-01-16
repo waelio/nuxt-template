@@ -13,7 +13,7 @@ const lok = ref(1)
 const nuxtApp = useNuxtApp()
 const Quran: ONET[] = nuxtApp.payload.data['B6H5jvHlMH'].data
 const sura = computed(() => Quran[lok.value - 1])
-const index = ref(Quran).value.map(v => ({ names: v.Name }))
+const total = ref(Quran).value.map(v => ({ verses: v.TotalVerses }))
 
 const Verses = computed(() => sura.value.Verses)
 </script>
@@ -21,7 +21,7 @@ const Verses = computed(() => sura.value.Verses)
     <QPage padding>
         <h1>stats: {{ sura.TotalVerses }}</h1>
         <ol>
-            <li v-for="i in index" :key="i.names">{{ i.names }}</li>
+            <li v-for="i in total" :key="i.verses">{{ i.verses }}</li>
         </ol>
     </QPage>
 </template>

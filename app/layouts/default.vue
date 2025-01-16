@@ -32,14 +32,14 @@ const router = useRouter()
     <q-header elevated class="bg-primary text-white" height-hint="98">
       <q-toolbar>
         <q-btn dense flat round icon="menu" @click="toggleLeftDrawer" />
-        <q-toolbar-title>{{ appName }}</q-toolbar-title>
-        <q-header reveal class="flex">
-        </q-header>
+        <q-toolbar-title>
+          <nuxt-link :title="appName" to="/">{{ appName }}</nuxt-link>
+        </q-toolbar-title>
       </q-toolbar>
     </q-header>
 
-    <q-drawer show-if-above v-model="leftOpen" side="left" bordered>
-      <ol class="column">
+    <q-drawer show-if-above mini mini-width="120" v-model="leftOpen" side="left" bordered>
+      <ol class="column q-mt-xl q-pt-lg">
         <nuxt-link class="cursor-pointer" v-for="(i, ind) in names" :key="i.names"
           @click="router.push({ name: 'book', params: { index: ind + 1 } })">{{ ind + 1 }} - {{ i.names }}
         </nuxt-link>

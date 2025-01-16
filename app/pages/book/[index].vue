@@ -30,6 +30,7 @@ const nuxtApp = useNuxtApp()
 const Quran: ONET[] = nuxtApp.payload.data['B6H5jvHlMH'].data
 const sura = computed(() => Quran[lok.value - 1])
 const Verses = computed(() => sura.value.Verses)
+const cleanText = computed(() => JSON.stringify(Verses.value).replaceAll(',', '🎗'))
 </script>
 <template>
     <QPage padding class=" rtl">
@@ -54,7 +55,7 @@ const Verses = computed(() => sura.value.Verses)
             </q-card>
             <q-card class="q-mt-xs">
                 <q-card-section>
-                    <p class=" block just fit"> {{ Verses }}</p>
+                    <p class="block just fit verse"> {{ cleanText }}</p>
                 </q-card-section>
             </q-card>
         </div>
@@ -82,5 +83,9 @@ const Verses = computed(() => sura.value.Verses)
     justify-content: space-between;
     align-items: flex-start;
     flex-wrap: nowrap;
+}
+
+.verse::after {
+    content: '🎗';
 }
 </style>
