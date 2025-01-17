@@ -45,7 +45,8 @@ function navToLok(lok: number) {
 
     <q-drawer persistent min-width="200" v-model="drawerLeft" elevated side="left" bordered>
       <ol class="column q-mt-xl q-pt-lg">
-        <nuxt-link class="cursor-pointer" v-for="(i, ind) in names" :key="i.names" @click="navToLok(ind)">{{ ind + 1 }}
+        <nuxt-link class="cursor-pointer" v-for="(i, ind) in names" :key="i.names"
+          @click="navToLok(ind)">{{ ind + 1 }}-{{ i.names }}
         </nuxt-link>
       </ol>
     </q-drawer>
