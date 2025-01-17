@@ -14,16 +14,21 @@ import { appName } from '../constants/global';
 const nuxtApp = useNuxtApp()
 const Quran: ONET[] = nuxtApp.payload.data['B6H5jvHlMH'].data
 const names = ref(Quran).value.map(v => ({ names: v.Name }))
-
+const router = useRouter()
 const $q = useQuasar()
 const offset = ref([0, 18])
-const leftOpen = ref(false)
+
+const drawerLeft = ref(true)
+
 const { toggle } = $q.dark
 function toggleDark() {
   toggle()
   return $q.dark.mode
 }
-const router = useRouter()
+function navToLok(lok: number) {
+  const advonced = lok + 1 || 1
+  router.push(`/quran/${advonced}`)
+}
 </script>
 
 <template>
@@ -38,10 +43,9 @@ const router = useRouter()
       </q-toolbar>
     </q-header>
 
-    <q-drawer show-if-above mini mini-width="120" v-model="leftOpen" side="left" bordered>
+    <q-drawer persistent min-width="200" v-model="drawerLeft" elevated side="left" bordered>
       <ol class="column q-mt-xl q-pt-lg">
-        <nuxt-link class="cursor-pointer" v-for="(i, ind) in names" :key="i.names"
-          @click="router.push({ name: 'book', params: { index: ind + 1 } })">{{ ind + 1 }} - {{ i.names }}
+        <nuxt-link class="cursor-pointer" v-for="(i, ind) in names" :key="i.names" @click="navToLok(ind)">{{ ind + 1 }}
         </nuxt-link>
       </ol>
     </q-drawer>

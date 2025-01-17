@@ -2,6 +2,15 @@
 import { useHead, useNuxtApp, useRoute } from 'nuxt/app';
 import { computed, ref, watchEffect } from 'vue';
 import { useRouter } from 'vue-router';
+import { appDescription, appName } from '../../constants/global';
+
+export type ONET = {
+    Index: number | string,
+    Name: string,
+    Location: string,
+    TotalVerses: number,
+    Verses: string[],
+}
 
 useHead({
     title: appName,
@@ -9,21 +18,14 @@ useHead({
     ogTitle: appName,
     ogDescription: appDescription,
 });
-const lok = ref(1)
 const route = useRoute()
-const router = useRouter()
+const lok = ref(route.params?.lok || 1)
 
 
 watchEffect(() => {
-    lok.value = +route.params.name || 1
+    lok.value = +route.params.lok || 1
 })
-type ONET = {
-    Index: number | string,
-    Name: string,
-    Location: string,
-    TotalVerses: number,
-    Verses: string[],
-}
+
 
 
 const nuxtApp = useNuxtApp()
@@ -35,11 +37,6 @@ const cleanText = computed(() => JSON.stringify(Verses.value).replaceAll(',', 'ð
 <template>
     <QPage padding class=" rtl">
         <div class="q-mt-xl q-gutter-md">
-            <menu>
-                <q-pagination v-model="lok" max="114" min="1" direction-links outline color="orange"
-                    active-design="flat" active-color="brown" active-text-color="white" />
-            </menu>
-
             <q-card>
                 <q-card-section class="flex">
                     <div>

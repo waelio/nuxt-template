@@ -54,7 +54,7 @@ export default defineNuxtConfig({
         maxAge: 31536000000,
         swr: true
       }
-    }
+    },
   },
   pinia: {
     autoImports: [

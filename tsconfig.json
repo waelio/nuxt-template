@@ -1,0 +1,10 @@
+{
+    "compilerOptions": {
+        "module": "system",
+        "target": "ES3",
+            "noImplicitAny": true,
+                "removeComments": true,
+                    "preserveConstEnums": true,
+                        "sourceMap": true,
+    }
+}
