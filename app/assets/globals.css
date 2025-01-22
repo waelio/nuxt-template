@@ -23,3 +23,7 @@ body {
 .ltr {
   direction: ltr !important;
 }
+
+.h-50 {
+  height: 3rem;
+}

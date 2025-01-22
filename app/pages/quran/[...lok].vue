@@ -30,29 +30,29 @@ watchEffect(() => {
 
 const nuxtApp = useNuxtApp()
 const Quran: ONET[] = nuxtApp.payload.data['B6H5jvHlMH'].data
-const sura = computed(() => Quran[lok.value - 1])
+const sura = computed(() => Quran[lok.value - 1] as unknown as number)
 const Verses = computed(() => sura.value.Verses)
-const cleanText = computed(() => JSON.stringify(Verses.value).replaceAll(',', '🎗'))
+const cleanText = computed(() => JSON.stringify(Verses.value).replaceAll(',', ' ♦ '))
 </script>
 <template>
     <QPage padding class=" rtl">
-        <div class="q-mt-xl q-gutter-md">
-            <q-card>
-                <q-card-section class="flex">
+        <div class="q-mt-md q-gutter-md">
+            <q-card class="text-sm">
+                <q-card-section class="flex h-50">
                     <div>
 
-                        <h1 class="text-h3">{{ sura.Name }}</h1>
+                        <h4 class="text-h3">{{ sura.Name }}</h4>
                     </div>
                     <div>
-                        <h4>{{ sura.TotalVerses }}</h4>
-                        <h5>{{ sura.Location }}</h5>
+                        <h4 class="capitalize">{{ sura.TotalVerses }}</h4>
+                        <h4 class="capitalize text-h6">{{ sura.Location }}</h4>
                     </div>
 
                 </q-card-section>
             </q-card>
             <q-card class="q-mt-xs">
                 <q-card-section>
-                    <p class="block just fit verse"> {{ cleanText }}</p>
+                    <p class="capitalize block just fit verse"> {{ cleanText }}</p>
                 </q-card-section>
             </q-card>
         </div>
@@ -65,6 +65,9 @@ const cleanText = computed(() => JSON.stringify(Verses.value).replaceAll(',', '�
     font-size: larger;
 }
 
+.capitalize::first-letter {
+    text-transform: uppercase;
+}
 
 .rtl {
     direction: rtl;
@@ -83,6 +86,6 @@ const cleanText = computed(() => JSON.stringify(Verses.value).replaceAll(',', '�
 }
 
 .verse::after {
-    content: '🎗';
+    content: '♦';
 }
 </style>
