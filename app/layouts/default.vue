@@ -8,7 +8,7 @@ import { appName } from '../constants/global';
 
 const $q = useQuasar()
 const offset = ref([0, 18])
-
+const toggleLeftDrawer = ref(true)
 const drawerLeft = ref(true)
 
 const { toggle } = $q.dark
@@ -36,7 +36,6 @@ function toggleDark() {
     </q-drawer>
 
     <q-page-container>
-
       <slot />
       <q-page-scroller reverse position="bottom" :scroll-offset="20" :offset="[20, -9]">
         <q-btn fab icon="keyboard_arrow_down" color="accent" />

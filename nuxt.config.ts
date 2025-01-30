@@ -38,6 +38,14 @@ export default defineNuxtConfig({
     '~/plugins/storage.server.ts'
   ],
   vite: {
+    server: {
+      hmr: {
+        protocol: "WS",
+        host: 'localhost',
+        clientPort: 3000,
+        port: 3000,
+      },
+    },
     build: {
       minify: false
     }

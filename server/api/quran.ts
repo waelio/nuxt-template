@@ -15,7 +15,7 @@ type FIL = {
 export default defineEventHandler(async (event: H3Event) => {
     const params = getRouterParams(event);
     // console.log('params', params)
-    const book = Object.values(hbook) as unknown as FIL[]
+    const book = Object.values(JSON.stringify(hbook)) as unknown as FIL[]
     const I = _sniffId(params) || 0
     const info = Object.values(details)
 

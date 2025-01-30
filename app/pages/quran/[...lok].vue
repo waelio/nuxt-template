@@ -88,4 +88,8 @@ const cleanText = computed(() => JSON.stringify(Verses.value).replaceAll(',', ' 
 .verse::after {
     content: '♦';
 }
+
+.verse {
+    font-size: 2rem;
+}
 </style>
