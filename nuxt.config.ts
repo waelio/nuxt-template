@@ -40,7 +40,7 @@ export default defineNuxtConfig({
   vite: {
     server: {
       hmr: {
-        protocol: "WS",
+        protocol: "http",
         host: 'localhost',
         clientPort: 3000,
         port: 3000,
@@ -81,7 +81,6 @@ export default defineNuxtConfig({
       dirs: [
         '../shared',
         '../app/constants',
-        '~/constants',
         '../app/components'
       ]
     }
@@ -91,10 +90,10 @@ export default defineNuxtConfig({
     dirs: [
       '../app/constants',
       '../app/layouts',
-      '../app/store/',
+      '../app/store',
       '../app/composables',
       '../app/components',
-      '../shared/',
+      '../shared',
       '../server/uils'
     ]
   },

@@ -27,3 +27,10 @@ body {
 .h-50 {
   height: 3rem;
 }
+
+
+@media only screen and (max-width: 800px) {
+  .holynames-page {
+    flex-direction: column;
+  }
+}

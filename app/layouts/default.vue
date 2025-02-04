@@ -9,12 +9,14 @@ import { appName } from '../constants/global';
 const $q = useQuasar()
 const offset = ref([0, 18])
 const toggleLeftDrawer = ref(true)
-const drawerLeft = ref(true)
 
 const { toggle } = $q.dark
 function toggleDark() {
   toggle()
   return $q.dark.mode
+}
+function toggleDrwer() {
+  toggleLeftDrawer.value = !toggleLeftDrawer.value
 }
 
 </script>
@@ -24,14 +26,14 @@ function toggleDark() {
 
     <q-header elevated class="bg-primary text-white" height-hint="98">
       <q-toolbar>
-        <q-btn dense flat round icon="menu" @click="toggleLeftDrawer" />
+        <q-btn dense flat round icon="menu" @click="toggleDrwer" />
         <q-toolbar-title>
           <nuxt-link :title="appName" to="/">{{ appName }}</nuxt-link>
         </q-toolbar-title>
       </q-toolbar>
     </q-header>
 
-    <q-drawer persistent min-width="200" v-model="drawerLeft" elevated side="left" bordered>
+    <q-drawer min-width="200" v-model="toggleLeftDrawer" elevated side="left" bordered>
       <fahras />
     </q-drawer>
 

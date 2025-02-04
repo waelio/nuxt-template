@@ -1,6 +1,6 @@
 import type { H3Event } from 'h3'
 import hbook from "../data/quran.json"
-import details from "../data/chapters/en.json"
+import details from "../data/chapters/en.json" //*?*/
 import { _sniffId, _resetString } from "waelio-utils"
 // @ts-ignore
 import _ from "lodash"
@@ -21,6 +21,7 @@ export default defineEventHandler(async (event: H3Event) => {
 
     const ready = info.map(detail => {
         const prep: FIL = book[detail.id - 1]
+        // dont flatten the array
         let V = _.flattenDeep(prep).map((v: FIL) => v.text)
         V = decodeURI(V)
         return !!I ? {

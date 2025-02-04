@@ -116,3 +116,4 @@ export function c(can: (arg0: string, arg1: string) => void) {
     can('update', 'post');
     can('add', 'post');
 }
+export const AlFateha = "بِسۡمِ ٱللَّهِ ٱلرَّحۡمَٰنِ ٱلرَّحِيمِ"

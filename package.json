@@ -44,6 +44,7 @@
     "bcryptjs": "^2.4.3",
     "index.d": "link:pinia-plugin-persistedstat/dist/index.d",
     "jose": "^5.9.6",
+    "jsdom": "^26.0.0",
     "prisma": "5.21.1",
     "sass": "^1.83.4",
     "tinyexec": "^0.3.2",

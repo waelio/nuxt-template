@@ -1,8 +1,10 @@
 <script lang="ts" async setup>
 import { useHead, useNuxtApp, useRoute } from 'nuxt/app';
-import { computed, ref, watchEffect } from 'vue';
+import { is } from 'quasar';
+import { computed, Ref, ref, watchEffect } from 'vue';
 import { useRouter } from 'vue-router';
-import { appDescription, appName } from '../../constants/global';
+import { isNumber } from 'waelio-utils';
+import { AlFateha, appDescription, appName } from '../../constants/global';
 
 export type ONET = {
     Index: number | string,
@@ -18,12 +20,16 @@ useHead({
     ogTitle: appName,
     ogDescription: appDescription,
 });
+
 const route = useRoute()
 const lok = ref(route.params?.lok || 1)
 
+const sglok = (off = 1): number => {
+    return (isNumber(off)) ? lok.value = +off : 1
 
+}
 watchEffect(() => {
-    lok.value = +route.params.lok || 1
+    sglok(+route.params.lok)
 })
 
 
@@ -31,8 +37,9 @@ watchEffect(() => {
 const nuxtApp = useNuxtApp()
 const Quran: ONET[] = nuxtApp.payload.data['B6H5jvHlMH'].data
 const sura = computed(() => Quran[lok.value - 1] as unknown as number)
-const Verses = computed(() => sura.value.Verses)
+const Verses: Ref<string[]> = computed(() => sura.value.Verses)
 const cleanText = computed(() => JSON.stringify(Verses.value).replaceAll(',', ' ♦ '))
+
 </script>
 <template>
     <QPage padding class=" rtl">
@@ -52,7 +59,8 @@ const cleanText = computed(() => JSON.stringify(Verses.value).replaceAll(',', ' 
             </q-card>
             <q-card class="q-mt-xs">
                 <q-card-section>
-                    <p class="capitalize block just fit verse"> {{ cleanText }}</p>
+                    <p class="capitalize block just fit verse">
+                    <p class="verse text-center" v-if="lok.value !== 1">{{ AlFateha }}</p> {{ cleanText }}</p>
                 </q-card-section>
             </q-card>
         </div>
@@ -85,9 +93,9 @@ const cleanText = computed(() => JSON.stringify(Verses.value).replaceAll(',', ' 
     flex-wrap: nowrap;
 }
 
-.verse::after {
-    content: '♦';
-}
+// .verse::after {
+//     content: '♦';
+// }
 
 .verse {
     font-size: 2rem;
