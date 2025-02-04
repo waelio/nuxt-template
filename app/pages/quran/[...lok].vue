@@ -58,7 +58,8 @@ const cleanText = computed(() => JSON.stringify(Verses.value).replaceAll(',', ' 
             <q-card class="q-mt-xs">
                 <q-card-section>
                     <p class="capitalize block just fit verse">
-                        <span class="verse text-center" v-if="lok.value !== 1">{{ AlFateha }}</span> ♦{{ cleanText }}
+                        <span class="verse text-center">
+                            <span v-if="lok.value !== 1">{{ AlFateha }}</span></span> ♦{{ cleanText }}
                     </p>
                 </q-card-section>
             </q-card>
