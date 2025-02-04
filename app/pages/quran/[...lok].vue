@@ -45,22 +45,21 @@ const cleanText = computed(() => JSON.stringify(Verses.value).replaceAll(',', ' 
     <QPage padding class=" rtl">
         <div class="q-mt-md q-gutter-md">
             <q-card class="text-sm">
-                <q-card-section class="flex h-50">
-                    <div>
+                <div class="q-pa-md flex h-50">
 
-                        <h4 class="text-h3">{{ sura.Name }}</h4>
-                    </div>
+                    <h4 class="text-h3">{{ sura.Name }}</h4>
                     <div>
                         <h4 class="capitalize">{{ sura.TotalVerses }}</h4>
                         <h4 class="capitalize text-h6">{{ sura.Location }}</h4>
                     </div>
 
-                </q-card-section>
+                </div>
             </q-card>
             <q-card class="q-mt-xs">
                 <q-card-section>
                     <p class="capitalize block just fit verse">
-                    <p class="verse text-center" v-if="lok.value !== 1">{{ AlFateha }}</p> {{ cleanText }}</p>
+                        <span class="verse text-center" v-if="lok.value !== 1">{{ AlFateha }}</span> ♦{{ cleanText }}
+                    </p>
                 </q-card-section>
             </q-card>
         </div>
