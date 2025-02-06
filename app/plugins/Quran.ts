@@ -1,6 +1,6 @@
 import { defineNuxtPlugin, useFetch, useNuxtApp, useState } from "nuxt/app";
 
-export default defineNuxtPlugin(async _nuxtApp => {
+export default defineNuxtPlugin(async nuxtApp => {
 
   const { data } = await useFetch('/api/quran/', {
     headers: {
@@ -15,5 +15,6 @@ export default defineNuxtPlugin(async _nuxtApp => {
   if (!!data && data.value) {
     useState('Quran', () => JSON.stringify(data.value.data))
   }
+  nuxtApp.provide('Quran', data.value.data)
 
 })

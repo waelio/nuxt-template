@@ -15,5 +15,6 @@ export default defineNuxtPlugin(async _nuxtApp => {
     if (data && data.value) {
         useState('HolyNames', () => JSON.stringify(data.value.data))
     }
+    provide('HolyNames', data.value.data)
 
 })

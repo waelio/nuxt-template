@@ -1,15 +1,19 @@
 <script lang="ts" async setup>
 import { useHead, useNuxtApp, useRoute } from 'nuxt/app';
-import { computed, ref, watchEffect } from 'vue';
+import { computed, ref, watchEffect, watch } from 'vue';
+import type { Ref } from 'vue'
 import { useRouter } from 'vue-router';
 import { AlFateha, appDescription, appName } from '../../constants/global';
 
+const { $Quran } = useNuxtApp()
 export type ONET = {
     Index: number | string,
     Name: string,
     Location: string,
     TotalVerses: number,
-    Verses: string[],
+    Verses: {
+
+    }
 }
 
 useHead({
@@ -20,29 +24,34 @@ useHead({
 });
 const route = useRoute()
 const lok = ref(route.params?.lok || 1)
-
+const router = useRouter()
 
 watchEffect(() => {
     lok.value = +route.params.lok || 1
 })
 
+watch(lok, (newv) => {
+    router.push(`/quran/${newv}`)
 
+})
 
-const nuxtApp = useNuxtApp()
-const Quran: ONET[] = nuxtApp.payload.data['B6H5jvHlMH'].data
-const sura = computed(() => Quran[(lok.value - 1)] as unknown as number)
+const Quran: ONET[] = $Quran as ONET[];
+const sura: Ref<ONET> = computed(() => Quran[(lok.value - 1)])
 const Verses = computed(() => sura.value.Verses)
+const Infor = computed(() => sura.value)
+
 const cleanText = computed(() => JSON.stringify(Verses.value).replaceAll(',', ' ♦ '))
 </script>
 <template>
     <QPage padding class=" rtl">
         <div class="q-mt-md q-gutter-md">
             <q-card class="text-sm">
-                <q-card-section class="flex h-50">
-                    <div>
-
-                        <h4 class="text-h3">{{ sura.Name }}</h4>
-                    </div>
+                <div class="q-pa-lg flex flex-center">
+                    <q-pagination h-10 v-model="lok" direction-links unelevated color="black" active-color="purple"
+                        :max="114" />
+                </div>
+                <q-card-section>
+                    <h4 class="text-h3">{{ sura.Name }}</h4>
                     <div>
                         <h4 class="capitalize">{{ sura.TotalVerses }}</h4>
                         <h4 class="capitalize text-h6">{{ sura.Location }}</h4>

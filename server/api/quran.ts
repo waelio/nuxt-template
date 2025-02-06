@@ -1,6 +1,7 @@
 import type { H3Event } from 'h3'
-import hbook from "../data/quran.json"
-import details from "../data/chapters/en.json" //*?*/
+import hbook from '../data/quran.json' assert {type: 'json'}
+
+import details from "../data/chapters/en.json" assert {type: 'json'}
 import { _sniffId, _resetString } from "waelio-utils"
 // @ts-ignore
 import _ from "lodash"
@@ -13,16 +14,20 @@ type FIL = {
 
 
 export default defineEventHandler(async (event: H3Event) => {
-    const params = getRouterParams(event);
+    const params = getRouterParams(event);//*?*/
     // console.log('params', params)
-    const book = Object.values(JSON.stringify(hbook)) as unknown as FIL[]
+    const book = Object.values(hbook) as unknown as FIL[] /*?*/
     const I = _sniffId(params) || 0
-    const info = Object.values(details)
+    const info = Object.values(details)/*? */
 
     const ready = info.map(detail => {
         const prep: FIL = book[detail.id - 1]
         // dont flatten the array
-        let V = _.flattenDeep(prep).map((v: FIL) => v.text)
+        let V = _.flattenDeep(prep).map((v: FIL) => ({
+            verserse: v.text,
+            verse: v.verse,
+            chapter: v.chapter
+        }))
         V = decodeURI(V)
         return !!I ? {
             params: I,
