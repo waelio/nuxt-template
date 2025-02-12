@@ -6,7 +6,8 @@ interface HolyNameI {
     name: string,
     text: string
 }
-const holynames: HolyNameI[] = nuxtApp.payload.data['6Dst81xkaL'].data
+const { $HolyNames } = nuxtApp
+const holynames: HolyNameI[] = $HolyNames as HolyNameI[]
 
 </script>
 <template>

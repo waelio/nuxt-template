@@ -43,13 +43,8 @@ export default defineNuxtConfig({
       minify: false
     }
   },
+
   routeRules: {
-    '/api/quran': {
-      cache: {
-        maxAge: 31536000000,
-        swr: true
-      }
-    },
     '/api/holynames': {
       cache: {
         maxAge: 31536000000,

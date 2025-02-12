@@ -1,53 +1,39 @@
 import type { H3Event } from 'h3'
-import hbook from '../data/quran.json' assert {type: 'json'}
-
-import details from "../data/chapters/en.json" assert {type: 'json'}
+import { defineEventHandler, getRouterParams } from 'h3'
+import hdetails from "../data/chapters/en.json" assert {type: 'json'}
+import hbook from '../data/quran.json' assert { type: 'json' }
+import type { QDBI } from "../../shared/types";
 import { _sniffId, _resetString } from "waelio-utils"
-// @ts-ignore
 import _ from "lodash"
-// import { SuraI } from '~~/shared/types'
-type FIL = {
+import { log } from 'node:console'
+type QSDT = {
     chapter: number
     verse: number
     text: string[]
 }
-
-
-export default defineEventHandler(async (event: H3Event) => {
-    const params = getRouterParams(event);//*?*/
-    // console.log('params', params)
-    const book = Object.values(hbook) as unknown as FIL[] /*?*/
-    const I = _sniffId(params) || 0
-    const info = Object.values(details)/*? */
-
-    const ready = info.map(detail => {
-        const prep: FIL = book[detail.id - 1]
-        // dont flatten the array
-        let V = _.flattenDeep(prep).map((v: FIL) => ({
-            verserse: v.text,
-            verse: v.verse,
-            chapter: v.chapter
-        }))
-        V = decodeURI(V)
-        return !!I ? {
-            params: I,
-            Index: detail.id as number,
-            Name: detail.name as string,
-            Location: detail.type as string,
-            TotalVerses: detail.total_verses as number,
-            Verses: V
-        } : {
-            Index: detail.id as number,
-            Name: detail.name as string,
-            Location: detail.type as string,
-            TotalVerses: detail.total_verses as number,
-            Verses: V
-        }
+type IDT = {
+    id: number
+    name: string
+    transliteration: string,
+    translation: string,
+    type: string
+    total_verses: number
+}
+export default defineEventHandler((event: H3Event) => {
+    const params = getQuery(event);
+    const { s } = params;
+    let ready = [];
+    hdetails.forEach((item: IDT) => {
+        const qr: QSDT = hbook[item.id];
+        qr.find((v, index) => v[index] === item.id);
+        ready.push({
+            id: item.id,
+            name: item.name,
+            e_name: item.translation,
+            type: item.type,
+            total_verses: item.total_verses,
+            ayat: qr,
+        })
     })
-
-
-    return {
-        data: I ? ready[I] : ready
-    }
-
+    return s ? ready[s] : ready as QDBI
 })

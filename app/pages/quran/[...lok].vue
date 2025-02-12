@@ -4,8 +4,10 @@ import { computed, ref, watchEffect, watch } from 'vue';
 import type { Ref } from 'vue'
 import { useRouter } from 'vue-router';
 import { AlFateha, appDescription, appName } from '../../constants/global';
-
-const { $Quran } = useNuxtApp()
+import type revQuranT from '../../../server/api/quran'
+import { QDBI } from '~~/shared/types';
+const nuxtApp = useNuxtApp()
+const { $quran } = nuxtApp
 export type ONET = {
     Index: number | string,
     Name: string,
@@ -23,11 +25,11 @@ useHead({
     ogDescription: appDescription,
 });
 const route = useRoute()
-const lok = ref(route.params?.lok || 1)
+const lok = ref(route.params?.lok)
 const router = useRouter()
 
 watchEffect(() => {
-    lok.value = +route.params.lok || 1
+    lok.value = +route.params?.lok as number && 1
 })
 
 watch(lok, (newv) => {
@@ -35,26 +37,27 @@ watch(lok, (newv) => {
 
 })
 
-const Quran: ONET[] = $Quran as ONET[];
-const sura: Ref<ONET> = computed(() => Quran[(lok.value - 1)])
-const Verses = computed(() => sura.value.Verses)
-const Infor = computed(() => sura.value)
+const Quran: QDBI = nuxtApp.payload.data.B6H5jvHlMH
+const sura: Ref<QDBI> = computed(() => Quran[(lok.value - 1)])
+const Verses = computed(() => sura.value.ayat)
+// const Infor = computed(() => sura.value)
 
-const cleanText = computed(() => JSON.stringify(Verses.value).replaceAll(',', ' ♦ '))
+// const cleanText = computed(() => Verses.value.replaceAll(',', ' ♦ '))
 </script>
 <template>
     <QPage padding class=" rtl">
         <div class="q-mt-md q-gutter-md">
             <q-card class="text-sm">
                 <div class="q-pa-lg flex flex-center">
-                    <q-pagination h-10 v-model="lok" direction-links unelevated color="black" active-color="purple"
+                    <q-pagination h-10 v-model="lok" direction-links unelevated color="black" active-color="green"
                         :max="114" />
                 </div>
-                <q-card-section>
-                    <h4 class="text-h3">{{ sura.Name }}</h4>
+                <q-card-section class="rtl">
+                    <h4 class="text-h3">Name:{{ sura.name }}</h4>
+                    <h5 class="text-h5">Nuber:{{ sura.id }}</h5>
                     <div>
-                        <h4 class="capitalize">{{ sura.TotalVerses }}</h4>
-                        <h4 class="capitalize text-h6">{{ sura.Location }}</h4>
+                        <h4 class="capitalize text-h6">Number of Verses:{{ sura.total_verses }}</h4>
+                        <h4 class="capitalize text-h6">Locatiom:{{ sura.type }}</h4>
                     </div>
 
                 </q-card-section>
@@ -64,7 +67,11 @@ const cleanText = computed(() => JSON.stringify(Verses.value).replaceAll(',', ' 
                     <h3>{{ AlFateha }}</h3>
                 </q-card-section>
                 <q-card-section>
-                    <p class="capitalize block just fit verse"> {{ cleanText }}</p>
+                    <span class="capitalize block just fit verse">
+                        <i class="q-mx-sm" v-for="aya in sura.ayat" :key="aya.verse">{{ aya.text }}
+                            <q-chip>{{ aya.verse }}</q-chip>
+                        </i>
+                    </span>
                 </q-card-section>
             </q-card>
         </div>

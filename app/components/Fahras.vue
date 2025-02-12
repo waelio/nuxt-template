@@ -8,9 +8,9 @@ type ONET = {
     TotalVerses: number,
     Verses: string[],
 }
-const nuxtApp = useNuxtApp()
-const Quran: ONET[] = nuxtApp.payload.data['B6H5jvHlMH'].data
-const names = ref(Quran).value.map(v => ({ names: v.Name }))
+let { $Quran } = useNuxtApp()
+const Quran: ONET[] = $Quran as ONET[]
+// const names = ref(Quran).value.map(v => ({ names: v.Name }))
 const router = useRouter()
 
 function navToLok(lok: number) {
@@ -20,8 +20,8 @@ function navToLok(lok: number) {
 </script>
 <template>
     <ol class="column q-mt-xl q-pt-lg">
-        <nuxt-link class="cursor-pointer" v-for="(i, ind) in names" :key="i.names"
+        <!-- <nuxt-link class="cursor-pointer" v-for="(i, ind) in names" :key="i.names"
             @click="navToLok(ind)">{{ ind + 1 }}-{{ i.names }}
-        </nuxt-link>
+        </nuxt-link> -->
     </ol>
 </template>

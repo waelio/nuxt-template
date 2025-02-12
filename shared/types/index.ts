@@ -145,17 +145,30 @@ export interface HarfI {
     color?: string;
     encoding?: string;
 }
-export interface kalimatI {
+export interface KalimatI extends HarfI {
     horuf: HarfI[];
 }
-export interface AyaI {
+export interface AyaI extends KalimatI {
     Kalemat: kalimatI[];
 }
-export interface SuraI {
+export interface SuraI extends AyaI {
     Ayat: AyaI[];
 }
-export interface QuranI {
+export interface QuranI extends SuraI {
     Surah: SuraI[];
+}
+type aya = {
+    chapter: number,
+    verse: number,
+    text: string
+}
+export interface QDBI {
+    id: number,
+    name: string,
+    e_name?: string,
+    type: string,
+    total_verses: number,
+    ayat: aya[]
 }
 export interface StateI {
     quran: QuranI;
