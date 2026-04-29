@@ -224,7 +224,7 @@ export type TransactionsT = TransactionT[];
 export interface UserI {
     [x: string]: any
     id?: string;
-    email: string;
+    email?: string;
     username: string;
     handle?: string;
     password: string;

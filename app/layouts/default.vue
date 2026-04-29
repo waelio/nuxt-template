@@ -31,6 +31,7 @@ function toggleDrwer() {
           <nuxt-link :title="appName" to="/">{{ appName }}</nuxt-link>
         </q-toolbar-title>
         <q-btn dense flat round icon="light" @click="toggleDark" />
+        <nuxt-link to="/auth/login">Login</nuxt-link>
 
       </q-toolbar>
     </q-header>

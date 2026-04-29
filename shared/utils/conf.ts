@@ -137,10 +137,10 @@ class Conf {
         import.meta.dev
           ? dev
           : prod
-      if (filename === 'dev') 
+      if (filename === 'dev')
         console.warn(
-          `FYI: data in \`./config/${filename}.js\` file will override Server & Client equal data/values.` )
-    
+          `FYI: data in \`./config/${filename}.js\` file will override Server & Client equal data/values.`)
+
     } catch (e) {
       overrides = {}
     }

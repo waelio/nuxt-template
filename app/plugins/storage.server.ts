@@ -1,11 +1,12 @@
 import { createStorage } from "unstorage";
 import mongodbDriver from "unstorage/drivers/mongodb";
-import { defineNuxtPlugin } from 'nuxt/app'
 
-export default defineNuxtPlugin(async () => {
+export default defineNuxtPlugin(async (nuxtApp) => {
+    const config = useRuntimeConfig()
+
     const storage = createStorage({
         driver: mongodbDriver({
-            connectionString: process.env.NUXT_MONGODB_URI as string,
+            connectionString: config.NUXT_MONGODB_URI as string,
             databaseName: "apiDatabase",
             collectionName: "local",
         }),

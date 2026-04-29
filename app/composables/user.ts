@@ -1,12 +1,10 @@
-import { /* acceptHMRUpdate,*/ defineStore } from 'pinia'
-import { ref, computed } from 'vue'
-import type { Ref } from 'vue'
+import { acceptHMRUpdate, defineStore } from 'pinia'
 
 export const useUserStore = defineStore('user', () => {
     /**
      * Current named of the user.
      */
-    const savedName:Ref<string> = ref('')
+    const savedName: Ref<string> = ref('')
     const previousNames = ref(new Set<string>())
 
     const usedNames = computed(() => Array.from(previousNames.value))
@@ -32,5 +30,5 @@ export const useUserStore = defineStore('user', () => {
     }
 })
 
-// if (import.meta.hot)
-//     import.meta.hot.accept(acceptHMRUpdate(useUserStore, import.meta.dev))
+if (import.meta.hot)
+    import.meta.hot.accept(acceptHMRUpdate(useUserStore, import.meta.dev))

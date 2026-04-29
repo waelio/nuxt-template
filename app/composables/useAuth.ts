@@ -1,5 +1,3 @@
-import { useState, useRequestFetch } from 'nuxt/app'
-import { computed } from 'vue'
 import type { AuthPayload } from '../../shared/types'
 
 

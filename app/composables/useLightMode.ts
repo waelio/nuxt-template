@@ -1,8 +1,5 @@
 
-// @ts-ignore
-import { useState } from 'nuxt/app'
 import { useQuasar } from 'quasar'
-import type { Ref } from 'vue'
 import type { LightModesE } from '../../shared/types'
 const $q = useQuasar()
 

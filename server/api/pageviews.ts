@@ -1,5 +1,5 @@
 import { H3Event } from "h3";
-import { c } from "~/constants/global";
+import { c } from "../../constants/global";
 
 export default defineEventHandler(async (Event: H3Event) => {
   const LABEL = 'client:user';
